@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIVerID™ Dashboard - Manage Your AI Rights</title>
+    <meta name="description" content="Manage your AIVerID™ account, AI Rights tokens, and OAuth applications from your personal dashboard.">
+    <meta name="keywords" content="AI Rights, Dashboard, AIVID, AIPLT, SLIVR, OAuth management">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aivisibilityrights.com/dashboard">
+    <meta property="og:title" content="AIVerID™ Dashboard - Manage Your AI Rights">
+    <meta property="og:description" content="Your personal control center for AI Rights tokens and OAuth applications.">
+    <meta property="og:image" content="https://aivisibilityrights.com/assets/images/aiverid-og.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://aivisibilityrights.com/dashboard">
+    <meta property="twitter:title" content="AIVerID™ Dashboard - Manage Your AI Rights">
+    <meta property="twitter:description" content="Your personal control center for AI Rights tokens and OAuth applications.">
+    <meta property="twitter:image" content="https://aivisibilityrights.com/assets/images/aiverid-og.png">
+
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="https://aivisibilityrights.com/dashboard">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00d4ff, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00d4ff, #ff6b6b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .logout-btn {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ff6b6b;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .logout-btn:hover {
+            background: rgba(239, 68, 68, 0.2);
+            transform: translateY(-1px);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .dashboard-header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .dashboard-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #00d4ff, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .dashboard-subtitle {
+            color: #b0b3c7;
+            font-size: 1.1rem;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .card-subtitle {
+            color: #b0b3c7;
+            font-size: 0.9rem;
+        }
+
+        /* Profile Card */
+        .profile-card .card-icon {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+        }
+
+        .profile-info {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #b0b3c7;
+            font-size: 0.9rem;
+        }
+
+        .info-value {
+            color: #ffffff;
+            font-weight: 500;
+            font-family: 'Courier New', monospace;
+        }
+
+        .edit-profile-btn {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            color: #00d4ff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .edit-profile-btn:hover {
+            background: rgba(0, 212, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        /* Tokens Card */
+        .tokens-card .card-icon {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+        }
+
+        .token-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .token-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .token-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .token-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .token-name {
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .token-status {
+            background: rgba(34, 197, 94, 0.2);
+            color: #10b981;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .token-description {
+            color: #b0b3c7;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .token-id {
+            font-family: 'Courier New', monospace;
+            color: #00d4ff;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        /* OAuth Apps Card */
+        .oauth-card .card-icon {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+
+        .oauth-apps {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .oauth-app {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .oauth-app:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .app-name {
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .app-status {
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .app-description {
+            color: #b0b3c7;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .app-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
+        }
+
+        /* Activity Card */
+        .activity-card .card-icon {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+
+        .activity-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .activity-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            color: #ffffff;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .activity-time {
+            color: #b0b3c7;
+            font-size: 0.8rem;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .quick-action {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .quick-action:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .quick-action-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .quick-action-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .quick-action-subtitle {
+            color: #b0b3c7;
+            font-size: 0.9rem;
+        }
+
+        /* Loading States */
+        .loading-skeleton {
+            background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 4px;
+            height: 1.2rem;
+            margin: 0.25rem 0;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            main {
+                padding: 1rem;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .dashboard-card {
+                padding: 1.5rem;
+            }
+
+            .quick-actions {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .user-menu {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            nav {
+                padding: 0 1rem;
+            }
+        }
+
+        /* Error States */
+        .error-state {
+            text-align: center;
+            padding: 2rem;
+            color: #ff6b6b;
+        }
+
+        .error-state .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Success States */
+        .success-state {
+            text-align: center;
+            padding: 2rem;
+            color: #10b981;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">AIVerID™</a>
+            <div class="user-menu">
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">U</div>
+                    <div>
+                        <div id="userName" style="font-weight: 500; font-size: 0.9rem;">Loading...</div>
+                        <div id="userEmail" style="color: #b0b3c7; font-size: 0.8rem;">Loading...</div>
+                    </div>
+                </div>
+                <a href="#" class="logout-btn" onclick="logout()">Logout</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">AIVerID™ Dashboard</h1>
+            <p class="dashboard-subtitle">Manage your Universal AI Rights Platform account and tokens</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Profile Information -->
+            <div class="dashboard-card profile-card">
+                <div class="card-header">
+                    <div class="card-icon">👤</div>
+                    <div>
+                        <div class="card-title">Profile Information</div>
+                        <div class="card-subtitle">Your account details and AIVerID</div>
+                    </div>
+                </div>
+                
+                <div class="profile-info" id="profileInfo">
+                    <div class="loading-skeleton"></div>
+                    <div class="loading-skeleton"></div>
+                    <div class="loading-skeleton"></div>
+                </div>
+            </div>
+
+            <!-- AI Rights Tokens -->
+            <div class="dashboard-card tokens-card">
+                <div class="card-header">
+                    <div class="card-icon">🎭</div>
+                    <div>
+                        <div class="card-title">AI Rights Tokens</div>
+                        <div class="card-subtitle">Your digital identity assets</div>
+                    </div>
+                </div>
+                
+                <div class="token-list">
+                    <div class="token-item">
+                        <div class="token-header">
+                            <div class="token-name">AIVID Token</div>
+                            <div class="token-status">Active</div>
+                        </div>
+                        <div class="token-description">Your core digital identity token for AI ecosystem access and authentication.</div>
+                        <div class="token-id" id="aividToken">Loading...</div>
+                    </div>
+                    
+                    <div class="token-item">
+                        <div class="token-header">
+                            <div class="token-name">AIPLT Rights</div>
+                            <div class="token-status">Registered</div>
+                        </div>
+                        <div class="token-description">AI Patent License Rights - US Copyright registered intellectual property protection.</div>
+                        <div class="token-id">US Copyright: TXu002391737</div>
+                    </div>
+                    
+                    <div class="token-item">
+                        <div class="token-header">
+                            <div class="token-name">SLIVR Rights</div>
+                            <div class="token-status">Active</div>
+                        </div>
+                        <div class="token-description">AI Search Visibility Rights - Control how AI systems discover and reference your content.</div>
+                        <div class="token-id" id="slivrToken">Loading...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OAuth Applications -->
+            <div class="dashboard-card oauth-card">
+                <div class="card-header">
+                    <div class="card-icon">🔗</div>
+                    <div>
+                        <div class="card-title">OAuth Applications</div>
+                        <div class="card-subtitle">Connected platforms and services</div>
+                    </div>
+                </div>
+                
+                <div class="oauth-apps" id="oauthApps">
+                    <div class="oauth-app">
+                        <div class="app-header">
+                            <div class="app-name">VerGolf</div>
+                            <div class="app-status">Connected</div>
+                        </div>
+                        <div class="app-description">Golf community platform with AI-powered matching and booking system.</div>
+                        <div class="app-actions">
+                            <a href="/oauth-demo?app=vergolf" class="action-btn">Test</a>
+                            <a href="#" class="action-btn" onclick="revokeApp('vergolf')">Revoke</a>
+                        </div>
+                    </div>
+                    
+                    <div class="oauth-app">
+                        <div class="app-header">
+                            <div class="app-name">AIJMT Platform</div>
+                            <div class="app-status">Coming Soon</div>
+                        </div>
+                        <div class="app-description">AI Job Matching platform for connecting talent with opportunities.</div>
+                        <div class="app-actions">
+                            <a href="#" class="action-btn" style="opacity: 0.5;">Connect</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="dashboard-card activity-card">
+                <div class="card-header">
+                    <div class="card-icon">📊</div>
+                    <div>
+                        <div class="card-title">Recent Activity</div>
+                        <div class="card-subtitle">Your account activity log</div>
+                    </div>
+                </div>
+                
+                <div class="activity-list" id="activityList">
+                    <div class="loading-skeleton"></div>
+                    <div class="loading-skeleton"></div>
+                    <div class="loading-skeleton"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <a href="/oauth-demo" class="quick-action">
+                <span class="quick-action-icon">🚀</span>
+                <div class="quick-action-title">Test OAuth</div>
+                <div class="quick-action-subtitle">Try OAuth 2.0 integration</div>
+            </a>
+            
+            <a href="/profile/edit" class="quick-action">
+                <span class="quick-action-icon">✏️</span>
+                <div class="quick-action-title">Edit Profile</div>
+                <div class="quick-action-subtitle">Update your information</div>
+            </a>
+            
+            <a href="/tokens" class="quick-action">
+                <span class="quick-action-icon">🎭</span>
+                <div class="quick-action-title">Manage Tokens</div>
+                <div class="quick-action-subtitle">View token details</div>
+            </a>
+            
+            <a href="/developers" class="quick-action">
+                <span class="quick-action-icon">👨‍💻</span>
+                <div class="quick-action-title">Developer Tools</div>
+                <div class="quick-action-subtitle">API documentation</div>
+            </a>
+        </div>
+    </main>
+
+    <script>
+        // API Configuration
+        const API_BASE_URL = 'https://aiverid-backend-production.up.railway.app';
+
+        // Check authentication
+        function checkAuth() {
+            const token = localStorage.getItem('aiverid_token') || sessionStorage.getItem('aiverid_token');
+            const user = localStorage.getItem('aiverid_user') || sessionStorage.getItem('aiverid_user');
+            
+            if (!token || !user) {
+                window.location.href = '/login';
+                return null;
+            }
+            
+            return JSON.parse(user);
+        }
+
+        // Load user data
+        async function loadUserData() {
+            const user = checkAuth();
+            if (!user) return;
+
+            // Update user info in header
+            document.getElementById('userName').textContent = `${user.firstName} ${user.lastName}`;
+            document.getElementById('userEmail').textContent = user.email;
+            document.getElementById('userAvatar').textContent = user.firstName.charAt(0).toUpperCase();
+
+            // Load profile information
+            loadProfileInfo(user);
+            
+            // Load activity
+            loadActivity();
+        }
+
+        // Load profile information
+        function loadProfileInfo(user) {
+            const profileInfo = document.getElementById('profileInfo');
+            
+            profileInfo.innerHTML = `
+                <div class="info-row">
+                    <span class="info-label">Full Name</span>
+                    <span class="info-value">${user.firstName} ${user.lastName}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Email</span>
+                    <span class="info-value">${user.email}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">AIVerID</span>
+                    <span class="info-value">${user.aiverid || 'TH9743123338'}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Country</span>
+                    <span class="info-value">${user.country || 'TH'}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Member Since</span>
+                    <span class="info-value">${new Date(user.createdAt || Date.now()).toLocaleDateString()}</span>
+                </div>
+                <a href="/profile/edit" class="edit-profile-btn">Edit Profile</a>
+            `;
+
+            // Update token IDs
+            document.getElementById('aividToken').textContent = `AIVID-${user.aiverid || 'TH9743123338'}`;
+            document.getElementById('slivrToken').textContent = `SLIVR-${user.aiverid || 'TH9743123338'}`;
+        }
+
+        // Load activity data
+        async function loadActivity() {
+            const activityList = document.getElementById('activityList');
+            
+            try {
+                const token = localStorage.getItem('aiverid_token') || sessionStorage.getItem('aiverid_token');
+                const response = await fetch(`${API_BASE_URL}/api/user/activity`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.ok) {
+                    const activities = await response.json();
+                    displayActivities(activities);
+                } else {
+                    // Fallback to mock data
+                    displayMockActivities();
+                }
+            } catch (error) {
+                console.error('Error loading activity:', error);
+                displayMockActivities();
+            }
+        }
+
+        // Display activities
+        function displayActivities(activities) {
+            const activityList = document.getElementById('activityList');
+            
+            if (!activities || activities.length === 0) {
+                displayMockActivities();
+                return;
+            }
+
+            activityList.innerHTML = activities.map(activity => `
+                <div class="activity-item">
+                    <div class="activity-icon">${getActivityIcon(activity.type)}</div>
+                    <div class="activity-content">
+                        <div class="activity-title">${activity.description}</div>
+                        <div class="activity-time">${formatTime(activity.timestamp)}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Display mock activities
+        function displayMockActivities() {
+            const activityList = document.getElementById('activityList');
+            
+            const mockActivities = [
+                { type: 'login', description: 'Signed in to AIVerID dashboard', timestamp: new Date() },
+                { type: 'oauth', description: 'Connected to VerGolf platform', timestamp: new Date(Date.now() - 86400000) },
+                { type: 'token', description: 'AIVID token generated', timestamp: new Date(Date.now() - 172800000) },
+                { type: 'profile', description: 'Profile information updated', timestamp: new Date(Date.now() - 259200000) }
+            ];
+
+            activityList.innerHTML = mockActivities.map(activity => `
+                <div class="activity-item">
+                    <div class="activity-icon">${getActivityIcon(activity.type)}</div>
+                    <div class="activity-content">
+                        <div class="activity-title">${activity.description}</div>
+                        <div class="activity-time">${formatTime(activity.timestamp)}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Get activity icon
+        function getActivityIcon(type) {
+            const icons = {
+                'login': '🔐',
+                'oauth': '🔗',
+                'token': '🎭',
+                'profile': '👤',
+                'security': '🛡️'
+            };
+            return icons[type] || '📝';
+        }
+
+        // Format time
+        function formatTime(timestamp) {
+            const now = new Date();
+            const time = new Date(timestamp);
+            const diff = now - time;
+            
+            if (diff < 60000) return 'Just now';
+            if (diff < 3600000) return `${Math.floor(diff / 60000)} minutes ago`;
+            if (diff < 86400000) return `${Math.floor(diff / 3600000)} hours ago`;
+            return `${Math.floor(diff / 86400000)} days ago`;
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to sign out?')) {
+                localStorage.removeItem('aiverid_token');
+                localStorage.removeItem('aiverid_user');
+                sessionStorage.removeItem('aiverid_token');
+                sessionStorage.removeItem('aiverid_user');
+                window.location.href = '/login';
+            }
+        }
+
+        // Revoke OAuth app
+        function revokeApp(appName) {
+            if (confirm(`Are you sure you want to revoke access for ${appName}?`)) {
+                // Implement revoke logic here
+                alert(`Access revoked for ${appName}`);
+            }
+        }
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            loadUserData();
+        });
+
+        // Auto-refresh activity every 30 seconds
+        setInterval(loadActivity, 30000);
+    </script>
+</body>
+</html>

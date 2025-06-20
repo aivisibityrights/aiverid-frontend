@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OAuth 2.0 Demo - AIVerID™ Developer Console</title>
+    <meta name="description" content="Test AIVerID™ OAuth 2.0 integration. Complete developer console for testing 'Sign in with AIVerID' functionality.">
+    <meta name="keywords" content="OAuth 2.0, AIVerID, Developer Console, API Testing, Sign in with AIVerID">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aivisibilityrights.com/oauth-demo">
+    <meta property="og:title" content="OAuth 2.0 Demo - AIVerID™ Developer Console">
+    <meta property="og:description" content="Test 'Sign in with AIVerID' OAuth 2.0 integration with live demo and code examples.">
+    <meta property="og:image" content="https://aivisibilityrights.com/assets/images/aiverid-og.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://aivisibilityrights.com/oauth-demo">
+    <meta property="twitter:title" content="OAuth 2.0 Demo - AIVerID™ Developer Console">
+    <meta property="twitter:description" content="Test 'Sign in with AIVerID' OAuth 2.0 integration with live demo and code examples.">
+    <meta property="twitter:image" content="https://aivisibilityrights.com/assets/images/aiverid-og.png">
+
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="https://aivisibilityrights.com/oauth-demo">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00d4ff, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .demo-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00d4ff, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .demo-subtitle {
+            color: #b0b3c7;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .demo-description {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            color: #e2e8f0;
+        }
+
+        /* Demo Grid */
+        .demo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .demo-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .card-content {
+            color: #b0b3c7;
+            line-height: 1.6;
+        }
+
+        /* OAuth Flow Demo */
+        .oauth-flow {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .flow-step:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(5px);
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            color: #ffffff;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .step-description {
+            color: #b0b3c7;
+            font-size: 0.9rem;
+        }
+
+        /* Demo Controls */
+        .demo-controls {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .control-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .control-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .control-input, .control-select {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 0.9rem;
+        }
+
+        .control-input:focus, .control-select:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+        }
+
+        .control-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        /* Buttons */
+        .demo-btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            margin: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .btn-vergolf {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+        }
+
+        .btn-vergolf:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-block pre {
+            margin: 0;
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 0.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Response Display */
+        .response-display {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            min-height: 100px;
+        }
+
+        .response-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .response-title {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .response-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-success {
+            background: rgba(34, 197, 94, 0.2);
+            color: #10b981;
+        }
+
+        .status-error {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ff6b6b;
+        }
+
+        .status-pending {
+            background: rgba(251, 191, 36, 0.2);
+            color: #f59e0b;
+        }
+
+        .response-content {
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        /* App Demos */
+        .app-demos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .app-demo {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .app-demo:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .app-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .app-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .app-description {
+            color: #b0b3c7;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            .demo-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .demo-card {
+                padding: 1.5rem;
+            }
+
+            .control-row {
+                grid-template-columns: 1fr;
+            }
+
+            .demo-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Loading States */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+            position: relative;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid transparent;
+            border-top: 2px solid #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">AIVerID™</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/register">Register</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="demo-header">
+            <h1 class="demo-title">OAuth 2.0 Demo Console</h1>
+            <p class="demo-subtitle">Test "Sign in with AIVerID" integration with live examples</p>
+            
+            <div class="demo-description">
+                <strong>🚀 Developer Preview:</strong> This console demonstrates how to integrate AIVerID™ OAuth 2.0 into your applications. 
+                Test the complete flow, view real API responses, and see code examples.
+            </div>
+        </div>
+
+        <div class="demo-grid">
+            <div class="demo-card">
+                <h2 class="card-title">🔗 OAuth 2.0 Flow</h2>
+                <div class="card-content">
+                    <p>AIVerID™ implements the standard OAuth 2.0 Authorization Code flow with PKCE for enhanced security. Perfect for both web applications and mobile apps.</p>
+                    <br>
+                    <p><strong>Features:</strong></p>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>Standard OAuth 2.0 compliance</li>
+                        <li>PKCE security extension</li>
+                        <li>Refresh token support</li>
+                        <li>Scopes for granular permissions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="demo-card">
+                <h2 class="card-title">⚡ Quick Integration</h2>
+                <div class="card-content">
+                    <p>Get started with AIVerID™ OAuth in minutes. Our API is designed for developers and follows industry best practices.</p>
+                    <br>
+                    <p><strong>Endpoints:</strong></p>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li><code>/oauth/authorize</code> - Authorization</li>
+                        <li><code>/oauth/token</code> - Token exchange</li>
+                        <li><code>/oauth/userinfo</code> - User information</li>
+                        <li><code>/oauth/introspect</code> - Token validation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- OAuth Flow Steps -->
+        <div class="oauth-flow">
+            <h3 style="color: #ffffff; margin-bottom: 1.5rem; font-size: 1.3rem;">OAuth 2.0 Authorization Flow</h3>
+            
+            <div class="flow-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <div class="step-title">Authorization Request</div>
+                    <div class="step-description">User clicks "Sign in with AIVerID" button in your app</div>
+                </div>
+            </div>
+            
+            <div class="flow-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <div class="step-title">User Authorization</div>
+                    <div class="step-description">User authenticates and authorizes your app on AIVerID</div>
+                </div>
+            </div>
+            
+            <div class="flow-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <div class="step-title">Authorization Code</div>
+                    <div class="step-description">AIVerID redirects back with authorization code</div>
+                </div>
+            </div>
+            
+            <div class="flow-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <div class="step-title">Access Token</div>
+                    <div class="step-description">Your backend exchanges code for access token</div>
+                </div>
+            </div>
+            
+            <div class="flow-step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <div class="step-title">User Information</div>
+                    <div class="step-description">Use access token to get user profile and AI Rights tokens</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Demo Controls -->
+        <div class="demo-controls">
+            <h3 style="color: #ffffff; margin-bottom: 1.5rem; font-size: 1.3rem;">Test OAuth Integration</h3>
+            
+            <div class="control-row">
+                <div class="control-group">
+                    <label class="control-label">Client ID</label>
+                    <input type="text" class="control-input" id="clientId" value="aiv_50de5e3f702bfe688230d13d" readonly>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Redirect URI</label>
+                    <input type="text" class="control-input" id="redirectUri" value="https://aivisibilityrights.com/oauth-demo">
+                </div>
+            </div>
+            
+            <div class="control-row">
+                <div class="control-group">
+                    <label class="control-label">Scope</label>
+                    <select class="control-select" id="scope">
+                        <option value="profile">profile (basic info)</option>
+                        <option value="profile email">profile email</option>
+                        <option value="profile email tokens">profile email tokens (AI Rights)</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">State (CSRF Protection)</label>
+                    <input type="text" class="control-input" id="state" value="" placeholder="Auto-generated">
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <button class="demo-btn btn-primary" onclick="startOAuthFlow()">Start OAuth Flow</button>
+                <button class="demo-btn btn-secondary" onclick="generateState()">Generate New State</button>
+            </div>
+        </div>
+
+        <!-- Response Display -->
+        <div class="response-display" id="responseDisplay" style="display: none;">
+            <div class="response-header">
+                <div class="response-title">OAuth Response</div>
+                <div class="response-status" id="responseStatus">Pending</div>
+            </div>
+            <div class="response-content" id="responseContent">Waiting for response...</div>
+        </div>
+
+        <!-- Code Examples -->
+        <div class="demo-card" style="margin: 2rem 0;">
+            <h3 class="card-title">💻 Integration Code Example</h3>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode('jsExample')">Copy</button>
+                <pre id="jsExample">// JavaScript OAuth Integration
+const AIVERID_CLIENT_ID = 'your_client_id';
+const AIVERID_REDIRECT_URI = 'https://yourapp.com/callback';
+
+// Generate PKCE challenge
+function generateCodeChallenge() {
+    const codeVerifier = crypto.randomUUID();
+    const codeChallenge = btoa(crypto.createHash('sha256')
+        .update(codeVerifier).digest()).replace(/=/g, '');
+    return { codeVerifier, codeChallenge };
+}
+
+// Start OAuth flow
+function signInWithAIVerID() {
+    const { codeVerifier, codeChallenge } = generateCodeChallenge();
+    const state = crypto.randomUUID();
+    
+    // Store for later use
+    sessionStorage.setItem('code_verifier', codeVerifier);
+    sessionStorage.setItem('oauth_state', state);
+    
+    const params = new URLSearchParams({
+        response_type: 'code',
+        client_id: AIVERID_CLIENT_ID,
+        redirect_uri: AIVERID_REDIRECT_URI,
+        scope: 'profile email tokens',
+        state: state,
+        code_challenge: codeChallenge,
+        code_challenge_method: 'S256'
+    });
+    
+    window.location.href = `https://aiverid-backend-production.up.railway.app/oauth/authorize?${params}`;
+}
+
+// Handle callback
+async function handleCallback(code, state) {
+    const codeVerifier = sessionStorage.getItem('code_verifier');
+    const savedState = sessionStorage.getItem('oauth_state');
+    
+    if (state !== savedState) {
+        throw new Error('State mismatch - possible CSRF attack');
+    }
+    
+    const response = await fetch('https://aiverid-backend-production.up.railway.app/oauth/token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            grant_type: 'authorization_code',
+            client_id: AIVERID_CLIENT_ID,
+            code: code,
+            redirect_uri: AIVERID_REDIRECT_URI,
+            code_verifier: codeVerifier
+        })
+    });
+    
+    const tokens = await response.json();
+    return tokens; // { access_token, refresh_token, token_type, expires_in }
+}</pre>
+            </div>
+        </div>
+
+        <!-- App Demos -->
+        <div class="app-demos">
+            <div class="app-demo">
+                <span class="app-icon">⛳</span>
+                <div class="app-name">VerGolf Demo</div>
+                <div class="app-description">
+                    Golf community platform demonstrating AIVerID OAuth integration. 
+                    See how users can sign in with their AI Rights tokens.
+                </div>
+                <a href="/oauth-demo?app=vergolf" class="demo-btn btn-vergolf">Test VerGolf Integration</a>
+            </div>
+            
+            <div class="app-demo">
+                <span class="app-icon">🔧</span>
+                <div class="app-name">Developer Playground</div>
+                <div class="app-description">
+                    Interactive testing environment for OAuth flows. 
+                    Test different scopes, see real API responses.
+                </div>
+                <button class="demo-btn btn-secondary" onclick="openPlayground()">Open Playground</button>
+            </div>
+            
+            <div class="app-demo">
+                <span class="app-icon">📚</span>
+                <div class="app-name">API Documentation</div>
+                <div class="app-description">
+                    Complete OAuth 2.0 documentation with endpoints, 
+                    parameters, and integration guides.
+                </div>
+                <a href="/docs/oauth" class="demo-btn btn-secondary">View Documentation</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // API Configuration
+        const API_BASE_URL = 'https://aiverid-backend-production.up.railway.app';
+        const CLIENT_ID = 'aiv_50de5e3f702bfe688230d13d';
+
+        // Initialize demo
+        document.addEventListener('DOMContentLoaded', function() {
+            generateState();
+            checkForCallback();
+        });
+
+        // Generate random state for CSRF protection
+        function generateState() {
+            const state = 'state_' + Math.random().toString(36).substr(2, 9);
+            document.getElementById('state').value = state;
+        }
+
+        // Start OAuth flow
+        function startOAuthFlow() {
+            const clientId = document.getElementById('clientId').value;
+            const redirectUri = document.getElementById('redirectUri').value;
+            const scope = document.getElementById('scope').value;
+            const state = document.getElementById('state').value || generateState();
+
+            // Generate PKCE challenge (simplified for demo)
+            const codeVerifier = 'demo_' + Math.random().toString(36).substr(2, 32);
+            const codeChallenge = btoa(codeVerifier).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
+
+            // Store for later use
+            sessionStorage.setItem('code_verifier', codeVerifier);
+            sessionStorage.setItem('oauth_state', state);
+
+            // Build authorization URL
+            const params = new URLSearchParams({
+                response_type: 'code',
+                client_id: clientId,
+                redirect_uri: redirectUri,
+                scope: scope,
+                state: state,
+                code_challenge: codeChallenge,
+                code_challenge_method: 'S256'
+            });
+
+            const authUrl = `${API_BASE_URL}/oauth/authorize?${params}`;
+            
+            // Show response display
+            showResponse('Redirecting to AIVerID...', 'pending');
+            
+            // Redirect after short delay
+            setTimeout(() => {
+                window.location.href = authUrl;
+            }, 1000);
+        }
+
+        // Check for OAuth callback
+        function checkForCallback() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            const state = urlParams.get('state');
+            const error = urlParams.get('error');
+
+            if (error) {
+                showResponse(`OAuth Error: ${error}\nDescription: ${urlParams.get('error_description') || 'Unknown error'}`, 'error');
+                return;
+            }
+
+            if (code && state) {
+                handleOAuthCallback(code, state);
+            }
+        }
+
+        // Handle OAuth callback
+        async function handleOAuthCallback(code, state) {
+            const savedState = sessionStorage.getItem('oauth_state');
+            const codeVerifier = sessionStorage.getItem('code_verifier');
+
+            if (state !== savedState) {
+                showResponse('Error: State mismatch - possible CSRF attack', 'error');
+                return;
+            }
+
+            showResponse('Exchanging authorization code for access token...', 'pending');
+
+            try {
+                // Exchange code for token
+                const tokenResponse = await fetch(`${API_BASE_URL}/oauth/token`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        grant_type: 'authorization_code',
+                        client_id: CLIENT_ID,
+                        code: code,
+                        redirect_uri: document.getElementById('redirectUri').value,
+                        code_verifier: codeVerifier
+                    })
+                });
+
+                const tokens = await tokenResponse.json();
+
+                if (tokenResponse.ok) {
+                    // Get user info
+                    const userResponse = await fetch(`${API_BASE_URL}/oauth/userinfo`, {
+                        headers: {
+                            'Authorization': `Bearer ${tokens.access_token}`
+                        }
+                    });
+
+                    const userInfo = await userResponse.json();
+
+                    if (userResponse.ok) {
+                        const responseData = {
+                            tokens: tokens,
+                            user: userInfo,
+                            timestamp: new Date().toISOString()
+                        };
+                        
+                        showResponse(JSON.stringify(responseData, null, 2), 'success');
+                    } else {
+                        showResponse(`Error getting user info: ${JSON.stringify(userInfo, null, 2)}`, 'error');
+                    }
+                } else {
+                    showResponse(`Token exchange failed: ${JSON.stringify(tokens, null, 2)}`, 'error');
+                }
+
+            } catch (error) {
+                showResponse(`Network error: ${error.message}`, 'error');
+            }
+
+            // Clean up
+            sessionStorage.removeItem('code_verifier');
+            sessionStorage.removeItem('oauth_state');
+        }
+
+        // Show response
+        function showResponse(content, status) {
+            const display = document.getElementById('responseDisplay');
+            const statusElement = document.getElementById('responseStatus');
+            const contentElement = document.getElementById('responseContent');
+
+            statusElement.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+            statusElement.className = `response-status status-${status}`;
+            
+            contentElement.textContent = content;
+            
+            display.style.display = 'block';
+            display.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Copy code to clipboard
+        function copyCode(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                // Show temporary feedback
+                const btn = element.parentElement.querySelector('.copy-btn');
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        // Open playground (demo function)
+        function openPlayground() {
+            alert('Developer Playground coming soon! This will provide an interactive testing environment for OAuth flows.');
+        }
+
+        // Handle app-specific demos
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('app') === 'vergolf') {
+            // Customize for VerGolf demo
+            document.getElementById('redirectUri').value = 'https://vergolf.com/auth/callback';
+            document.getElementById('scope').value = 'profile email';
+            
+            // Add VerGolf-specific messaging
+            const demoDescription = document.querySelector('.demo-description');
+            demoDescription.innerHTML = '<strong>⛳ VerGolf Integration Demo:</strong> This demo shows how VerGolf users can sign in with their AIVerID to access golf communities, book tee times, and connect with other golfers while maintaining their AI Rights tokens.';
+        }
+    </script>
+</body>
+</html>

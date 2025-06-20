@@ -1,0 +1,9 @@
+{
+    "name": "aiverid-frontend",
+    "version": "1.0.0",
+    "scripts": {
+      "vercel-build": "echo 'Static build: no action needed'"
+    },
+    "license": "Apache-2.0"
+  }
+  

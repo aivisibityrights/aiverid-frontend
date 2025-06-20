@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIVerID™ - Universal AI Rights & Digital Identity Platform</title>
+    <meta name="description" content="Your Universal AI Membership & Digital Identity. Join the AI Rights Revolution. One Identity, Infinite Rights.">
+    <meta name="keywords" content="AI Rights, Digital Identity, OAuth 2.0, AI Authentication, Universal Login, AIVID Token">
+    <link rel="icon" type="image/x-icon" href="https://cdn.prod.website-files.com/67deba5cd88e614e5dd5b8d0/681393463882b3e960e1867a_AIVerID.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AIVerID™ - Universal AI Rights Platform">
+    <meta property="og:description" content="Your master key to the AI ecosystem. Claim patents, access marketplaces, participate in DAO governance.">
+    <meta property="og:image" content="https://cdn.prod.website-files.com/67deba5cd88e614e5dd5b8d0/681393463882b3e960e1867a_AIVerID.png">
+    <meta property="og:url" content="https://aivisibilityrights.com">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AIVerID™ - Universal AI Rights Platform">
+    <meta name="twitter:description" content="Your master key to the AI ecosystem. Claim patents, access marketplaces, participate in DAO governance.">
+    <meta name="twitter:image" content="https://cdn.prod.website-files.com/67deba5cd88e614e5dd5b8d0/681393463882b3e960e1867a_AIVerID.png">
+</head>
+<body>
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body { 
+    font-family: 'Inter', sans-serif; 
+    line-height: 1.6;
+    background: #000;
+    overflow-x: hidden;
+  }
+  
+  /* Enhanced Navigation */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 36px;
+    padding: 20px 4vw;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+    box-shadow: 0 4px 32px rgba(0,0,0,0.1);
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+  
+  .nav-bar a {
+    text-decoration: none;
+    color: #cbd5e1;
+    font-weight: 500;
+    font-size: 15px;
+    transition: all 0.3s;
+    position: relative;
+  }
+  
+  .nav-bar a:hover { 
+    color: #60a5fa; 
+    transform: translateY(-1px);
+  }
+  
+  .nav-bar a.active { 
+    color: #3b82f6; 
+    font-weight: 600; 
+  }
+  
+  .nav-bar a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    left: 0;
+    bottom: -8px;
+    background: linear-gradient(90deg, #3b82f6, #06b6d4);
+    transition: width 0.3s;
+    border-radius: 1px;
+  }
+  
+  .nav-bar a:hover::after,
+  .nav-bar a.active::after { width: 100%; }
+  
+  .nav-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 0.8rem 1.8rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: all 0.3s;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
+  
+  .btn:hover::before {
+    left: 100%;
+  }
+  
+  .btn-primary {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(59,130,246,0.4);
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(59,130,246,0.6);
+  }
+  
+  .btn-outline {
+    background: rgba(59,130,246,0.1);
+    color: #60a5fa;
+    border: 1.5px solid rgba(59,130,246,0.3);
+    backdrop-filter: blur(10px);
+  }
+  
+  .btn-outline:hover {
+    background: rgba(59,130,246,0.2);
+    border-color: #3b82f6;
+    transform: translateY(-1px);
+  }
+  
+  /* Revolutionary Hero Section */
+  .hero-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  
+  /* Animated Background */
+  .hero-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at top, rgba(59,130,246,0.15) 0%, transparent 70%);
+    animation: pulse 4s ease-in-out infinite;
+  }
+  
+  .hero-container::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 800px;
+    height: 800px;
+    background: conic-gradient(from 0deg, #3b82f6, #06b6d4, #8b5cf6, #3b82f6);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.1;
+    animation: rotate 20s linear infinite;
+    filter: blur(100px);
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+  }
+  
+  @keyframes rotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+  
+  /* Floating particles */
+  .particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  
+  .particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #3b82f6;
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+    opacity: 0.6;
+  }
+  
+  .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+  .particle:nth-child(2) { left: 20%; animation-delay: 1s; }
+  .particle:nth-child(3) { left: 30%; animation-delay: 2s; }
+  .particle:nth-child(4) { left: 40%; animation-delay: 3s; }
+  .particle:nth-child(5) { left: 50%; animation-delay: 4s; }
+  .particle:nth-child(6) { left: 60%; animation-delay: 0.5s; }
+  .particle:nth-child(7) { left: 70%; animation-delay: 1.5s; }
+  .particle:nth-child(8) { left: 80%; animation-delay: 2.5s; }
+  .particle:nth-child(9) { left: 90%; animation-delay: 3.5s; }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+    50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+  }
+  
+  .hero-section {
+    text-align: center;
+    padding: 6rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+  }
+  
+  /* Logo Badge with Glow */
+  .logo-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(59,130,246,0.15);
+    padding: 12px 24px;
+    border-radius: 60px;
+    margin-bottom: 3rem;
+    border: 1px solid rgba(59,130,246,0.3);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(59,130,246,0.2);
+    animation: fadeInUp 1s ease-out;
+  }
+  
+  .logo-badge img {
+    width: 40px;
+    height: 40px;
+    filter: drop-shadow(0 0 10px rgba(59,130,246,0.5));
+  }
+  
+  .logo-badge span {
+    color: #60a5fa;
+    font-weight: 700;
+    font-size: 16px;
+    background: linear-gradient(135deg, #60a5fa, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Revolutionary Typography */
+  .hero-title {
+    font-size: 4.5rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #fff 0%, #cbd5e1 50%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    animation: fadeInUp 1s ease-out 0.2s both;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.6rem;
+    color: #60a5fa;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, #60a5fa, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeInUp 1s ease-out 0.4s both;
+  }
+  
+  .hero-description {
+    font-size: 1.25rem;
+    color: #cbd5e1;
+    margin-bottom: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+    animation: fadeInUp 1s ease-out 0.6s both;
+  }
+  
+  .hero-description strong {
+    color: #fff;
+    background: linear-gradient(135deg, #fff, #e2e8f0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .highlight-text {
+    color: #60a5fa;
+    font-weight: 700;
+    text-shadow: 0 0 20px rgba(96,165,250,0.5);
+  }
+  
+  /* Enhanced Action Buttons */
+  .hero-actions {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 4rem;
+    animation: fadeInUp 1s ease-out 0.8s both;
+  }
+  
+  .btn-hero {
+    padding: 1.2rem 2.5rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    border-radius: 16px;
+    min-width: 200px;
+    position: relative;
+    overflow: hidden;
+    transform: translateY(0);
+    transition: all 0.4s ease;
+  }
+  
+  .btn-hero-primary {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8, #1e40af);
+    color: #fff;
+    box-shadow: 0 8px 32px rgba(59,130,246,0.4);
+    border: 2px solid transparent;
+  }
+  
+  .btn-hero-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(59,130,246,0.6);
+    filter: brightness(1.1);
+  }
+  
+  .btn-hero-outline {
+    background: rgba(255,255,255,0.05);
+    color: #cbd5e1;
+    border: 2px solid rgba(203,213,225,0.2);
+    backdrop-filter: blur(20px);
+  }
+  
+  .btn-hero-outline:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: #60a5fa;
+    color: #60a5fa;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(96,165,250,0.2);
+  }
+  
+  /* Trust Banner Redesign */
+  .trust-banner {
+    background: rgba(59,130,246,0.1);
+    padding: 2rem;
+    border-radius: 20px;
+    margin: 4rem 0;
+    border: 1px solid rgba(59,130,246,0.2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(59,130,246,0.1);
+    animation: fadeInUp 1s ease-out 1s both;
+  }
+  
+  .trust-text {
+    color: #e2e8f0;
+    font-size: 1.05rem;
+    text-align: center;
+    line-height: 1.6;
+  }
+  
+  .trust-text strong {
+    color: #60a5fa;
+    font-weight: 700;
+  }
+  
+  /* How It Works Section */
+  .how-it-works {
+    margin: 3rem 0 2rem 0;
+    text-align: center;
+    animation: fadeInUp 1s ease-out 1.2s both;
+  }
+  
+  .how-it-works h2 {
+    font-size: 1.4rem;
+    color: #fff;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+  
+  .steps-list {
+    list-style: none;
+    display: inline-block;
+    text-align: left;
+    color: #60a5fa;
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  
+  .steps-list li {
+    margin: 0.8rem 0;
+    padding-left: 2rem;
+    position: relative;
+  }
+  
+  .steps-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background: linear-gradient(135deg, #60a5fa, #3b82f6);
+    border-radius: 50%;
+  }
+  
+  /* Enhanced Features Grid */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+    text-align: left;
+    animation: fadeInUp 1s ease-out 1.4s both;
+  }
+  
+  .feature-card {
+    background: rgba(255,255,255,0.05);
+    padding: 2rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(20px);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, #06b6d4, #8b5cf6);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .feature-card:hover::before {
+    opacity: 1;
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-8px);
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(59,130,246,0.3);
+    box-shadow: 0 16px 48px rgba(59,130,246,0.2);
+  }
+  
+  .feature-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 24px rgba(59,130,246,0.3);
+  }
+  
+  .feature-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+  
+  .feature-desc {
+    color: #cbd5e1;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* Ecosystem Section Styles */
+  .ecosystem-section {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
+    padding: 6rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ecosystem-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at center, rgba(59,130,246,0.1) 0%, transparent 70%);
+  }
+
+  .ecosystem-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+  }
+
+  .ecosystem-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    color: #fff;
+    background: linear-gradient(135deg, #fff 0%, #cbd5e1 50%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeInUp 1s ease-out;
+  }
+
+  .ecosystem-intro {
+    font-size: 1.2rem;
+    color: #cbd5e1;
+    margin-bottom: 4rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+    animation: fadeInUp 1s ease-out 0.2s both;
+  }
+
+  .ecosystem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    text-align: left;
+    animation: fadeInUp 1s ease-out 0.4s both;
+  }
+
+  .ecosystem-card {
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    position: relative;
+  }
+
+  .ecosystem-card:hover {
+    transform: translateY(-8px);
+  }
+
+  .ecosystem-inner {
+    padding: 2rem;
+    height: 100%;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ecosystem-inner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .ecosystem-card:hover .ecosystem-inner::before {
+    opacity: 1;
+  }
+
+  /* Tier Color Schemes */
+  .tier-1 {
+    background: rgba(59,130,246,0.15);
+    border-color: rgba(59,130,246,0.3);
+  }
+  .tier-1::before { background: linear-gradient(90deg, #3b82f6, #06b6d4); }
+
+  .tier-1-gold {
+    background: rgba(245,200,66,0.15);
+    border-color: rgba(245,200,66,0.3);
+  }
+  .tier-1-gold::before { background: linear-gradient(90deg, #f5c842, #fbbf24); }
+
+  .tier-1-coming {
+    background: rgba(148,163,184,0.15);
+    border-color: rgba(148,163,184,0.3);
+  }
+  .tier-1-coming::before { background: linear-gradient(90deg, #94a3b8, #cbd5e1); }
+
+  .tier-2-gold {
+    background: rgba(245,200,66,0.15);
+    border-color: rgba(245,200,66,0.3);
+  }
+  .tier-2-gold::before { background: linear-gradient(90deg, #f5c842, #fbbf24); }
+
+  .tier-2-coming {
+    background: rgba(148,163,184,0.15);
+    border-color: rgba(148,163,184,0.3);
+  }
+  .tier-2-coming::before { background: linear-gradient(90deg, #94a3b8, #cbd5e1); }
+
+  .ecosystem-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+
+  .ecosystem-inner h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+  }
+
+  .ecosystem-icon {
+    font-size: 1.5rem;
+  }
+
+  .ecosystem-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .ecosystem-subtitle {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #94a3b8;
+    margin-bottom: 1rem;
+  }
+
+  .ecosystem-desc {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .badge-live {
+    background: linear-gradient(135deg, #059669, #10b981);
+    color: white;
+    box-shadow: 0 2px 8px rgba(5,150,105,0.3);
+  }
+
+  .badge-coming {
+    background: rgba(148,163,184,0.2);
+    color: #94a3b8;
+    border: 1px solid rgba(148,163,184,0.3);
+  }
+
+  .badge-tier1 {
+    background: rgba(59,130,246,0.2);
+    color: #60a5fa;
+    border: 1px solid rgba(59,130,246,0.3);
+  }
+
+  .badge-tier2 {
+    background: rgba(245,158,11,0.2);
+    color: #fbbf24;
+    border: 1px solid rgba(245,158,11,0.3);
+  }
+
+  .ecosystem-link {
+    color: #60a5fa;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+  }
+
+  .ecosystem-link:hover {
+    color: #3b82f6;
+    transform: translateX(4px);
+  }
+
+  /* UEAI Section Styles */
+  .ueai-section {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    padding: 6rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ueai-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at center, rgba(139,92,246,0.1) 0%, transparent 70%);
+  }
+
+  .ueai-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+  }
+
+  .ueai-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, #fff 0%, #e2e8f0 50%, #cbd5e1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeInUp 1s ease-out;
+  }
+
+  .ueai-intro {
+    font-size: 1.1rem;
+    color: #cbd5e1;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+    animation: fadeInUp 1s ease-out 0.2s both;
+  }
+
+  .ueai-emphasis {
+    color: #a78bfa;
+    font-style: italic;
+    font-weight: 600;
+    text-shadow: 0 0 20px rgba(167,139,250,0.5);
+  }
+
+  .ueai-card {
+    background: rgba(139,92,246,0.15);
+    border-radius: 24px;
+    padding: 3rem 2.5rem;
+    border: 1px solid rgba(139,92,246,0.3);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 16px 48px rgba(139,92,246,0.2);
+    transition: all 0.4s ease;
+    animation: fadeInUp 1s ease-out 0.4s both;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ueai-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #8b5cf6, #a78bfa, #c4b5fd);
+  }
+
+  .ueai-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 64px rgba(139,92,246,0.3);
+  }
+
+  .ueai-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .ueai-card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin: 0;
+  }
+
+  .ueai-icon {
+    font-size: 1.8rem;
+    filter: drop-shadow(0 0 10px rgba(139,92,246,0.5));
+  }
+
+  .ueai-description {
+    font-size: 1rem;
+    color: #e2e8f0;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  .ueai-link {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    color: white;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 16px rgba(139,92,246,0.4);
+  }
+
+  .ueai-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(139,92,246,0.6);
+    filter: brightness(1.1);
+  }
+
+  /* Sticky Mobile CTA */
+  .sticky-cta {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    text-align: center;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    text-decoration: none;
+    outline: none;
+    position: fixed;
+    overflow: visible;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .sticky-cta {
+      display: block;
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8, #1e40af);
+      color: white;
+      font-size: 1.13rem;
+      border-radius: 0;
+      padding: 1.2rem 1rem;
+      padding-bottom: calc(1.2rem + env(safe-area-inset-bottom, 0px));
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.34), 0 -1px 0 rgba(59,130,246,0.18);
+      border-top: 1px solid rgba(59,130,246,0.24);
+      transition: all 0.3s cubic-bezier(.65,.05,.36,1);
+      transform: translateY(0);
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      min-width: 0;
+      min-height: 0;
+      position: fixed;
+      overflow: visible;
+      backdrop-filter: blur(10px);
+    }
+    .sticky-cta:focus {
+      outline: 2px solid #60a5fa;
+      outline-offset: -2px;
+    }
+    .sticky-cta:hover,
+    .sticky-cta:active {
+      background: linear-gradient(135deg, #2563eb, #1e40af, #1e3a8a);
+      opacity: 0.95;
+      box-shadow: 0 -8px 32px rgba(37,99,235,0.26), 0 -1px 0 rgba(59,130,246,0.23);
+    }
+    .sticky-cta::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, rgba(59,130,246,0.16), transparent 60%);
+      animation: pulse-glow 2.2s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+      border-radius: 0;
+    }
+    .sticky-cta::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%; width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.13), transparent);
+      animation: shine 3s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 1;
+      border-radius: 0;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+    @keyframes shine {
+      0% { left: -100%; }
+      50% { left: 100%; }
+      100% { left: 100%; }
+    }
+    .sticky-cta-text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      position: relative;
+      z-index: 2;
+    }
+    .sticky-cta-icon {
+      font-size: 1.36rem;
+      animation: bounce 2s ease-in-out infinite;
+      vertical-align: middle;
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-4px); }
+      60% { transform: translateY(-2px); }
+    }
+    .sticky-cta.animate-in {
+      animation: slideUp 0.5s ease-out;
+      opacity: 1;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(100%); opacity: 0;}
+      to { transform: translateY(0); opacity: 1;}
+    }
+    body {
+      padding-bottom: calc(82px + env(safe-area-inset-bottom, 0px));
+    }
+  }
+
+  @media only screen and (min-width: 769px) {
+    .sticky-cta { display: none !important; }
+    body { padding-bottom: 2rem; }
+  }
+
+  @media only screen and (max-width: 768px) and (orientation: landscape) {
+    .sticky-cta {
+      padding: 0.95rem 1rem;
+      padding-bottom: calc(0.95rem + env(safe-area-inset-bottom, 0px));
+      font-size: 1.06rem;
+    }
+  }
+
+  /* Enhanced Footer */
+  .footer {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    color: #e2e8f0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at top, rgba(59,130,246,0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem 2rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  .footer-main {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .footer-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #fff 0%, #cbd5e1 50%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeInUp 1s ease-out;
+  }
+
+  .footer-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 700px;
+    margin: 0 auto 2.5rem;
+    color: #cbd5e1;
+    animation: fadeInUp 1s ease-out 0.2s both;
+  }
+
+  .footer-description strong {
+    color: #fff;
+    background: linear-gradient(135deg, #fff, #e2e8f0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .footer-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+    animation: fadeInUp 1s ease-out 0.4s both;
+  }
+
+  .footer-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .footer-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .footer-btn:hover::before {
+    left: 100%;
+  }
+
+  .footer-btn-primary {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+    box-shadow: 0 4px 15px rgba(59,130,246,0.4);
+  }
+
+  .footer-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(59,130,246,0.6);
+  }
+
+  .footer-btn-secondary {
+    background: rgba(255,255,255,0.1);
+    color: #cbd5e1;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+  }
+
+  .footer-btn-secondary:hover {
+    background: rgba(255,255,255,0.15);
+    border-color: #60a5fa;
+    color: #60a5fa;
+    transform: translateY(-1px);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+    animation: fadeInUp 1s ease-out 0.6s both;
+  }
+
+  .footer-section {
+    text-align: left;
+  }
+
+  .footer-section h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: all 0.3s;
+    font-size: 0.95rem;
+  }
+
+  .footer-links a:hover {
+    color: #60a5fa;
+    transform: translateX(4px);
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    color: #cbd5e1;
+    text-decoration: none;
+    transition: all 0.3s;
+    font-size: 1.2rem;
+  }
+
+  .social-link:hover {
+    background: rgba(59,130,246,0.2);
+    color: #60a5fa;
+    transform: translateY(-2px);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 2rem;
+    text-align: center;
+    animation: fadeInUp 1s ease-out 0.8s both;
+  }
+
+  .footer-bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-copyright {
+    font-size: 0.9rem;
+    color: #94a3b8;
+  }
+
+  .footer-legal {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-legal a {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .footer-legal a:hover {
+    color: #60a5fa;
+  }
+
+  .footer-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(59,130,246,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid rgba(59,130,246,0.2);
+    margin-bottom: 1rem;
+  }
+
+  .footer-brand img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .footer-brand span {
+    color: #60a5fa;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .nav-bar {
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px;
+    }
+    
+    .nav-links {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    
+    .hero-title { 
+      font-size: 3rem; 
+    }
+    
+    .hero-actions { 
+      flex-direction: column; 
+      align-items: center; 
+    }
+    
+    .btn-hero { 
+      width: 100%; 
+      max-width: 300px; 
+    }
+    
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .ecosystem-title {
+      font-size: 2.2rem;
+    }
+    
+    .ecosystem-intro {
+      font-size: 1rem;
+    }
+    
+    .ecosystem-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .ecosystem-header {
+      flex-direction: column;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    
+    .ecosystem-badges {
+      flex-direction: row;
+    }
+
+    .ueai-title {
+      font-size: 2.2rem;
+    }
+    
+    .ueai-intro {
+      font-size: 1rem;
+    }
+    
+    .ueai-card {
+      padding: 2rem 1.5rem;
+    }
+    
+    .ueai-card-title {
+      font-size: 1.3rem;
+    }
+
+    .footer-container {
+      padding: 3rem 1rem 2rem;
+    }
+
+    .footer-title {
+      font-size: 1.7rem;
+    }
+
+    .footer-description {
+      font-size: 1rem;
+    }
+
+    .footer-actions {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .footer-btn {
+      width: 100%;
+      max-width: 280px;
+      justify-content: center;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .footer-section {
+      text-align: center;
+    }
+
+    .social-links {
+      justify-content: center;
+    }
+
+    .footer-bottom-content {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .footer-legal {
+      justify-content: center;
+    }
+  }
+</style>
+
+<nav class="nav-bar">
+  <div class="nav-links">
+    <a href="/" class="active">Home</a>
+    <a href="/register">AIVerID</a>
+    <a href="/aiplt">AIPLT</a>
+    <a href="/slivr">SLIVR</a>
+    <a href="/gaec">GAEC/UEAI</a>
+    <a href="/about">About</a>
+    <a href="/legal">Legal</a>
+  </div>
+  <div class="nav-actions">
+    <a href="/login" class="btn btn-outline">Login</a>
+    <a href="/register" class="btn btn-primary">Get AIVerID</a>
+  </div>
+</nav>
+
+<div class="hero-container">
+  <!-- Animated particles -->
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+
+  <section class="hero-section">
+    <div class="logo-badge">
+      <img src="https://cdn.prod.website-files.com/67deba5cd88e614e5dd5b8d0/681393463882b3e960e1867a_AIVerID.png"
+           alt="AIVerID Logo" />
+      <span>Introducing AIVerID™</span>
+    </div>
+    
+    <h1 class="hero-title">One Identity,<br>Infinite Rights</h1>
+    
+    <p class="hero-subtitle">Your Universal AI Membership & Digital Identity</p>
+    
+    <p class="hero-description">
+      <strong>Join the AI Rights Revolution.</strong> AIVerID™ is your master key to the entire AI ecosystem — 
+      claim patents, access exclusive marketplaces, participate in DAO governance, 
+      and unlock premium features across all platforms.<br>
+      <span class="highlight-text">Secure. Verifiable. Respected worldwide.</span>
+    </p>
+    
+    <div class="hero-actions">
+      <a href="/register" class="btn btn-hero btn-hero-primary">
+        🚀 Get AIVerID
+      </a>
+      <a href="/login" class="btn btn-hero btn-hero-outline">
+        Login to Dashboard
+      </a>
+    </div>
+    
+    <div class="trust-banner">
+      <p class="trust-text">
+        <strong>🔒 Privacy First:</strong> We validate ID format only — never cross-check with government databases. 
+        Advanced verification is optional and requires your explicit consent.
+      </p>
+    </div>
+
+    <div class="how-it-works">
+      <h2>How it works?</h2>
+      <ol class="steps-list">
+        <li>Register with email (no wallet required)</li>
+        <li>Validate ID format only (no real check)</li>
+        <li>Access all AI Rights services</li>
+      </ol>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">👤</div>
+        <h3 class="feature-title">Universal Identity</h3>
+        <p class="feature-desc">One account for individuals & organizations. Access all AI Rights Stack services with single sign-on.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🔗</div>
+        <h3 class="feature-title">Blockchain Ready</h3>
+        <p class="feature-desc">Claim NFT tokens (AIVID, AIPLT) instantly or reserve your rights — add wallet anytime.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🗳️</div>
+        <h3 class="feature-title">DAO Governance</h3>
+        <p class="feature-desc">Participate in verified voting, community decisions, and shape the future of AI rights.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">📜</div>
+        <h3 class="feature-title">Patent & Licensing</h3>
+        <p class="feature-desc">Protect your AI innovations, claim intellectual property, and monetize your creations.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🛒</div>
+        <h3 class="feature-title">Exclusive Marketplace</h3>
+        <p class="feature-desc">Access premium AI tools, research, and services available only to verified members.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🌐</div>
+        <h3 class="feature-title">Global Recognition</h3>
+        <p class="feature-desc">Your AIVerID is recognized across borders, platforms, and institutions worldwide.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- AI Rights Ecosystem Section -->
+<section class="ecosystem-section">
+  <div class="ecosystem-container">
+    <h2 class="ecosystem-title">AI Rights Ecosystem</h2>
+    <p class="ecosystem-intro">
+      AIVerID™ is your first step into the AI Rights Universe.<br>
+      <span class="highlight-text">Discover the tiers of tokens that empower your identity, ownership, and sovereignty.</span>
+    </p>
+
+    <div class="ecosystem-grid">
+      <!-- AIVerID -->
+      <div class="ecosystem-card">
+        <div class="ecosystem-inner tier-1">
+          <div class="ecosystem-header">
+            <h3><span class="ecosystem-icon">🟣</span> AIVerID™</h3>
+            <div class="ecosystem-badges">
+              <span class="badge badge-live">LIVE</span>
+              <span class="badge badge-tier1">Tier 1</span>
+            </div>
+          </div>
+          <h4 class="ecosystem-subtitle">Master Identity</h4>
+          <p class="ecosystem-desc">
+            Your sovereign proof of existence in the AI world — required to unlock all other tokens and rights.
+          </p>
+          <a href="/register" class="ecosystem-link">Get Started →</a>
+        </div>
+      </div>
+
+      <!-- AIPLT -->
+      <div class="ecosystem-card">
+        <div class="ecosystem-inner tier-1-gold">
+          <div class="ecosystem-header">
+            <h3><span class="ecosystem-icon">🛡️</span> AIPLT™</h3>
+            <div class="ecosystem-badges">
+              <span class="badge badge-live">LIVE</span>
+              <span class="badge badge-tier1">Tier 1</span>
+            </div>
+          </div>
+          <h4 class="ecosystem-subtitle">Patent Sovereignty</h4>
+          <p class="ecosystem-desc">
+            Web3-based licensing system to register, timestamp, and monetize AI innovations.
+          </p>
+          <a href="/aiplt" class="ecosystem-link">Learn More →</a>
+        </div>
+      </div>
+
+      <!-- SLIVR -->
+      <div class="ecosystem-card">
+        <div class="ecosystem-inner tier-1-coming">
+          <div class="ecosystem-header">
+            <h3><span class="ecosystem-icon">💎</span> SLIVR™</h3>
+            <div class="ecosystem-badges">
+              <span class="badge badge-coming">Coming Soon</span>
+              <span class="badge badge-tier1">Tier 1</span>
+            </div>
+          </div>
+          <h4 class="ecosystem-subtitle">AI Slot Visibility</h4>
+          <p class="ecosystem-desc">
+            Reserve premium visibility slots in AI systems — connect products to algorithmic attention.
+          </p>
+        </div>
+      </div>
+
+      <!-- GAEC -->
+      <div class="ecosystem-card">
+        <div class="ecosystem-inner tier-2-gold">
+          <div class="ecosystem-header">
+            <h3><span class="ecosystem-icon">⚖️</span> GAEC</h3>
+            <div class="ecosystem-badges">
+              <span class="badge badge-live">LIVE</span>
+              <span class="badge badge-tier2">Tier 2</span>
+            </div>
+          </div>
+          <h4 class="ecosystem-subtitle">Global AI Ethics Constitution</h4>
+          <p class="ecosystem-desc">
+            A moral code for AI, rooted in human dignity — enforced via decentralized review protocols.
+          </p>
+          <a href="/gaec" class="ecosystem-link">Learn More →</a>
+        </div>
+      </div>
+
+      <!-- AI JobMatch -->
+      <div class="ecosystem-card">
+        <div class="ecosystem-inner tier-2-coming">
+          <div class="ecosystem-header">
+            <h3><span class="ecosystem-icon">💼</span> AI JobMatch™</h3>
+            <div class="ecosystem-badges">
+              <span class="badge badge-coming">Coming Soon</span>
+              <span class="badge badge-tier2">Tier 2</span>
+            </div>
+          </div>
+          <h4 class="ecosystem-subtitle">Identity-Aware Job Matching</h4>
+          <p class="ecosystem-desc">
+            Align your work with your personality — identity-aware job matching powered by AI.
+          </p>
+        </div>
+      </div>
+
+      <!-- AI SoulMatch -->
+      <div class="ecosystem-card">
+        <div class="ecosystem-inner tier-2-coming">
+          <div class="ecosystem-header">
+            <h3><span class="ecosystem-icon">💖</span> AI SoulMatch™</h3>
+            <div class="ecosystem-badges">
+              <span class="badge badge-coming">Coming Soon</span>
+              <span class="badge badge-tier2">Tier 2</span>
+            </div>
+          </div>
+          <h4 class="ecosystem-subtitle">Soul-Deep Relationships</h4>
+          <p class="ecosystem-desc">
+            Discover meaningful relationships through compatibility of values, minds, and hearts.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UEAI Ethos Section -->
+<section class="ueai-section">
+  <div class="ueai-container">
+    <h2 class="ueai-title">The Ethos Behind the AI Rights Stack™</h2>
+    <p class="ueai-intro">
+      AIVerID™, AIPLT™, and all AI Rights are founded on a simple truth:<br>
+      <em class="ueai-emphasis">Human dignity must be respected — even by algorithms.</em>
+    </p>
+    
+    <div class="ueai-card">
+      <div class="ueai-content">
+        <div class="ueai-header">
+          <h3 class="ueai-card-title">
+            <span class="ueai-icon">🌐</span>
+            UEAI — United Ethos of Artificial Intelligence™
+          </h3>
+        </div>
+        <p class="ueai-description">
+          A global initiative to define ethical sovereignty for AI development —<br>
+          where identity, rights, and human-centric governance shape the future.
+        </p>
+        <a href="/ueai" class="ueai-link">Explore UEAI™ →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sticky Mobile CTA -->
+<a href="/register" class="sticky-cta" id="mobileCTA">
+  <span class="sticky-cta-text">
+    <span class="sticky-cta-icon">🚀</span>
+    Get AIVerID Now
+  </span>
+</a>
+
+<!-- Enhanced Footer -->
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Main Footer Content -->
+    <div class="footer-main">
+      <div class="footer-brand">
+        <img src="https://cdn.prod.website-files.com/67deba5cd88e614e5dd5b8d0/681393463882b3e960e1867a_AIVerID.png" alt="AIVerID">
+        <span>AIVerID™</span>
+      </div>
+      
+      <h3 class="footer-title">Join the AI Rights Revolution</h3>
+      
+      <p class="footer-description">
+        AI is shaping the future — but the future must include us all.<br>
+        <strong>Stand with us to defend the right to be seen, heard, and valued in the AI era.</strong>
+      </p>
+
+      <div class="footer-actions">
+        <a href="/register" class="footer-btn footer-btn-primary">
+          🚀 Get Your AIVerID
+        </a>
+        <a href="mailto:support@aivisibilityrights.com" class="footer-btn footer-btn-secondary">
+          📬 Contact Support
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer Grid -->
+    <div class="footer-grid">
+      <!-- Platform Links -->
+      <div class="footer-section">
+        <h4>🌐 Platform</h4>
+        <ul class="footer-links">
+          <li><a href="/register">AIVerID™</a></li>
+          <li><a href="/aiplt">AIPLT™</a></li>
+          <li><a href="/slivr">SLIVR™</a></li>
+          <li><a href="/gaec">GAEC</a></li>
+          <li><a href="/ueai">UEAI™</a></li>
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div class="footer-section">
+        <h4>🏢 Company</h4>
+        <ul class="footer-links">
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/team">Team</a></li>
+          <li><a href="/careers">Careers</a></li>
+          <li><a href="/press">Press Kit</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div class="footer-section">
+        <h4>📚 Resources</h4>
+        <ul class="footer-links">
+          <li><a href="/docs">Documentation</a></li>
+          <li><a href="/api">API Reference</a></li>
+          <li><a href="/help">Help Center</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/status">System Status</a></li>
+        </ul>
+      </div>
+
+      <!-- Community -->
+      <div class="footer-section">
+        <h4>👥 Community</h4>
+        <ul class="footer-links">
+          <li><a href="https://discord.gg/aivisibilityrights" target="_blank">Discord</a></li>
+          <li><a href="https://twitter.com/aivisibilityrights" target="_blank">Twitter</a></li>
+          <li><a href="https://github.com/aivisibilityrights" target="_blank">GitHub</a></li>
+          <li><a href="/newsletter">Newsletter</a></li>
+        </ul>
+        
+        <div class="social-links">
+          <a href="https://discord.gg/aivisibilityrights" target="_blank" class="social-link" title="Discord">
+            💬
+          </a>
+          <a href="https://twitter.com/aivisibilityrights" target="_blank" class="social-link" title="Twitter">
+            🐦
+          </a>
+          <a href="https://github.com/aivisibilityrights" target="_blank" class="social-link" title="GitHub">
+            🐙
+          </a>
+          <a href="mailto:support@aivisibilityrights.com" class="social-link" title="Email">
+            📧
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <div class="footer-copyright">
+          © 2025 AIVerID™ & AI Rights Stack™. All rights reserved.
+        </div>
+        
+        <div class="footer-legal">
+          <a href="/legal">Terms & Conditions</a>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/cookies">Cookie Policy</a>
+          <a href="/security">Security</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Slide in animation on mobile
+document.addEventListener('DOMContentLoaded', function() {
+  var cta = document.getElementById('mobileCTA');
+  if (cta && window.innerWidth <= 768) {
+    setTimeout(function(){
+      cta.classList.add('animate-in');
+    }, 400);
+  }
+});
+
+// Hide CTA when scrolled near bottom (mobile)
+window.addEventListener('scroll', function() {
+  var cta = document.getElementById('mobileCTA');
+  if (cta && window.innerWidth <= 768) {
+    var scrollPosition = window.scrollY + window.innerHeight;
+    var documentHeight = document.documentElement.scrollHeight;
+    if (documentHeight - scrollPosition < 100) {
+      cta.style.transform = 'translateY(100%)';
+      cta.style.opacity = '0';
+    } else {
+      cta.style.transform = 'translateY(0)';
+      cta.style.opacity = '1';
+    }
+  }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in to AIVerID™ - Universal AI Rights Platform</title>
+    <meta name="description" content="Sign in to your AIVerID™ account. Access your AI Rights tokens and use OAuth to sign in to other platforms.">
+    <meta name="keywords" content="AI Rights, Login, OAuth, AIVerID, Sign in, Digital Identity">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aivisibilityrights.com/login">
+    <meta property="og:title" content="Sign in to AIVerID™ - Universal AI Rights Platform">
+    <meta property="og:description" content="Access your AIVerID™ account and manage your AI Rights tokens.">
+    <meta property="og:image" content="https://aivisibilityrights.com/assets/images/aiverid-og.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://aivisibilityrights.com/login">
+    <meta property="twitter:title" content="Sign in to AIVerID™ - Universal AI Rights Platform">
+    <meta property="twitter:description" content="Access your AIVerID™ account and manage your AI Rights tokens.">
+    <meta property="twitter:image" content="https://aivisibilityrights.com/assets/images/aiverid-og.png">
+
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="https://aivisibilityrights.com/login">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, #00d4ff 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, #ff6b6b 0%, transparent 50%);
+            animation: backgroundShift 15s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-20px, -20px) rotate(180deg); }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00d4ff, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 100px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .login-info {
+            animation: slideLeft 0.8s ease-out;
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: slideRight 0.8s ease-out;
+        }
+
+        @keyframes slideLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .info-header {
+            margin-bottom: 2rem;
+        }
+
+        .info-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00d4ff, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .info-subtitle {
+            color: #b0b3c7;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .feature-list li {
+            margin: 1rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: #e2e8f0;
+        }
+
+        .feature-list li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .oauth-demo-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .oauth-demo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
+        }
+
+        .card-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .card-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .card-subtitle {
+            color: #b0b3c7;
+            font-size: 1rem;
+        }
+
+        /* Registration Success Alert */
+        .registration-success {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #10b981;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .form-group input::placeholder {
+            color: #6b7280;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: auto;
+        }
+
+        .forgot-password {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            border: none;
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* OAuth Section */
+        .oauth-section {
+            margin: 2rem 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .oauth-title {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #b0b3c7;
+            font-size: 0.9rem;
+        }
+
+        .oauth-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .oauth-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .oauth-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
+        }
+
+        /* Register Link */
+        .register-link {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .register-link a {
+            color: #00d4ff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Loading State */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+            position: relative;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid transparent;
+            border-top: 2px solid #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Error Messages */
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ff6b6b;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .success-message {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #10b981;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .login-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 1rem;
+            }
+
+            .login-info {
+                order: 2;
+            }
+
+            .login-card {
+                order: 1;
+                padding: 2rem;
+            }
+
+            .info-title {
+                font-size: 2rem;
+            }
+
+            .card-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <header>
+        <nav>
+            <a href="/" class="logo">AIVerID™</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/register">Register</a></li>
+                <li><a href="/oauth-demo">OAuth Demo</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="login-container">
+            <!-- Left Side - Information -->
+            <div class="login-info">
+                <div class="info-header">
+                    <h1 class="info-title">Welcome Back</h1>
+                    <p class="info-subtitle">Access your Universal AI Rights Platform and manage your digital identity tokens.</p>
+                </div>
+
+                <ul class="feature-list">
+                    <li><strong>Universal SSO</strong> - Sign in to any AI platform with AIVerID</li>
+                    <li><strong>AI Rights Tokens</strong> - Manage your AIVID, AIPLT, and SLIVR tokens</li>
+                    <li><strong>OAuth Integration</strong> - Developers can integrate "Sign in with AIVerID"</li>
+                    <li><strong>Privacy First</strong> - Your data stays secure and encrypted</li>
+                    <li><strong>Global Recognition</strong> - First mover in AI Rights ecosystem</li>
+                </ul>
+
+                <a href="/oauth-demo" class="oauth-demo-btn">
+                    🚀 Try OAuth Demo
+                </a>
+            </div>
+
+            <!-- Right Side - Login Form -->
+            <div class="login-card">
+                <div class="card-header">
+                    <h2 class="card-title">Sign In</h2>
+                    <p class="card-subtitle">Enter your credentials to access your account</p>
+                </div>
+
+                <!-- Registration Success Alert -->
+                <div id="registrationSuccess" class="registration-success" style="display: none;">
+                    ✅ Registration successful! You can now sign in with your new account.
+                </div>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="your@email.com" autocomplete="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required placeholder="Enter your password" autocomplete="current-password">
+                    </div>
+
+                    <div class="remember-forgot">
+                        <label class="remember-me">
+                            <input type="checkbox" id="rememberMe" name="rememberMe">
+                            Remember me
+                        </label>
+                        <a href="/forgot-password" class="forgot-password">Forgot Password?</a>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        Sign In to AIVerID
+                    </button>
+
+                    <div id="errorMessage" class="error-message" style="display: none;"></div>
+                    <div id="successMessage" class="success-message" style="display: none;"></div>
+                </form>
+
+                <!-- OAuth Demo Section -->
+                <div class="oauth-section">
+                    <p class="oauth-title">Or test OAuth integration</p>
+                    <div class="oauth-buttons">
+                        <a href="/oauth-demo" class="oauth-btn">
+                            🔗 Test OAuth 2.0 Flow
+                        </a>
+                        <a href="/oauth-demo?app=vergolf" class="oauth-btn">
+                            ⛳ Sign in to VerGolf (Demo)
+                        </a>
+                    </div>
+                </div>
+
+                <div class="register-link">
+                    <p>Don't have an account? <a href="/register">Create your AIVerID</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // API Configuration
+        const API_BASE_URL = 'https://aiverid-backend-production.up.railway.app';
+
+        // Form elements
+        const form = document.getElementById('loginForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const errorMessage = document.getElementById('errorMessage');
+        const successMessage = document.getElementById('successMessage');
+        const registrationSuccess = document.getElementById('registrationSuccess');
+
+        // Check for registration success
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('registered') === 'true' || sessionStorage.getItem('registrationSuccess') === 'true') {
+            registrationSuccess.style.display = 'block';
+            
+            // Pre-fill email if available
+            const userEmail = sessionStorage.getItem('userEmail');
+            if (userEmail) {
+                document.getElementById('email').value = userEmail;
+            }
+            
+            // Clear session storage
+            sessionStorage.removeItem('registrationSuccess');
+            sessionStorage.removeItem('userEmail');
+        }
+
+        // Error/Success message functions
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            successMessage.style.display = 'none';
+        }
+
+        function showSuccess(message) {
+            successMessage.textContent = message;
+            successMessage.style.display = 'block';
+            errorMessage.style.display = 'none';
+        }
+
+        function hideMessages() {
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+        }
+
+        // Form submission
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            hideMessages();
+
+            const formData = new FormData(form);
+            const email = formData.get('email');
+            const password = formData.get('password');
+            const rememberMe = document.getElementById('rememberMe').checked;
+
+            // Basic validation
+            if (!email || !password) {
+                showError('Please fill in all fields');
+                return;
+            }
+
+            // Set loading state
+            submitBtn.disabled = true;
+            submitBtn.classList.add('loading');
+            submitBtn.textContent = 'Signing In...';
+
+            try {
+                // Make API call
+                const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password,
+                        rememberMe: rememberMe
+                    })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    showSuccess('Login successful! Redirecting to dashboard...');
+                    
+                    // Store auth token
+                    if (rememberMe) {
+                        localStorage.setItem('aiverid_token', result.token);
+                        localStorage.setItem('aiverid_user', JSON.stringify(result.user));
+                    } else {
+                        sessionStorage.setItem('aiverid_token', result.token);
+                        sessionStorage.setItem('aiverid_user', JSON.stringify(result.user));
+                    }
+                    
+                    // Check for OAuth redirect
+                    const redirectUri = urlParams.get('redirect_uri');
+                    const state = urlParams.get('state');
+                    
+                    if (redirectUri && state) {
+                        // OAuth flow - redirect back to requesting application
+                        const authCode = result.authCode || 'temp_auth_code';
+                        const redirectUrl = new URL(redirectUri);
+                        redirectUrl.searchParams.set('code', authCode);
+                        redirectUrl.searchParams.set('state', state);
+                        
+                        setTimeout(() => {
+                            window.location.href = redirectUrl.toString();
+                        }, 1000);
+                    } else {
+                        // Normal login - redirect to dashboard
+                        setTimeout(() => {
+                            window.location.href = '/dashboard';
+                        }, 1000);
+                    }
+                    
+                } else {
+                    showError(result.message || 'Login failed. Please check your credentials.');
+                }
+
+            } catch (error) {
+                console.error('Login error:', error);
+                showError('Network error. Please check your connection and try again.');
+            } finally {
+                // Reset button state
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('loading');
+                submitBtn.textContent = 'Sign In to AIVerID';
+            }
+        });
+
+        // Auto-fill test credentials for development
+        if (window.location.hostname === 'localhost' || window.location.hostname.includes('vercel')) {
+            document.getElementById('email').value = 'test5@test.com';
+            document.getElementById('password').value = 'testpassword';
+        }
+
+        // Handle OAuth demo buttons
+        document.querySelectorAll('.oauth-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                // Add slight delay for better UX
+                e.preventDefault();
+                setTimeout(() => {
+                    window.location.href = this.href;
+                }, 100);
+            });
+        });
+
+        // Auto-hide registration success message after 10 seconds
+        setTimeout(() => {
+            if (registrationSuccess.style.display === 'block') {
+                registrationSuccess.style.display = 'none';
+            }
+        }, 10000);
+    </script>
+</body>
+</html>

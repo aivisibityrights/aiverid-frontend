@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join AIVerID™ - Your Universal AI Rights Platform</title>
+    <meta name="description" content="Register for AIVerID™ - Universal AI Rights & Digital Identity Platform. Get your AI Rights tokens (AIVID, AIPLT, SLIVR) and join the AI ecosystem.">
+    <meta name="keywords" content="AI Rights, Digital Identity, OAuth, AIVerID, AIVID token, blockchain">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aivisibilityrights.com/register">
+    <meta property="og:title" content="Join AIVerID™ - Universal AI Rights Platform">
+    <meta property="og:description" content="Register for AIVerID™ and get your AI Rights tokens. Join the revolution in AI identity management.">
+    <meta property="og:image" content="https://aivisibilityrights.com/assets/images/aiverid-og.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://aivisibilityrights.com/register">
+    <meta property="twitter:title" content="Join AIVerID™ - Universal AI Rights Platform">
+    <meta property="twitter:description" content="Register for AIVerID™ and get your AI Rights tokens. Join the revolution in AI identity management.">
+    <meta property="twitter:image" content="https://aivisibilityrights.com/assets/images/aiverid-og.png">
+
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="https://aivisibilityrights.com/register">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, #00d4ff 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, #ff6b6b 0%, transparent 50%);
+            animation: backgroundShift 15s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-20px, -20px) rotate(180deg); }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00d4ff, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 100px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .registration-container {
+            max-width: 500px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .registration-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .card-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #00d4ff, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card-subtitle {
+            color: #b0b3c7;
+            font-size: 1.1rem;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .form-group input::placeholder {
+            color: #6b7280;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .aiverid-display {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .aiverid-id {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #00d4ff;
+            font-family: 'Courier New', monospace;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-top: 0.25rem;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            border: none;
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Loading State */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid transparent;
+            border-top: 2px solid #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Login Link */
+        .login-link {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .login-link a {
+            color: #00d4ff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Token Info */
+        .token-info {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .token-info h4 {
+            color: #ff6b6b;
+            margin-bottom: 0.5rem;
+        }
+
+        .token-list {
+            list-style: none;
+            padding-left: 1rem;
+        }
+
+        .token-list li {
+            margin: 0.3rem 0;
+            color: #b0b3c7;
+        }
+
+        .token-list li::before {
+            content: '✨';
+            margin-right: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .registration-card {
+                padding: 2rem;
+                margin: 1rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .card-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Error Messages */
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ff6b6b;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .success-message {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #10b981;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <header>
+        <nav>
+            <a href="/" class="logo">AIVerID™</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/oauth-demo">OAuth Demo</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="registration-container">
+            <div class="registration-card">
+                <div class="card-header">
+                    <h1 class="card-title">Join AIVerID™</h1>
+                    <p class="card-subtitle">Create your Universal AI Rights account and claim your tokens</p>
+                </div>
+
+                <form id="registrationForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" name="firstName" required placeholder="John">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" required placeholder="Doe">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="john@example.com">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <select id="country" name="country" required>
+                                <option value="">Select Country</option>
+                                <option value="TH">Thailand</option>
+                                <option value="US">United States</option>
+                                <option value="GB">United Kingdom</option>
+                                <option value="DE">Germany</option>
+                                <option value="FR">France</option>
+                                <option value="JP">Japan</option>
+                                <option value="KR">South Korea</option>
+                                <option value="SG">Singapore</option>
+                                <option value="AU">Australia</option>
+                                <option value="CA">Canada</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="nationalId">National ID</label>
+                            <input type="text" id="nationalId" name="nationalId" required placeholder="1234567890123">
+                        </div>
+                    </div>
+
+                    <div class="aiverid-display">
+                        <div>Your AIVerID will be:</div>
+                        <div class="aiverid-id" id="generatedAIVerID">Generate ID above</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required placeholder="Enter secure password">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password">
+                    </div>
+
+                    <div class="token-info">
+                        <h4>🎁 You'll receive these AI Rights Tokens:</h4>
+                        <ul class="token-list">
+                            <li><strong>AIVID</strong> - Your digital identity token</li>
+                            <li><strong>AIPLT</strong> - AI Patent License Rights (US Registered)</li>
+                            <li><strong>SLIVR</strong> - AI Search Visibility Rights</li>
+                        </ul>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">
+                            I agree to the <a href="/terms" style="color: #00d4ff;">Terms of Service</a> and 
+                            <a href="/privacy" style="color: #00d4ff;">Privacy Policy</a>. I understand that my national ID is used for format validation only and is not stored or shared.
+                        </label>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="marketing" name="marketing">
+                        <label for="marketing">
+                            I would like to receive updates about AIVerID and the AI Rights ecosystem.
+                        </label>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        Create My AIVerID Account
+                    </button>
+
+                    <div id="errorMessage" class="error-message" style="display: none;"></div>
+                    <div id="successMessage" class="success-message" style="display: none;"></div>
+                </form>
+
+                <div class="login-link">
+                    <p>Already have an account? <a href="/login">Sign in here</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // API Configuration
+        const API_BASE_URL = 'https://aiverid-backend-production.up.railway.app';
+
+        // Form elements
+        const form = document.getElementById('registrationForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const errorMessage = document.getElementById('errorMessage');
+        const successMessage = document.getElementById('successMessage');
+        
+        // AIVerID generation
+        const countryField = document.getElementById('country');
+        const nationalIdField = document.getElementById('nationalId');
+        const generatedAIVerID = document.getElementById('generatedAIVerID');
+
+        // Generate AIVerID when country or national ID changes
+        function updateAIVerID() {
+            const country = countryField.value;
+            const nationalId = nationalIdField.value;
+            
+            if (country && nationalId && nationalId.length >= 8) {
+                const aiverid = country + nationalId.slice(-10).padStart(10, '0');
+                generatedAIVerID.textContent = aiverid;
+                generatedAIVerID.parentElement.style.background = 'rgba(0, 212, 255, 0.1)';
+            } else {
+                generatedAIVerID.textContent = 'Complete fields above';
+                generatedAIVerID.parentElement.style.background = 'rgba(255, 255, 255, 0.05)';
+            }
+        }
+
+        countryField.addEventListener('change', updateAIVerID);
+        nationalIdField.addEventListener('input', updateAIVerID);
+
+        // Password validation
+        function validatePasswords() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password && confirmPassword && password !== confirmPassword) {
+                showError('Passwords do not match');
+                return false;
+            }
+            
+            if (password && password.length < 8) {
+                showError('Password must be at least 8 characters long');
+                return false;
+            }
+            
+            return true;
+        }
+
+        document.getElementById('confirmPassword').addEventListener('blur', validatePasswords);
+
+        // Error/Success message functions
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            successMessage.style.display = 'none';
+        }
+
+        function showSuccess(message) {
+            successMessage.textContent = message;
+            successMessage.style.display = 'block';
+            errorMessage.style.display = 'none';
+        }
+
+        function hideMessages() {
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+        }
+
+        // National ID validation
+        function validateNationalId(country, nationalId) {
+            const patterns = {
+                'TH': /^\d{13}$/,
+                'US': /^\d{9}$/,
+                'GB': /^[A-Z]{2}\d{6}[A-Z]$/,
+                'DE': /^\d{11}$/,
+                'FR': /^\d{13}$/,
+                'JP': /^\d{8}$/,
+                'KR': /^\d{6}-\d{7}$/,
+                'SG': /^[STFG]\d{7}[A-Z]$/,
+                'AU': /^\d{9}$/,
+                'CA': /^\d{9}$/
+            };
+
+            if (!patterns[country]) return true; // Allow unknown patterns
+            return patterns[country].test(nationalId.replace(/[-\s]/g, ''));
+        }
+
+        // Form submission
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            hideMessages();
+
+            // Validate form
+            if (!validatePasswords()) return;
+
+            const formData = new FormData(form);
+            const country = formData.get('country');
+            const nationalId = formData.get('nationalId');
+
+            // Validate national ID format
+            if (!validateNationalId(country, nationalId)) {
+                showError('Invalid national ID format for selected country');
+                return;
+            }
+
+            // Check terms agreement
+            if (!document.getElementById('terms').checked) {
+                showError('Please agree to the Terms of Service and Privacy Policy');
+                return;
+            }
+
+            // Set loading state
+            submitBtn.disabled = true;
+            submitBtn.classList.add('loading');
+            submitBtn.textContent = 'Creating Account...';
+
+            try {
+                // Prepare registration data
+                const registrationData = {
+                    firstName: formData.get('firstName'),
+                    lastName: formData.get('lastName'),
+                    email: formData.get('email'),
+                    password: formData.get('password'),
+                    country: country,
+                    nationalId: nationalId,
+                    marketingConsent: document.getElementById('marketing').checked
+                };
+
+                // Make API call
+                const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(registrationData)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    showSuccess('Account created successfully! Please check your email for verification.');
+                    
+                    // Store user data temporarily for login redirect
+                    sessionStorage.setItem('registrationSuccess', 'true');
+                    sessionStorage.setItem('userEmail', registrationData.email);
+                    
+                    // Redirect to login page after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = '/login?registered=true';
+                    }, 2000);
+                    
+                } else {
+                    showError(result.message || 'Registration failed. Please try again.');
+                }
+
+            } catch (error) {
+                console.error('Registration error:', error);
+                showError('Network error. Please check your connection and try again.');
+            } finally {
+                // Reset button state
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('loading');
+                submitBtn.textContent = 'Create My AIVerID Account';
+            }
+        });
+
+        // Auto-fill demo data (for development)
+        if (window.location.hostname === 'localhost' || window.location.hostname.includes('vercel')) {
+            document.getElementById('firstName').value = 'Test';
+            document.getElementById('lastName').value = 'User';
+            document.getElementById('email').value = 'test' + Math.floor(Math.random() * 1000) + '@example.com';
+            document.getElementById('country').value = 'TH';
+            document.getElementById('nationalId').value = '1234567890123';
+            document.getElementById('password').value = 'testpassword';
+            document.getElementById('confirmPassword').value = 'testpassword';
+            updateAIVerID();
+        }
+
+        // Initialize
+        updateAIVerID();
+    </script>
+</body>
+</html>

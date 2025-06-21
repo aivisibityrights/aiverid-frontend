@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAEC & UEAI - AI Ethics Constitution</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      /* --- Base & Global Styles --- */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: #0a0a0a;
+        color: #ffffff;
+        min-height: 100vh;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* --- Animated Background (from register.html) --- */
+      .bg-animation {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.15;
+      }
+
+      .bg-animation::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 20% 80%, #00d4ff 0%, transparent 40%),
+                    radial-gradient(circle at 80% 20%, #ff6b6b 0%, transparent 40%);
+        animation: backgroundShift 20s ease-in-out infinite;
+      }
+
+      @keyframes backgroundShift {
+        0%, 100% { transform: translate(0, 0) rotate(0deg); }
+        50% { transform: translate(-20px, 20px) rotate(180deg); }
+      }
+
+      /* --- Header (from register.html) --- */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(10, 10, 10, 0.8);
+        backdrop-filter: blur(15px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 1000;
+        padding: 1rem 0;
+      }
+
+      nav {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2rem;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #00d4ff, #ff6b6b);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-decoration: none;
+      }
+
+      /* --- Main Content Wrapper --- */
+      main {
+        padding-top: 120px; /* Increased padding for more space */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+        padding-bottom: 4rem;
+      }
+
+      /* --- Main Content Card Style (UPDATED) --- */
+      .content-card {
+        max-width: 1100px;
+        width: calc(100% - 4rem);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.2); /* Brighter border */
+        border-radius: 24px; /* Slightly more rounded */
+        padding: 3.5rem; /* More padding */
+        backdrop-filter: blur(20px);
+        text-align: center;
+        animation: slideUp 0.8s ease-out;
+        transition: all 0.4s ease-in-out; /* Smooth transition for hover */
+        
+        /* UPDATED: Added Glow Effect */
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 
+                    0 0 25px rgba(0, 212, 255, 0.1); 
+      }
+
+      /* UPDATED: Added Hover Effect for the card */
+      .content-card:hover {
+        border-color: rgba(0, 212, 255, 0.5);
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 
+                    0 0 40px rgba(0, 212, 255, 0.25);
+      }
+      
+      @keyframes slideUp {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* --- Typography --- */
+      .main-title {
+        font-size: 3.2rem; /* Slightly larger title */
+        font-weight: 800;
+        letter-spacing: -2px;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, #00d4ff, #ff6b6b);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .main-subtitle {
+        font-size: 1.2rem;
+        color: #cbd5e1;
+        margin-bottom: 2.5rem;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* --- Download Grid & Cards --- */
+      .download-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin: 3rem 0;
+      }
+      
+      .download-card {
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 16px;
+        padding: 2rem 1.5rem;
+        transition: all 0.3s;
+        text-align: left;
+      }
+      
+      .download-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0, 212, 255, 0.15);
+        border-color: rgba(0, 212, 255, 0.3);
+      }
+      
+      .card-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #f4f4f4;
+        margin-bottom: 1rem;
+      }
+      
+      .card-link {
+        color: #38bdf8;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+      
+      .card-link:hover {
+        color: #0ea5e9;
+      }
+      
+      .card-hash {
+        font-size: 0.8rem;
+        color: #94a3b8;
+        margin-top: 0.75rem;
+        font-family: 'Monaco', monospace;
+        word-break: break-all;
+      }
+
+      /* --- Quote Section --- */
+      .author-quote {
+        margin: 3rem 0;
+        padding: 2rem;
+        background: rgba(0, 212, 255, 0.05);
+        border-radius: 16px;
+        border-left: 4px solid #00d4ff;
+        text-align: left;
+      }
+      
+      .quote-text {
+        font-style: italic;
+        font-size: 1.1rem;
+        color: #e2e8f0;
+        margin-bottom: 1rem;
+      }
+      
+      .quote-author {
+        font-size: 0.95rem;
+        color: #94a3b8;
+        font-weight: 500;
+      }
+
+      /* --- DAO Section --- */
+      .dao-section {
+        background: rgba(255, 255, 255, 0.08);
+        padding: 3rem 2rem;
+        border-radius: 20px;
+        margin: 2rem 0;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .dao-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, #facc15, #f59e0b); /* Keep DAO brand color */
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      
+      .dao-description {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+        color: #cbd5e1;
+      }
+      
+      /* --- Buttons --- */
+      .cta-button {
+        display: inline-block;
+        padding: 1rem 2rem;
+        border-radius: 12px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s;
+        margin: 0.5rem;
+        font-size: 1rem;
+        cursor: pointer;
+        border: none;
+      }
+      
+      .btn-primary {
+        background: linear-gradient(135deg, #00d4ff, #0099cc);
+        color: #ffffff;
+      }
+      
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
+      }
+      
+      .btn-secondary {
+        background: transparent;
+        color: #00d4ff;
+        border: 2px solid #00d4ff;
+      }
+      
+      .btn-secondary:hover {
+        background: rgba(0, 212, 255, 0.1);
+        color: #ffffff;
+      }
+      
+      /* --- UEAI Section specific styles --- */
+       .ueai-quote {
+        font-size: 1.3rem;
+        font-style: italic;
+        color: #fef9c3; /* Keep UEAI brand color */
+        margin: 2rem 0;
+        line-height: 1.6;
+      }
+      
+      .ueai-description {
+        font-size: 1.15rem;
+        color: #f1f5f9;
+        margin-bottom: 2.5rem;
+        line-height: 1.7;
+      }
+      
+      .highlight {
+        color: #facc15; /* Keep UEAI highlight color */
+        font-weight: 600;
+      }
+      
+      .ueai-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+      }
+      
+      /* --- Back Button --- */
+      .back-section {
+        text-align: center;
+        margin-top: 1rem;
+      }
+      
+      .back-button {
+        display: inline-block;
+        padding: 1.25rem 3rem;
+        font-size: 1.1rem;
+      }
+
+      /* --- Responsive --- */
+      @media (max-width: 768px) {
+        nav { padding: 0 1rem; }
+        main { padding-top: 80px; }
+        .content-card {
+            padding: 2rem 1.5rem;
+            width: calc(100% - 2rem);
+        }
+        .main-title { font-size: 2.2rem; }
+        .download-grid { grid-template-columns: 1fr; gap: 1rem; }
+        .ueai-actions, .dao-section .cta-button { flex-direction: column; align-items: center; width: 100%; max-width: 300px; }
+      }
+    </style>
+</head>
+<body>
+
+    <div class="bg-animation"></div>
+
+    <header>
+        <nav>
+            <a href="/" class="logo">AI Ethics Portal</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="content-card" id="gaec">
+            <div class="gaec-header">
+                <div style="margin-bottom: 2.5rem; display: flex; justify-content: center;">
+                    <img src="https://cdn.prod.website-files.com/67deba5cd88e614e5dd5b8d0/68067c5525afc9d259aff336_GAEC%20LOGO.png" alt="GAEC Logo" style="height: 200px;">
+                </div>
+                <h1 class="main-title">Global AI Ethics Constitution</h1>
+                <p class="main-subtitle">
+                    The world's first <strong>AI Constitution</strong> — written with soul, guided by humanity, and immutably timestamped on blockchain.
+                </p>
+            </div>
+
+            <div class="download-grid">
+                <div class="download-card">
+                    <h3 class="card-title">📄 Download GAEC</h3>
+                    <a href="https://bafybeiadulzfigt3tuxnsbubfbbr6bdtt7vqfguwhlttzyu6qrmmrcbjse.ipfs.w3s.link" target="_blank" class="card-link">View on IPFS</a>
+                    <p style="font-size: 0.9rem; color: #94a3b8; margin-top: 0.5rem;">Decentralized & Permanent</p>
+                </div>
+                <div class="download-card">
+                    <h3 class="card-title">⚡ GitHub Release</h3>
+                    <a href="https://github.com/aivisibilityrights-org/GAEC-Constitution-1.0" target="_blank" class="card-link">View Repository</a>
+                    <p style="font-size: 0.9rem; color: #94a3b8; margin-top: 0.5rem;">Open Source & Collaborative</p>
+                </div>
+                <div class="download-card">
+                    <h3 class="card-title">🔗 Blockchain Proof</h3>
+                    <a href="https://app.ardrive.io/#/file/cef9a10c-7310-4020-a9d8-2e332224d43e/view" target="_blank" class="card-link">Arweave Transaction</a>
+                    <div class="card-hash">
+                        SHA256: 3b6c4844e835f0ccfdadf9d30a07c25b8f68bc4abebfafeea9743ea4a2c15e9d
+                    </div>
+                </div>
+            </div>
+
+            <div class="author-quote">
+                <p class="quote-text">
+                    "This Constitution was not generated by machines. It was envisioned by a human — written with soul, and refined through the assistance of AI."
+                </p>
+                <p class="quote-author">
+                    — Jittapol Prukpatarakul, Founder of GAEC & AI Rights Stack™
+                </p>
+            </div>
+
+            <div class="dao-section">
+                <h2 class="dao-title">🏛️ Join GAECX DAO</h2>
+                <p class="dao-description">
+                    Become a constitutional guardian of AI Ethics.<br>
+                    Claim your governance token and co-govern the future.
+                </p>
+                <a href="https://aivisibilityrights.com/claim" target="_blank" class="cta-button btn-primary">
+                    Claim GAECX Token
+                </a>
+                <a href="https://aivisibilityrights.com/donate" target="_blank" class="cta-button btn-secondary">
+                    Support the Movement
+                </a>
+            </div>
+        </section>
+
+        <section class="content-card" id="ueai">
+            <div style="margin-bottom: 2.5rem;">
+                <img src="https://cdn.prod.website-files.com/67deba5cd88e614e5dd5b8d0/68067c5484508e4265a6ca08_UEAI%20LOGO.png" alt="UEAI Logo" style="height: 200px;">
+            </div>
+            
+            <h2 class="main-title">🌐 United Ethos of Artificial Intelligence™</h2>
+            
+            <div class="ueai-quote">
+                "The future of AI cannot be owned by code alone.<br>
+                It must be guided by values, dignity, and shared responsibility."
+            </div>
+            
+            <p class="ueai-description">
+                UEAI™ was founded to be the sovereign ethical axis for all AI systems — creating a decentralized framework where <span class="highlight">trust is not a feature, but a right.</span>
+            </p>
+            
+            <div class="ueai-actions">
+                <a href="https://github.com/aivisibilityrights-org/UEAI" target="_blank" class="cta-button btn-primary">
+                    View UEAI on GitHub
+                </a>
+                <a href="mailto:support@aivisibilityrights.com" class="cta-button btn-secondary">
+                    Become a UEAI Partner
+                </a>
+            </div>
+        </section>
+
+        <div class="back-section">
+            <a href="/" class="cta-button btn-primary back-button">
+                ← Back to AI Rights Portal
+            </a>
+        </div>
+    </main>
+
+</body>
+</html>

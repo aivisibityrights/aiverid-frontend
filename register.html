@@ -1,694 +1,1801 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join AIVerID™ - Your Universal AI Rights Platform</title>
-    <meta name="description" content="Register for AIVerID™ - Universal AI Rights & Digital Identity Platform. Get your AI Rights tokens (AIVID, AIPLT, SLIVR) and join the AI ecosystem.">
-    <meta name="keywords" content="AI Rights, Digital Identity, OAuth, AIVerID, AIVID token, blockchain">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://aivisibilityrights.com/register">
-    <meta property="og:title" content="Join AIVerID™ - Universal AI Rights Platform">
-    <meta property="og:description" content="Register for AIVerID™ and get your AI Rights tokens. Join the revolution in AI identity management.">
-    <meta property="og:image" content="https://aivisibilityrights.com/assets/images/aiverid-og.png">
+<meta charset="UTF-8">
+<title>Register - AIVerID™ Universal AI Rights Platform</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Create your AIVerID™ - Universal AI Rights & Digital Identity Platform. Get AIVID, AIPLT, SLIVR tokens and join the AI ecosystem.">
+<meta name="keywords" content="AI Rights, Digital Identity, OAuth, AIVerID, AIVID token, AIPLT, SLIVR, blockchain">
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://aivisibilityrights.com/register">
-    <meta property="twitter:title" content="Join AIVerID™ - Universal AI Rights Platform">
-    <meta property="twitter:description" content="Register for AIVerID™ and get your AI Rights tokens. Join the revolution in AI identity management.">
-    <meta property="twitter:image" content="https://aivisibilityrights.com/assets/images/aiverid-og.png">
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aivisibilityrights.com/register">
+<meta property="og:title" content="Register for AIVerID™ - Universal AI Rights Platform">
+<meta property="og:description" content="Create your AIVerID™ and claim your AI Rights tokens. Join the revolution in AI identity management.">
+<meta property="og:image" content="https://aivisibilityrights.com/assets/aiverid-og.png">
 
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="canonical" href="https://aivisibilityrights.com/register">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://aivisibilityrights.com/register">
+<meta property="twitter:title" content="Register for AIVerID™ - Universal AI Rights Platform">
+<meta property="twitter:description" content="Create your AIVerID™ and claim your AI Rights tokens. Join the revolution in AI identity management.">
+<meta property="twitter:image" content="https://aivisibilityrights.com/assets/aiverid-og.png">
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
-            color: #ffffff;
-            min-height: 100vh;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="https://cdn.prod.website-files.com/67deba5cd88e614e5dd5b8d0/681393463882b3e960e1867a_AIVerID.png">
 
-        /* Animated Background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.1;
-        }
+<style>
+* { 
+  box-sizing: border-box; 
+  margin: 0;
+  padding: 0;
+}
 
-        .bg-animation::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 80%, #00d4ff 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, #ff6b6b 0%, transparent 50%);
-            animation: backgroundShift 15s ease-in-out infinite;
-        }
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #e2e8f0;
+  position: relative;
+  overflow-x: hidden;
+}
 
-        @keyframes backgroundShift {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(-20px, -20px) rotate(180deg); }
-        }
+/* Subtle Brand Animation */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(0,212,255,0.08) 0%, transparent 50%),
+              radial-gradient(circle at 20% 80%, rgba(59,130,246,0.06) 0%, transparent 50%);
+  animation: subtle-glow 20s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
 
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-            padding: 1rem 0;
-        }
+@keyframes subtle-glow {
+  0%, 100% { opacity: 0.8; transform: translate(0, 0) scale(1); }
+  50% { opacity: 1; transform: translate(-10px, 10px) scale(1.05); }
+}
 
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
+.register-container {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(25px);
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 
+    0 20px 48px rgba(0,0,0,0.4),
+    0 0 25px rgba(0,212,255,0.1),
+    inset 0 1px 0 rgba(255,255,255,0.1);
+  max-width: 540px;
+  width: 100%;
+  padding: 36px;
+  position: relative;
+  overflow: hidden;
+  animation: slideUp 0.8s ease-out;
+}
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #00d4ff, #ff6b6b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-decoration: none;
-        }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 28px;
+}
 
-        .nav-links a {
-            color: #ffffff;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-        }
+.logo {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 18px;
+  border-radius: 18px;
+  box-shadow: 
+    0 8px 32px rgba(59,130,246,0.3),
+    0 0 20px rgba(0,212,255,0.2);
+  transition: transform 0.3s ease;
+}
 
-        .nav-links a:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
+.logo:hover {
+  transform: scale(1.05);
+}
 
-        /* Main Content */
-        main {
-            padding-top: 100px;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.title {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #00d4ff, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
-        .registration-container {
-            max-width: 500px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+.subtitle {
+  color: #94a3b8;
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 18px;
+}
 
-        .registration-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 3rem;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            animation: slideUp 0.8s ease-out;
-        }
+.badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #00d4ff, #1d4ed8);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 18px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 15px rgba(0,212,255,0.3);
+}
 
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+/* Mode Selector */
+.mode-selector {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 24px;
+  background: rgba(148,163,184,0.1);
+  padding: 6px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,212,255,0.2);
+}
 
-        .card-header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
+.mode-btn {
+  flex: 1;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+  color: #94a3b8;
+}
 
-        .card-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #00d4ff, #ff6b6b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+.mode-btn.active {
+  background: linear-gradient(135deg, #00d4ff, #3b82f6);
+  color: white;
+  box-shadow: 0 2px 12px rgba(0,212,255,0.3);
+}
 
-        .card-subtitle {
-            color: #b0b3c7;
-            font-size: 1.1rem;
-        }
+.mode-btn:hover:not(.active) {
+  background: rgba(0,212,255,0.1);
+  color: #00d4ff;
+}
 
-        /* Form Styles */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+/* Progress Steps */
+.progress-steps {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 28px;
+  gap: 12px;
+}
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #ffffff;
-            font-weight: 500;
-        }
+.step {
+  padding: 8px 14px;
+  background: rgba(148,163,184,0.2);
+  color: #94a3b8;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
 
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            color: #ffffff;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
+.step.active {
+  background: linear-gradient(135deg, #00d4ff, #3b82f6);
+  color: white;
+  border-color: rgba(0,212,255,0.3);
+}
 
-        .form-group input:focus, .form-group select:focus {
-            outline: none;
-            border-color: #00d4ff;
-            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
-            background: rgba(255, 255, 255, 0.08);
-        }
+.step.completed {
+  background: #10b981;
+  color: white;
+}
 
-        .form-group input::placeholder {
-            color: #6b7280;
-        }
+/* Section Indicators for Simple Mode */
+.section-indicator {
+  display: none;
+  text-align: center;
+  margin-bottom: 24px;
+}
 
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
+.section-indicator.show {
+  display: block;
+}
 
-        .aiverid-display {
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            padding: 1rem;
-            border-radius: 12px;
-            text-align: center;
-            margin: 1rem 0;
-        }
+.section-dots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
 
-        .aiverid-id {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #00d4ff;
-            font-family: 'Courier New', monospace;
-        }
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(148,163,184,0.2);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
 
-        .checkbox-group {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            margin: 1.5rem 0;
-        }
+.dot.active {
+  background: #00d4ff;
+  border-color: rgba(0,212,255,0.3);
+  box-shadow: 0 0 10px rgba(0,212,255,0.4);
+}
 
-        .checkbox-group input[type="checkbox"] {
-            width: auto;
-            margin-top: 0.25rem;
-        }
+.dot.completed {
+  background: #10b981;
+  border-color: rgba(16,185,129,0.3);
+}
 
-        .checkbox-group label {
-            margin-bottom: 0;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
+/* Auto-save indicator */
+.auto-save {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 11px;
+  color: #10b981;
+  display: none;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16,185,129,0.1);
+  padding: 6px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(16,185,129,0.2);
+}
 
-        .submit-btn {
-            width: 100%;
-            padding: 1.2rem;
-            background: linear-gradient(135deg, #00d4ff, #0099cc);
-            border: none;
-            border-radius: 12px;
-            color: #ffffff;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
-        }
+.auto-save.show {
+  display: flex;
+}
 
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
-        }
+.save-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  animation: pulse 1.5s infinite;
+}
 
-        .submit-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
 
-        /* Loading State */
-        .loading {
-            opacity: 0.7;
-            pointer-events: none;
-        }
+/* Step Sections */
+.step-section {
+  display: none;
+}
 
-        .loading::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 20px;
-            height: 20px;
-            margin: -10px 0 0 -10px;
-            border: 2px solid transparent;
-            border-top: 2px solid #ffffff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
+.step-section.active {
+  display: block;
+  animation: fadeIn 0.4s ease;
+}
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+.section-simple .step-section {
+  display: block;
+  margin-bottom: 24px;
+}
 
-        /* Login Link */
-        .login-link {
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-        .login-link a {
-            color: #00d4ff;
-            text-decoration: none;
-            font-weight: 500;
-        }
+.section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
-        .login-link a:hover {
-            text-decoration: underline;
-        }
+.step-number {
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, #00d4ff, #3b82f6);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0,212,255,0.3);
+}
 
-        /* Token Info */
-        .token-info {
-            background: rgba(255, 107, 107, 0.1);
-            border: 1px solid rgba(255, 107, 107, 0.3);
-            border-radius: 12px;
-            padding: 1rem;
-            margin: 1.5rem 0;
-            font-size: 0.9rem;
-        }
+/* Account Type Cards */
+.type-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 24px;
+}
 
-        .token-info h4 {
-            color: #ff6b6b;
-            margin-bottom: 0.5rem;
-        }
+.type-card {
+  border: 2px solid rgba(148,163,184,0.2);
+  border-radius: 14px;
+  padding: 24px 18px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(255,255,255,0.02);
+  position: relative;
+  overflow: hidden;
+}
 
-        .token-list {
-            list-style: none;
-            padding-left: 1rem;
-        }
+.type-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(59,130,246,0.1));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
 
-        .token-list li {
-            margin: 0.3rem 0;
-            color: #b0b3c7;
-        }
+.type-card:hover::before {
+  opacity: 1;
+}
 
-        .token-list li::before {
-            content: '✨';
-            margin-right: 0.5rem;
-        }
+.type-card:hover {
+  border-color: #00d4ff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,212,255,0.2);
+}
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
+.type-card.selected {
+  border-color: #00d4ff;
+  background: rgba(0,212,255,0.1);
+  box-shadow: 0 0 0 4px rgba(0,212,255,0.2);
+}
 
-            .registration-card {
-                padding: 2rem;
-                margin: 1rem;
-            }
+.type-card.selected::before {
+  opacity: 1;
+}
 
-            .form-row {
-                grid-template-columns: 1fr;
-            }
+.type-icon {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
 
-            .card-title {
-                font-size: 1.8rem;
-            }
-        }
+.type-title {
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+  font-size: 15px;
+  position: relative;
+  z-index: 1;
+}
 
-        /* Error Messages */
-        .error-message {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: #ff6b6b;
-            padding: 0.75rem;
-            border-radius: 8px;
-            margin-top: 0.5rem;
-            font-size: 0.9rem;
-        }
+.type-desc {
+  font-size: 12px;
+  color: #94a3b8;
+  line-height: 1.4;
+  position: relative;
+  z-index: 1;
+}
 
-        .success-message {
-            background: rgba(34, 197, 94, 0.1);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            color: #10b981;
-            padding: 0.75rem;
-            border-radius: 8px;
-            margin-top: 0.5rem;
-            font-size: 0.9rem;
-        }
-    </style>
+/* Form Elements */
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group.hidden {
+  display: none;
+}
+
+label {
+  font-size: 14px;
+  color: #e2e8f0;
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.required {
+  color: #f87171;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+input, select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid rgba(148,163,184,0.2);
+  border-radius: 12px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  backdrop-filter: blur(10px);
+}
+
+input::placeholder {
+  color: #64748b;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #00d4ff;
+  background: rgba(0,212,255,0.1);
+  box-shadow: 
+    0 0 0 4px rgba(0,212,255,0.1),
+    0 4px 20px rgba(0,212,255,0.2);
+}
+
+input.error, select.error {
+  border-color: #ef4444;
+  background: rgba(239,68,68,0.1);
+  box-shadow: 0 0 0 4px rgba(239,68,68,0.1);
+}
+
+input.success, select.success {
+  border-color: #10b981;
+  background: rgba(16,185,129,0.1);
+  box-shadow: 0 0 0 4px rgba(16,185,129,0.1);
+}
+
+/* Password Strength */
+.password-strength {
+  margin-top: 8px;
+}
+
+.strength-bar {
+  height: 4px;
+  background: rgba(148,163,184,0.2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.strength-fill {
+  height: 100%;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.strength-text {
+  font-size: 12px;
+  margin-top: 4px;
+  color: #94a3b8;
+}
+
+/* Phone Input */
+.phone-input-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.country-code {
+  background: rgba(0,212,255,0.1);
+  color: #00d4ff;
+  border: 2px solid rgba(0,212,255,0.2);
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-weight: 600;
+  font-size: 14px;
+  min-width: 80px;
+  text-align: center;
+}
+
+.phone-number {
+  flex: 1;
+}
+
+/* Organization Fields */
+.org-fields {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.org-fields.show {
+  display: block;
+}
+
+/* Consent Section */
+.consent-section {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  padding: 20px;
+  margin: 20px 0;
+  position: relative;
+}
+
+.consent-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0,212,255,0.02), rgba(59,130,246,0.02));
+  border-radius: 14px;
+  pointer-events: none;
+}
+
+.consent-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 1;
+}
+
+.consent-item:last-child {
+  margin-bottom: 0;
+}
+
+.consent-item input[type="checkbox"] {
+  margin-top: 2px;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  cursor: pointer;
+  accent-color: #00d4ff;
+}
+
+.consent-text {
+  font-size: 13px;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+.consent-text a {
+  color: #00d4ff;
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.consent-text a:hover {
+  color: #60a5fa;
+}
+
+/* Buttons */
+.btn {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #00d4ff, #1d4ed8);
+  color: white;
+  box-shadow: 0 4px 15px rgba(0,212,255,0.3);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,212,255,0.4);
+}
+
+.btn-secondary {
+  background: rgba(148,163,184,0.2);
+  color: #cbd5e1;
+  border: 1px solid rgba(148,163,184,0.3);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: rgba(148,163,184,0.3);
+  border-color: rgba(148,163,184,0.5);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-navigation {
+  display: flex;
+  gap: 14px;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.btn-submit {
+  width: 100%;
+  background: linear-gradient(135deg, #00d4ff, #1d4ed8);
+  color: white;
+  padding: 14px;
+  margin-top: 20px;
+  font-size: 15px;
+  box-shadow: 0 4px 15px rgba(0,212,255,0.3);
+}
+
+.btn-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,212,255,0.4);
+}
+
+/* Messages */
+.error-message, .success-message {
+  font-size: 12px;
+  margin-top: 6px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  display: none;
+}
+
+.error-message {
+  color: #f87171;
+  background: rgba(239,68,68,0.1);
+  border: 1px solid rgba(239,68,68,0.2);
+}
+
+.success-message {
+  color: #4ade80;
+  background: rgba(74,222,128,0.1);
+  border: 1px solid rgba(74,222,128,0.2);
+}
+
+.error-message.show, .success-message.show {
+  display: block;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  display: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+}
+
+.loading-spinner.show {
+  display: block;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Help Text */
+.help-text {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+/* Footer */
+.footer-links {
+  text-align: center;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.login-link {
+  color: #00d4ff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.login-link:hover {
+  color: #60a5fa;
+  text-decoration: underline;
+}
+
+.back-home {
+  display: block;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #422006;
+  padding: 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 14px;
+  font-size: 13px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(251,191,36,0.3);
+}
+
+.back-home:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(251,191,36,0.4);
+}
+
+/* API Status Indicator */
+.api-status {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 1000;
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+.api-status.connected {
+  background: linear-gradient(135deg, #10b981, #059669);
+  border: 1px solid rgba(16,185,129,0.3);
+}
+
+.api-status.disconnected {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  border: 1px solid rgba(239,68,68,0.3);
+}
+
+.api-status.checking {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  border: 1px solid rgba(59,130,246,0.3);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .register-container {
+    padding: 24px;
+    margin: 10px;
+    min-height: auto;
+  }
+  
+  .title {
+    font-size: 1.6rem;
+  }
+  
+  .type-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .phone-input-wrapper {
+    flex-direction: column;
+  }
+  
+  .country-code {
+    min-width: auto;
+  }
+  
+  .mode-selector {
+    margin-bottom: 20px;
+  }
+  
+  .mode-btn {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+}
+
+/* Utilities */
+.hidden { display: none !important; }
+.fade-in { animation: fadeIn 0.4s ease; }
+
+/* Brand Enhancement */
+.brand-glow {
+  box-shadow: 0 0 20px rgba(0,212,255,0.3);
+}
+</style>
 </head>
 <body>
-    <div class="bg-animation"></div>
 
-    <header>
-        <nav>
-            <a href="/" class="logo">AIVerID™</a>
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/login.html">Login</a></li>
-                <li><a href="/oauth-demo">OAuth Demo</a></li>
-            </ul>
-        </nav>
-    </header>
+<div class="register-container">
+  <div class="auto-save" id="autoSave">
+    <div class="save-dot"></div>
+    <span>Auto-saved</span>
+  </div>
 
-    <main>
-        <div class="registration-container">
-            <div class="registration-card">
-                <div class="card-header">
-                    <h1 class="card-title">Join AIVerID™</h1>
-                    <p class="card-subtitle">Create your Universal AI Rights account and claim your tokens</p>
-                </div>
+  <div class="header">
+    <img src="https://cdn.prod.website-files.com/67deba5cd88e614e5dd5b8d0/681393463882b3e960e1867a_AIVerID.png" 
+         class="logo" alt="AIVerID Logo">
+    <h1 class="title">Create AIVerID™</h1>
+    <div class="badge">🔐 Complete Registration</div>
+    <p class="subtitle">Your Universal AI Rights Identity</p>
+  </div>
 
-                <form id="registrationForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="firstName">First Name</label>
-                            <input type="text" id="firstName" name="firstName" required placeholder="John">
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">Last Name</label>
-                            <input type="text" id="lastName" name="lastName" required placeholder="Doe">
-                        </div>
-                    </div>
+  <div class="mode-selector">
+    <button class="mode-btn active" data-mode="simple" id="modeSimple">
+      📝 Quick Form
+    </button>
+    <button class="mode-btn" data-mode="steps" id="modeSteps">
+      📋 Step-by-Step
+    </button>
+  </div>
 
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required placeholder="john@example.com">
-                    </div>
+  <div class="progress-steps hidden" id="progressSteps">
+    <div class="step active" id="step1">1. Account Type</div>
+    <div class="step" id="step2">2. Personal Info</div>
+    <div class="step" id="step3">3. Security</div>
+  </div>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="country">Country</label>
-                            <select id="country" name="country" required>
-                                <option value="">Select Country</option>
-                                <option value="TH">Thailand</option>
-                                <option value="US">United States</option>
-                                <option value="GB">United Kingdom</option>
-                                <option value="DE">Germany</option>
-                                <option value="FR">France</option>
-                                <option value="JP">Japan</option>
-                                <option value="KR">South Korea</option>
-                                <option value="SG">Singapore</option>
-                                <option value="AU">Australia</option>
-                                <option value="CA">Canada</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="nationalId">National ID</label>
-                            <input type="text" id="nationalId" name="nationalId" required placeholder="1234567890123">
-                        </div>
-                    </div>
+  <div class="section-indicator" id="sectionIndicator">
+    <div class="section-dots">
+      <div class="dot active" data-section="1"></div>
+      <div class="dot" data-section="2"></div>
+      <div class="dot" data-section="3"></div>
+    </div>
+    <div style="font-size: 12px; color: #94a3b8; font-weight: 500;">Fill all sections to continue</div>
+  </div>
 
-                    <div class="aiverid-display">
-                        <div>Your AIVerID will be:</div>
-                        <div class="aiverid-id" id="generatedAIVerID">Generate ID above</div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" required placeholder="Enter secure password">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="confirmPassword">Confirm Password</label>
-                        <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password">
-                    </div>
-
-                    <div class="token-info">
-                        <h4>🎁 You'll receive these AI Rights Tokens:</h4>
-                        <ul class="token-list">
-                            <li><strong>AIVID</strong> - Your digital identity token</li>
-                            <li><strong>AIPLT</strong> - AI Patent License Rights (US Registered)</li>
-                            <li><strong>SLIVR</strong> - AI Search Visibility Rights</li>
-                        </ul>
-                    </div>
-
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="terms" name="terms" required>
-                        <label for="terms">
-                            I agree to the <a href="/terms" style="color: #00d4ff;">Terms of Service</a> and 
-                            <a href="/privacy" style="color: #00d4ff;">Privacy Policy</a>. I understand that my national ID is used for format validation only and is not stored or shared.
-                        </label>
-                    </div>
-
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="marketing" name="marketing">
-                        <label for="marketing">
-                            I would like to receive updates about AIVerID and the AI Rights ecosystem.
-                        </label>
-                    </div>
-
-                    <button type="submit" class="submit-btn" id="submitBtn">
-                        Create My AIVerID Account
-                    </button>
-
-                    <div id="errorMessage" class="error-message" style="display: none;"></div>
-                    <div id="successMessage" class="success-message" style="display: none;"></div>
-                </form>
-
-                <div class="login-link">
-                    <p>Already have an account? <a href="/login.html">Sign in here</a></p>
-                </div>
-            </div>
+  <form id="registerForm" autocomplete="off">
+    
+    <div class="step-section active" id="section1" data-section="1">
+      <div class="section-title">
+        <span class="step-number">1</span>
+        Account Type
+      </div>
+      <div class="type-cards">
+        <div class="type-card" data-type="individual">
+          <div class="type-icon">👤</div>
+          <div class="type-title">Individual</div>
+          <div class="type-desc">Personal identity for creators & innovators</div>
         </div>
-    </main>
+        <div class="type-card" data-type="organization">
+          <div class="type-icon">🏢</div>
+          <div class="type-title">Organization</div>
+          <div class="type-desc">Corporate identity for companies & teams</div>
+        </div>
+      </div>
+      <input type="hidden" id="accountType" name="accountType" value="">
+      <div class="error-message" id="errAccountType"></div>
+      
+      <div class="btn-navigation step-mode-only hidden">
+        <div></div>
+        <button type="button" class="btn btn-primary" onclick="nextStep()">Next →</button>
+      </div>
+    </div>
 
-    <script>
-        // API Configuration
-        const API_BASE_URL = 'https://aiverid-backend-production.up.railway.app';
+    <div class="step-section" id="section2" data-section="2">
+      <div class="section-title">
+        <span class="step-number">2</span>
+        Personal Information
+      </div>
+      
+      <div class="form-group">
+        <label for="firstName">First Name <span class="required">*</span></label>
+        <div class="input-wrapper">
+          <input type="text" id="firstName" name="firstName" placeholder="สมชาย" maxlength="50" required>
+        </div>
+        <div class="error-message" id="errFirstName"></div>
+        <div class="success-message" id="successFirstName"></div>
+      </div>
 
-        // Form elements
-        const form = document.getElementById('registrationForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const errorMessage = document.getElementById('errorMessage');
-        const successMessage = document.getElementById('successMessage');
+      <div class="form-group">
+        <label for="lastName">Last Name <span class="required">*</span></label>
+        <div class="input-wrapper">
+          <input type="text" id="lastName" name="lastName" placeholder="ใจดี" maxlength="50" required>
+        </div>
+        <div class="help-text">For single names (mononym), use "-" in the unused field</div>
+        <div class="error-message" id="errLastName"></div>
+        <div class="success-message" id="successLastName"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address <span class="required">*</span></label>
+        <div class="input-wrapper">
+          <input type="email" id="email" name="email" placeholder="your.name@example.com" maxlength="100" required>
+        </div>
+        <div class="error-message" id="errEmail"></div>
+        <div class="success-message" id="successEmail"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number <span class="required">*</span></label>
+        <div class="phone-input-wrapper">
+          <div class="country-code" id="countryCode">+66</div>
+          <div class="phone-number">
+            <input type="tel" id="phone" name="phone" placeholder="812345678" maxlength="20" required>
+          </div>
+        </div>
+        <div class="help-text">Enter phone number without country code</div>
+        <div class="error-message" id="errPhone"></div>
+        <div class="success-message" id="successPhone"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="country">Country <span class="required">*</span></label>
+        <div class="input-wrapper">
+          <select id="country" name="country" required>
+            <option value="">Select your country</option>
+            <optgroup label="🌏 Asia-Pacific">
+                <option value="TH">🇹🇭 Thailand</option>
+                <option value="SG">🇸🇬 Singapore</option>
+                <option value="MY">🇲🇾 Malaysia</option>
+                <option value="ID">🇮🇩 Indonesia</option>
+                <option value="VN">🇻🇳 Vietnam</option>
+                <option value="PH">🇵🇭 Philippines</option>
+                <option value="JP">🇯🇵 Japan</option>
+                <option value="KR">🇰🇷 South Korea</option>
+                <option value="CN">🇨🇳 China</option>
+                <option value="HK">🇭🇰 Hong Kong</option>
+                <option value="TW">🇹🇼 Taiwan</option>
+                <option value="IN">🇮🇳 India</option>
+                <option value="AU">🇦🇺 Australia</option>
+                <option value="NZ">🇳🇿 New Zealand</option>
+            </optgroup>
+            <optgroup label="🌎 Americas">
+                <option value="US">🇺🇸 United States</option>
+                <option value="CA">🇨🇦 Canada</option>
+                <option value="MX">🇲🇽 Mexico</option>
+                <option value="BR">🇧🇷 Brazil</option>
+                <option value="AR">🇦🇷 Argentina</option>
+                <option value="CL">🇨🇱 Chile</option>
+                <option value="CO">🇨🇴 Colombia</option>
+                <option value="PE">🇵🇪 Peru</option>
+            </optgroup>
+            <optgroup label="🌍 Europe">
+                <option value="GB">🇬🇧 United Kingdom</option>
+                <option value="DE">🇩🇪 Germany</option>
+                <option value="FR">🇫🇷 France</option>
+                <option value="IT">🇮🇹 Italy</option>
+                <option value="ES">🇪🇸 Spain</option>
+                <option value="NL">🇳🇱 Netherlands</option>
+                <option value="CH">🇨🇭 Switzerland</option>
+                <option value="SE">🇸🇪 Sweden</option>
+                <option value="NO">🇳🇴 Norway</option>
+                <option value="DK">🇩🇰 Denmark</option>
+                <option value="FI">🇫🇮 Finland</option>
+                <option value="PT">🇵🇹 Portugal</option>
+                <option value="BE">🇧🇪 Belgium</option>
+                <option value="AT">🇦🇹 Austria</option>
+                <option value="IE">🇮🇪 Ireland</option>
+                <option value="PL">🇵🇱 Poland</option>
+                <option value="CZ">🇨🇿 Czech Republic</option>
+                <option value="GR">🇬🇷 Greece</option>
+                <option value="TR">🇹🇷 Turkey</option>
+                <option value="RU">🇷🇺 Russia</option>
+                <option value="UA">🇺🇦 Ukraine</option>
+            </optgroup>
+            <optgroup label="🕌 Middle East & Africa">
+                <option value="AE">🇦🇪 United Arab Emirates</option>
+                <option value="SA">🇸🇦 Saudi Arabia</option>
+                <option value="QA">🇶🇦 Qatar</option>
+                <option value="KW">🇰🇼 Kuwait</option>
+                <option value="BH">🇧🇭 Bahrain</option>
+                <option value="OM">🇴🇲 Oman</option>
+                <option value="IL">🇮🇱 Israel</option>
+                <option value="EG">🇪🇬 Egypt</option>
+                <option value="ZA">🇿🇦 South Africa</option>
+                <option value="NG">🇳🇬 Nigeria</option>
+                <option value="KE">🇰🇪 Kenya</option>
+                <option value="GH">🇬🇭 Ghana</option>
+                <option value="MA">🇲🇦 Morocco</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="error-message" id="errCountry"></div>
+        <div class="success-message" id="successCountry"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="nationalId">National ID <span class="required">*</span></label>
+        <div class="input-wrapper">
+          <input type="text" id="nationalId" name="nationalId" placeholder="1-2345-67890-12-3" maxlength="20" required>
+        </div>
+        <div class="help-text" id="idHelp">Format validation based on selected country</div>
+        <div class="error-message" id="errNationalId"></div>
+        <div class="success-message" id="successNationalId"></div>
+      </div>
+
+      <div class="org-fields" id="orgFields">
+        <div class="form-group">
+          <label for="adminName">Admin/Contact Name <span class="required">*</span></label>
+          <div class="input-wrapper">
+            <input type="text" id="adminName" name="adminName" maxlength="100">
+          </div>
+          <div class="error-message" id="errAdminName"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="registrationNumber">Registration Number <span class="required">*</span></label>
+          <div class="input-wrapper">
+            <input type="text" id="registrationNumber" name="registrationNumber" maxlength="50">
+          </div>
+          <div class="help-text">Company registration number or tax ID</div>
+          <div class="error-message" id="errRegistrationNumber"></div>
+        </div>
+      </div>
+
+      <div class="btn-navigation step-mode-only hidden">
+        <button type="button" class="btn btn-secondary" onclick="prevStep()">← Back</button>
+        <button type="button" class="btn btn-primary" onclick="nextStep()">Next →</button>
+      </div>
+    </div>
+
+    <div class="step-section" id="section3" data-section="3">
+      <div class="section-title">
+        <span class="step-number">3</span>
+        Security & Terms
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Password <span class="required">*</span></label>
+        <div class="input-wrapper">
+          <input type="password" id="password" name="password" placeholder="Create a strong password" minlength="8" required>
+        </div>
+        <div class="password-strength" id="passwordStrength">
+            <div class="strength-bar">
+                <div class="strength-fill" id="strengthFill"></div>
+            </div>
+            <div class="strength-text" id="strengthText">Password strength</div>
+        </div>
+        <div class="help-text">8+ chars, with upper, lower, number & special character</div>
+        <div class="error-message" id="errPassword"></div>
+        <div class="success-message" id="successPassword"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password <span class="required">*</span></label>
+        <div class="input-wrapper">
+          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter password" required>
+        </div>
+        <div class="error-message" id="errConfirmPassword"></div>
+        <div class="success-message" id="successConfirmPassword"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="wallet">Crypto Wallet Address (Optional)</label>
+        <div class="input-wrapper">
+          <input type="text" id="wallet" name="wallet" maxlength="100" placeholder="0x... or wallet address">
+        </div>
+        <div class="help-text">Connect your wallet for token claims</div>
+        <div class="error-message" id="errWallet"></div>
+        <div class="success-message" id="successWallet"></div>
+      </div>
+
+      <div class="form-group">
+        <div class="consent-item">
+          <input type="checkbox" id="claimTokens" name="claimTokens" value="1" checked>
+          <div class="consent-text">
+            <strong>🪙 Reserve AI Rights Tokens</strong><br>
+            Reserve AIVID and AIPLT tokens for your account (claimable later)
+          </div>
+        </div>
+      </div>
+
+      <div class="consent-section">
+        <div class="consent-item">
+          <input type="checkbox" id="terms" name="terms" required>
+          <div class="consent-text">
+            I agree to the <a href="/legal" target="_blank">Terms of Service</a> & <a href="/legal" target="_blank">Privacy Policy</a> <span class="required">*</span>
+          </div>
+        </div>
         
-        // AIVerID generation
-        const countryField = document.getElementById('country');
-        const nationalIdField = document.getElementById('nationalId');
-        const generatedAIVerID = document.getElementById('generatedAIVerID');
+        <div class="consent-item">
+          <input type="checkbox" id="marketing" name="marketing">
+          <div class="consent-text">
+            I consent to receive marketing updates about AIVerID™
+          </div>
+        </div>
+        
+        <div class="consent-item">
+          <input type="checkbox" id="dataProcessing" name="dataProcessing" required>
+          <div class="consent-text">
+            I consent to my personal data processing as per the Privacy Policy <span class="required">*</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="error-message" id="errTerms"></div>
 
-        // Generate AIVerID when country or national ID changes
-        function updateAIVerID() {
-            const country = countryField.value;
-            const nationalId = nationalIdField.value;
-            
-            if (country && nationalId && nationalId.length >= 8) {
-                const aiverid = country + nationalId.slice(-10).padStart(10, '0');
-                generatedAIVerID.textContent = aiverid;
-                generatedAIVerID.parentElement.style.background = 'rgba(0, 212, 255, 0.1)';
-            } else {
-                generatedAIVerID.textContent = 'Complete fields above';
-                generatedAIVerID.parentElement.style.background = 'rgba(255, 255, 255, 0.05)';
-            }
-        }
+      <div class="btn-navigation step-mode-only hidden">
+        <button type="button" class="btn btn-secondary" onclick="prevStep()">← Back</button>
+        <button type="submit" class="btn btn-primary" id="submitBtn">
+          <div class="loading-spinner" id="loadingSpinner"></div>
+          <span id="btnText">🚀 Create AIVerID™</span>
+        </button>
+      </div>
 
-        countryField.addEventListener('change', updateAIVerID);
-        nationalIdField.addEventListener('input', updateAIVerID);
+      <button type="submit" class="btn btn-submit simple-mode-only" id="submitBtnSimple">
+        <div class="loading-spinner" id="loadingSpinnerSimple"></div>
+        <span id="btnTextSimple">🚀 Create My AIVerID™</span>
+      </button>
+    </div>
 
-        // Password validation
-        function validatePasswords() {
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            
-            if (password && confirmPassword && password !== confirmPassword) {
-                showError('Passwords do not match');
-                return false;
-            }
-            
-            if (password && password.length < 8) {
-                showError('Password must be at least 8 characters long');
-                return false;
-            }
-            
-            return true;
-        }
+  </form>
 
-        document.getElementById('confirmPassword').addEventListener('blur', validatePasswords);
+  <div class="footer-links">
+    <a href="/login" class="login-link">Already have an AIVerID? <strong>Sign In</strong></a>
+    <a href="/" class="back-home">← Back to Homepage</a>
+    
+    <div style="margin-top: 16px; padding: 12px; background: rgba(0,212,255,0.1); border-radius: 10px; font-size: 11px; color: #94a3b8; border: 1px solid rgba(0,212,255,0.2);">
+      <span>🔒</span>
+      <span><strong>Privacy First:</strong> We validate ID format only — never cross-check with government databases.</span>
+    </div>
+  </div>
+</div>
 
-        // Error/Success message functions
-        function showError(message) {
-            errorMessage.textContent = message;
-            errorMessage.style.display = 'block';
-            successMessage.style.display = 'none';
-        }
+<div class="api-status checking" id="apiStatus">
+  <span id="apiStatusText">Checking API...</span>
+</div>
 
-        function showSuccess(message) {
-            successMessage.textContent = message;
-            successMessage.style.display = 'block';
-            errorMessage.style.display = 'none';
-        }
+<script>
+// ============================================
+// API Configuration & Railway Integration
+// ============================================
+const API_CONFIG = {
+  // Production Railway API
+  API_URL: 'https://aiverid-backend-production.up.railway.app/api/auth/register',
+  
+  // Timeouts
+  AUTO_SAVE_DELAY: 2000,
+  VALIDATION_DELAY: 500,
+  API_TIMEOUT: 30000, // 30 seconds
+  
+  // Retry configuration
+  MAX_RETRIES: 3,
+  RETRY_DELAY: 1000
+};
 
-        function hideMessages() {
-            errorMessage.style.display = 'none';
-            successMessage.style.display = 'none';
-        }
+// ============================================
+// Country & ID Configuration (Updated with 85+ Countries)
+// ============================================
+const countryCodes = {
+    'TH': '+66', 'SG': '+65', 'MY': '+60', 'ID': '+62', 'VN': '+84', 'PH': '+63', 'JP': '+81', 'KR': '+82', 'CN': '+86', 'HK': '+852', 'TW': '+886', 'IN': '+91', 'AU': '+61', 'NZ': '+64',
+    'US': '+1', 'CA': '+1', 'MX': '+52', 'BR': '+55', 'AR': '+54', 'CL': '+56', 'CO': '+57', 'PE': '+51',
+    'GB': '+44', 'DE': '+49', 'FR': '+33', 'IT': '+39', 'ES': '+34', 'NL': '+31', 'CH': '+41', 'SE': '+46', 'NO': '+47', 'DK': '+45', 'FI': '+358', 'PT': '+351', 'BE': '+32', 'AT': '+43', 'IE': '+353', 'PL': '+48', 'CZ': '+420', 'GR': '+30', 'TR': '+90', 'RU': '+7', 'UA': '+380',
+    'AE': '+971', 'SA': '+966', 'QA': '+974', 'KW': '+965', 'BH': '+973', 'OM': '+968', 'IL': '+972', 'EG': '+20', 'ZA': '+27', 'NG': '+234', 'KE': '+254', 'GH': '+233', 'MA': '+212'
+};
 
-        // National ID validation
-        function validateNationalId(country, nationalId) {
-            const patterns = {
-                'TH': /^\d{13}$/,
-                'US': /^\d{9}$/,
-                'GB': /^[A-Z]{2}\d{6}[A-Z]$/,
-                'DE': /^\d{11}$/,
-                'FR': /^\d{13}$/,
-                'JP': /^\d{8}$/,
-                'KR': /^\d{6}-\d{7}$/,
-                'SG': /^[STFG]\d{7}[A-Z]$/,
-                'AU': /^\d{9}$/,
-                'CA': /^\d{9}$/
-            };
+const idPatterns = { 
+  'TH':{pattern:/^\d{1}-?\d{4}-?\d{5}-?\d{2}-?\d{1}$/,help:'Thai ID: 13 digits (1-2345-67890-12-3)'},
+  'US':{pattern:/^\d{3}-?\d{2}-?\d{4}$/,help:'US SSN: 9 digits (123-45-6789)'},
+  'SG':{pattern:/^[STFG]\d{7}[A-Z]$/,help:'Singapore NRIC: S1234567A format'},
+  'MY':{pattern:/^\d{6}-?\d{2}-?\d{4}$/,help:'Malaysia IC: 12 digits (123456-78-9012)'},
+  'ID':{pattern:/^\d{16}$/,help:'Indonesia KTP: 16 digits'},
+  'JP':{pattern:/^\d{12}$/,help:'Japan My Number: 12 digits'},
+  'KR':{pattern:/^\d{6}-?\d{7}$/,help:'South Korea: 13 digits (123456-1234567)'},
+  'IN':{pattern:/^\d{4}\s?\d{4}\s?\d{4}$/,help:'India Aadhaar: 12 digits (1234 5678 9012)'},
+  'AU':{pattern:/^\d{8,9}$/,help:'Australia TFN: 8-9 digits'},
+  'GB':{pattern:/^[A-Z]{2}\d{6}[A-D]$/,help:'UK National Insurance: AA123456A'},
+  'DE':{pattern:/^\d{11}$/,help:'Germany Tax ID: 11 digits'},
+  'CA':{pattern:/^\d{3}-?\d{3}-?\d{3}$/,help:'Canada SIN: 9 digits (123-456-789)'} 
+};
 
-            if (!patterns[country]) return true; // Allow unknown patterns
-            return patterns[country].test(nationalId.replace(/[-\s]/g, ''));
-        }
+// ============================================
+// State Management
+// ============================================
+let currentMode = 'simple';
+let currentStep = 1;
+let autoSaveTimeout;
+let apiHealthy = false;
 
-        // Form submission
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            hideMessages();
+// ============================================
+// Page Initialization
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('🚀 AIVerID Registration System - Production Version');
+  checkAPIHealth();
+  initializePage();
+  setupEventListeners();
+  setDefaultValues();
+  loadSavedFormData();
+  setInterval(checkAPIHealth, 30000);
+});
 
-            // Validate form
-            if (!validatePasswords()) return;
+function initializePage() {
+  setMode('simple');
+  document.getElementById('firstName').focus();
+  document.getElementById('country').value = 'TH';
+  updateCountryCode('TH');
+  updateIdValidation('TH');
+}
 
-            const formData = new FormData(form);
-            const country = formData.get('country');
-            const nationalId = formData.get('nationalId');
+function setupEventListeners() {
+  document.querySelectorAll('.mode-btn').forEach(btn => btn.addEventListener('click', () => setMode(btn.dataset.mode)));
+  document.querySelectorAll('.type-card').forEach(card => card.addEventListener('click', () => selectAccountType(card.dataset.type)));
+  document.getElementById('country').addEventListener('change', function() {
+    updateCountryCode(this.value);
+    updateIdValidation(this.value);
+    validateField('nationalId');
+    updateSectionIndicators();
+  });
+  
+  const inputs = ['firstName', 'lastName', 'email', 'phone', 'nationalId', 'password', 'confirmPassword', 'wallet'];
+  inputs.forEach(id => {
+    const el = document.getElementById(id);
+    if(el) {
+      el.addEventListener('input', () => {
+        if (id !== 'password') validateField(id);
+        updateSectionIndicators();
+        scheduleAutoSave();
+      });
+      el.addEventListener('blur', () => validateField(id));
+    }
+  });
 
-            // Validate national ID format
-            if (!validateNationalId(country, nationalId)) {
-                showError('Invalid national ID format for selected country');
-                return;
-            }
+  document.getElementById('password').addEventListener('input', function() {
+    updatePasswordStrength(this.value);
+    validateField('password');
+  });
+  
+  document.getElementById('registerForm').addEventListener('submit', handleFormSubmit);
+}
 
-            // Check terms agreement
-            if (!document.getElementById('terms').checked) {
-                showError('Please agree to the Terms of Service and Privacy Policy');
-                return;
-            }
+function setDefaultValues() {
+  document.getElementById('country').value = 'TH';
+  updateCountryCode('TH');
+  document.getElementById('claimTokens').checked = true;
+}
 
-            // Set loading state
-            submitBtn.disabled = true;
-            submitBtn.classList.add('loading');
-            submitBtn.textContent = 'Creating Account...';
+// ============================================
+// UI & Mode Management
+// ============================================
+function setMode(mode) {
+  currentMode = mode;
+  const container = document.querySelector('.register-container');
+  document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.mode === mode));
+  
+  const isSteps = mode === 'steps';
+  container.classList.toggle('step-mode', isSteps);
+  container.classList.toggle('section-simple', !isSteps);
+  document.getElementById('progressSteps').classList.toggle('hidden', !isSteps);
+  document.getElementById('sectionIndicator').classList.toggle('show', !isSteps);
+  document.querySelectorAll('.step-mode-only').forEach(el => el.classList.toggle('hidden', !isSteps));
+  document.querySelectorAll('.simple-mode-only').forEach(el => el.classList.toggle('hidden', isSteps));
+  
+  if (isSteps) {
+    updateStepDisplay();
+  } else {
+    document.querySelectorAll('.step-section').forEach(section => section.classList.add('active'));
+    updateSectionIndicators();
+  }
+}
 
-            try {
-                // Prepare registration data
-                const registrationData = {
-                    firstName: formData.get('firstName'),
-                    lastName: formData.get('lastName'),
-                    email: formData.get('email'),
-                    password: formData.get('password'),
-                    country: country,
-                    nationalId: nationalId,
-                    marketingConsent: document.getElementById('marketing').checked
-                };
+function selectAccountType(type) {
+  document.querySelectorAll('.type-card').forEach(card => card.classList.remove('selected'));
+  document.querySelector(`[data-type="${type}"]`).classList.add('selected');
+  document.getElementById('accountType').value = type;
+  
+  const orgFields = document.getElementById('orgFields');
+  if (type === 'organization') {
+      orgFields.classList.add('show');
+  } else {
+      orgFields.classList.remove('show');
+  }
+  
+  clearFieldError('accountType');
+  updateSectionIndicators();
+  scheduleAutoSave();
+}
 
-                // Make API call
-                const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(registrationData)
-                });
+function updateCountryCode(countryCode) {
+  document.getElementById('countryCode').textContent = countryCodes[countryCode] || '+??';
+}
 
-                const result = await response.json();
+function updateIdValidation(countryCode) {
+  const idField = document.getElementById('nationalId');
+  const helpText = document.getElementById('idHelp');
+  if (idPatterns[countryCode]) {
+    helpText.textContent = idPatterns[countryCode].help;
+    idField.placeholder = idPatterns[countryCode].help.split(': ')[1] || 'Enter your national ID';
+  } else {
+    helpText.textContent = 'Enter your national ID number';
+    idField.placeholder = 'National ID number';
+  }
+}
 
-                if (response.ok) {
-                    showSuccess('Account created successfully! Please check your email for verification.');
-                    
-                    // Store user data temporarily for login redirect
-                    sessionStorage.setItem('registrationSuccess', 'true');
-                    sessionStorage.setItem('userEmail', registrationData.email);
-                    
-                    // Redirect to login page after 2 seconds
-                    setTimeout(() => {
-                        window.location.href = '/login?registered=true';
-                    }, 2000);
-                    
-                } else {
-                    showError(result.message || 'Registration failed. Please try again.');
+function updateStepDisplay() {
+  document.querySelectorAll('.step').forEach((step, index) => {
+    step.classList.toggle('active', index + 1 === currentStep);
+    step.classList.toggle('completed', index + 1 < currentStep);
+  });
+  document.querySelectorAll('.step-section').forEach((section, index) => {
+    section.classList.toggle('active', index + 1 === currentStep);
+  });
+}
+
+function updateSectionIndicators() {
+  if (currentMode !== 'simple') return;
+  const sections = ['accountType', 'email', 'password'];
+  document.querySelectorAll('.dot').forEach((dot, index) => {
+    const fieldName = sections[index];
+    dot.classList.toggle('completed', isFieldCompleted(fieldName));
+  });
+}
+
+// ============================================
+// Step Navigation
+// ============================================
+function nextStep() {
+  if (validateCurrentStep() && currentStep < 3) {
+    currentStep++;
+    updateStepDisplay();
+  }
+}
+
+function prevStep() {
+  if (currentStep > 1) {
+    currentStep--;
+    updateStepDisplay();
+  }
+}
+
+// ============================================
+// Validation Logic
+// ============================================
+function isFieldCompleted(fieldName) {
+  switch (fieldName) {
+    case 'accountType': return !!document.getElementById('accountType').value;
+    case 'email': return !!document.getElementById('email').value && validateEmail(document.getElementById('email').value);
+    case 'password': 
+        return !!document.getElementById('password').value &&
+               document.getElementById('password').value === document.getElementById('confirmPassword').value &&
+               validatePassword(document.getElementById('password').value).isValid;
+    default: return false;
+  }
+}
+
+function validateCurrentStep() {
+  switch (currentStep) {
+    case 1: return validateAccountType();
+    case 2: return validateBasicInfo();
+    case 3: return validateSecurity();
+    default: return true;
+  }
+}
+
+function validateAllFields() {
+    let isValid = true;
+    if (!validateAccountType()) isValid = false;
+    if (!validateBasicInfo()) isValid = false;
+    if (!validateSecurity()) isValid = false;
+    return isValid;
+}
+
+function validateAccountType() {
+  if (!document.getElementById('accountType').value) {
+    showFieldError('accountType', 'Please select an account type.');
+    return false;
+  }
+  clearFieldError('accountType');
+  return true;
+}
+
+function validateBasicInfo() {
+  let isValid = true;
+  const fields = ['firstName', 'lastName', 'email', 'phone', 'country', 'nationalId'];
+  if (document.getElementById('accountType').value === 'organization') {
+    fields.push('adminName', 'registrationNumber');
+  }
+  fields.forEach(id => { if (!validateField(id)) isValid = false; });
+  return isValid;
+}
+
+function validateSecurity() {
+  let isValid = true;
+  if (!validateField('password')) isValid = false;
+  if (!validatePasswordConfirmation()) isValid = false;
+  if (!validateTerms()) isValid = false;
+  return isValid;
+}
+
+function validateField(id) {
+    const el = document.getElementById(id);
+    if (!el || !el.required && !el.value) return true;
+    let isValid = true;
+    let message = '';
+    
+    switch(id) {
+        case 'firstName':
+        case 'lastName':
+        case 'country':
+            isValid = !!el.value.trim();
+            message = 'This field is required.';
+            break;
+        case 'email':
+            isValid = validateEmail(el.value);
+            message = 'Please enter a valid email.';
+            break;
+        case 'phone':
+            isValid = /^\d{8,15}$/.test(el.value.replace(/[\s-()]/g, ''));
+            message = 'Please enter a valid phone number.';
+            break;
+        case 'nationalId':
+            isValid = !!el.value.trim();
+            message = 'National ID is required.';
+            if(isValid) {
+                const country = document.getElementById('country').value;
+                if(country && idPatterns[country] && !idPatterns[country].pattern.test(el.value.replace(/[\s-]/g, ''))) {
+                    isValid = false;
+                    message = `Invalid format. ${idPatterns[country].help}`;
                 }
-
-            } catch (error) {
-                console.error('Registration error:', error);
-                showError('Network error. Please check your connection and try again.');
-            } finally {
-                // Reset button state
-                submitBtn.disabled = false;
-                submitBtn.classList.remove('loading');
-                submitBtn.textContent = 'Create My AIVerID Account';
             }
-        });
+            break;
+        case 'password':
+            const pass = validatePassword(el.value);
+            isValid = pass.isValid;
+            message = pass.message;
+            break;
+        case 'confirmPassword':
+            isValid = el.value === document.getElementById('password').value;
+            message = 'Passwords do not match.';
+            break;
+        case 'wallet':
+            if (!el.value) return true; // Optional
+            isValid = /^0x[a-fA-F0-9]{40}$/.test(el.value) || /^[a-zA-Z0-9-]+\.eth$/.test(el.value);
+            message = 'Invalid Ethereum or ENS address.';
+            break;
+    }
+    
+    if (isValid) {
+        clearFieldError(id);
+        showFieldSuccess(id);
+    } else {
+        showFieldError(id, message);
+        clearFieldSuccess(id);
+    }
+    return isValid;
+}
 
-        // Auto-fill demo data (for development)
-        if (window.location.hostname === 'localhost' || window.location.hostname.includes('vercel')) {
-            document.getElementById('firstName').value = 'Test';
-            document.getElementById('lastName').value = 'User';
-            document.getElementById('email').value = 'test' + Math.floor(Math.random() * 1000) + '@example.com';
-            document.getElementById('country').value = 'TH';
-            document.getElementById('nationalId').value = '1234567890123';
-            document.getElementById('password').value = 'testpassword';
-            document.getElementById('confirmPassword').value = 'testpassword';
-            updateAIVerID();
+function validatePassword(password) {
+    const checks = {
+        length: password.length >= 8,
+        upper: /[A-Z]/.test(password),
+        lower: /[a-z]/.test(password),
+        number: /\d/.test(password),
+        special: /[@$!%*?&]/.test(password)
+    };
+    return {
+        isValid: Object.values(checks).every(Boolean),
+        message: 'Must contain 8+ chars, uppercase, lowercase, number, & special character.'
+    };
+}
+
+function validatePasswordConfirmation() {
+    const pass = document.getElementById('password').value;
+    const confirm = document.getElementById('confirmPassword').value;
+    if (pass !== confirm) {
+        showFieldError('confirmPassword', 'Passwords do not match.');
+        return false;
+    }
+    clearFieldError('confirmPassword');
+    if(confirm) showFieldSuccess('confirmPassword');
+    return true;
+}
+
+function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function validateTerms() {
+    const terms = document.getElementById('terms').checked;
+    const dataProcessing = document.getElementById('dataProcessing').checked;
+    if (!terms || !dataProcessing) {
+        showFieldError('terms', 'Please accept the required terms and data processing consent.');
+        return false;
+    }
+    clearFieldError('terms');
+    return true;
+}
+
+function updatePasswordStrength(password) {
+    const strengthMeter = document.getElementById('passwordStrength');
+    if (!password) {
+      strengthMeter.style.display = 'none';
+      return;
+    }
+    strengthMeter.style.display = 'block';
+
+    const score = calculatePasswordStrength(password);
+    const fill = document.getElementById('strengthFill');
+    const text = document.getElementById('strengthText');
+    const levels = ['Very Weak', 'Weak', 'Fair', 'Good', 'Strong'];
+    const colors = ['#ef4444', '#f59e0b', '#facc15', '#00d4ff', '#10b981'];
+
+    fill.style.width = `${(score + 1) * 20}%`;
+    fill.style.backgroundColor = colors[score];
+    text.textContent = `Strength: ${levels[score]}`;
+    text.style.color = colors[score];
+}
+
+function calculatePasswordStrength(password) {
+    let score = 0;
+    if (/.{8,}/.test(password)) score++;
+    if (/[a-z]/.test(password) && /[A-Z]/.test(password)) score++;
+    if (/\d/.test(password)) score++;
+    if (/[@$!%*?&]/.test(password)) score++;
+    return score;
+}
+
+// ============================================
+// DOM & Error/Success Display
+// ============================================
+function showFieldError(id, message) {
+    const el = document.getElementById(`err${id.charAt(0).toUpperCase() + id.slice(1)}`);
+    const field = document.getElementById(id);
+    if(el) { el.textContent = message; el.classList.add('show'); }
+    if(field) field.classList.add('error');
+}
+
+function clearFieldError(id) {
+    const el = document.getElementById(`err${id.charAt(0).toUpperCase() + id.slice(1)}`);
+    const field = document.getElementById(id);
+    if(el) el.classList.remove('show');
+    if(field) field.classList.remove('error');
+}
+
+function showFieldSuccess(id) {
+    const el = document.getElementById(`success${id.charAt(0).toUpperCase() + id.slice(1)}`);
+    const field = document.getElementById(id);
+    if(el) { el.textContent = '✓'; el.classList.add('show'); }
+    if(field) field.classList.add('success');
+}
+
+function clearFieldSuccess(id) {
+    const el = document.getElementById(`success${id.charAt(0).toUpperCase() + id.slice(1)}`);
+    if(el) el.classList.remove('show');
+}
+
+// ============================================
+// Form Submission & Data Handling
+// ============================================
+function scheduleAutoSave() {
+  clearTimeout(autoSaveTimeout);
+  autoSaveTimeout = setTimeout(autoSave, API_CONFIG.AUTO_SAVE_DELAY);
+}
+
+function autoSave() {
+  const data = Object.fromEntries(new FormData(document.getElementById('registerForm')).entries());
+  try {
+    sessionStorage.setItem('aiverIdFormData', JSON.stringify(data));
+    const indicator = document.getElementById('autoSave');
+    indicator.classList.add('show');
+    setTimeout(() => indicator.classList.remove('show'), 2000);
+  } catch (e) { console.error('Auto-save failed:', e); }
+}
+
+function loadSavedFormData() {
+  try {
+    const savedData = JSON.parse(sessionStorage.getItem('aiverIdFormData'));
+    if (savedData) {
+      Object.keys(savedData).forEach(key => {
+        const el = document.getElementById(key);
+        if (el) {
+          if (el.type === 'checkbox') el.checked = !!savedData[key];
+          else el.value = savedData[key];
         }
+      });
+      if (savedData.accountType) selectAccountType(savedData.accountType);
+      if (savedData.country) { updateCountryCode(savedData.country); updateIdValidation(savedData.country); }
+      if (savedData.password) updatePasswordStrength(savedData.password);
+      updateSectionIndicators();
+    }
+  } catch (e) { console.error('Could not load form data:', e); }
+}
 
-        // Initialize
-        updateAIVerID();
-    </script>
+async function handleFormSubmit(e) {
+  e.preventDefault();
+  if (!validateAllFields()) {
+    document.querySelector('.error, .error-message.show')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+  
+  const btn = e.submitter, spinner = btn.querySelector('.loading-spinner'), text = btn.querySelector('span');
+  btn.disabled = true;
+  spinner.classList.add('show');
+  text.textContent = 'Creating Account...';
+  
+  try {
+    const formData = {
+      accountType: document.getElementById('accountType').value,
+      firstName: document.getElementById('firstName').value.trim(),
+      lastName: document.getElementById('lastName').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      phone: document.getElementById('countryCode').textContent + document.getElementById('phone').value.trim(),
+      country: document.getElementById('country').value,
+      password: document.getElementById('password').value,
+      idcard: document.getElementById('nationalId').value.trim(), // API expects 'idcard'
+      wallet: document.getElementById('wallet').value.trim(),
+      claimTokens: document.getElementById('claimTokens').checked,
+      marketing: document.getElementById('marketing').checked,
+      adminName: document.getElementById('adminName')?.value?.trim() || '',
+      registrationNumber: document.getElementById('registrationNumber')?.value?.trim() || ''
+    };
+    
+    console.log('📤 Submitting:', { ...formData, password: '***' });
+    const result = await submitRegistrationWithRetry(formData);
+    
+    if (result.success) {
+      showSuccessModal(result.data);
+      sessionStorage.removeItem('aiverIdFormData');
+    } else {
+      throw new Error(result.error || 'Registration failed');
+    }
+  } catch (error) {
+    console.error('❌ Registration error:', error);
+    handleRegistrationError(error);
+  } finally {
+    btn.disabled = false;
+    spinner.classList.remove('show');
+    text.textContent = '🚀 Create My AIVerID™';
+  }
+}
+
+// ============================================
+// API Interaction
+// ============================================
+async function checkAPIHealth() {
+  const statusEl = document.getElementById('apiStatus'), textEl = document.getElementById('apiStatusText');
+  try {
+    statusEl.className = 'api-status checking';
+    textEl.textContent = 'Checking API...';
+    const healthURL = API_CONFIG.API_URL.replace('/register', '/health');
+    const res = await fetch(healthURL, { signal: AbortSignal.timeout(5000) });
+    if (!res.ok) throw new Error('API not responding');
+    apiHealthy = true;
+    statusEl.className = 'api-status connected';
+    textEl.textContent = '✅ API Connected';
+    setTimeout(() => { statusEl.style.opacity = '0.5'; }, 3000);
+  } catch (e) {
+    apiHealthy = false;
+    statusEl.className = 'api-status disconnected';
+    textEl.textContent = '❌ API Offline - Demo Mode';
+    statusEl.style.opacity = '1';
+  }
+}
+
+async function submitRegistrationWithRetry(formData, retries = 0) {
+  try {
+    const res = await fetch(API_CONFIG.API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(formData),
+      signal: AbortSignal.timeout(API_CONFIG.API_TIMEOUT)
+    });
+    
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+    console.log('✅ Registration successful:', data);
+    return { success: true, data: { ...data.user, email: formData.email, accountType: formData.accountType, claimTokens: formData.claimTokens } };
+    
+  } catch (error) {
+    console.error(`Attempt ${retries + 1} failed:`, error);
+    if ((error.name === 'AbortError' || error.message.includes('500')) && retries < API_CONFIG.MAX_RETRIES) {
+      await new Promise(r => setTimeout(r, API_CONFIG.RETRY_DELAY));
+      return submitRegistrationWithRetry(formData, retries + 1);
+    }
+    if (!apiHealthy || error.name === 'TypeError') return submitRegistrationDemo(formData);
+    throw error;
+  }
+}
+
+async function submitRegistrationDemo(formData) {
+  console.log('📌 Demo mode submission');
+  await new Promise(r => setTimeout(r, 1500));
+  if (formData.email === 'exists@test.com') throw new Error('email_exists');
+  return { success: true, data: { id: `AID-DEMO-${Date.now()}`, ...formData } };
+}
+
+// ============================================
+// Modals and Error Handling
+// ============================================
+function handleRegistrationError(error) {
+    let message = 'An unknown error occurred. Please try again.';
+    if (error.message.includes('email_exists')) {
+        showFieldError('email', 'This email is already registered.');
+        return;
+    }
+    if (error.message.includes('validation_error')) message = 'Please check all fields and try again.';
+    if (error.message.includes('server_error')) message = 'Server error. Please try again later.';
+    if (error.name === 'AbortError') message = 'Request timed out. Please check your connection.';
+    showGlobalError(message);
+}
+
+function showSuccessModal(data) {
+  const modal = document.createElement('div');
+  modal.style.cssText = `position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 9999; animation: fadeIn 0.3s ease; backdrop-filter: blur(10px);`;
+  
+  modal.innerHTML = `
+    <div style="background: linear-gradient(135deg, #1e293b, #334155); border: 1px solid rgba(0,212,255,0.3); color: #e2e8f0; padding: 2.5rem; border-radius: 20px; max-width: 450px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 25px rgba(0,212,255,0.2);">
+      <div style="font-size: 4rem; margin-bottom: 1.5rem;">🎉</div>
+      <h2 style="color: #00d4ff; margin-bottom: 1rem; font-size: 1.5rem; font-weight: 800;">Registration Successful!</h2>
+      <p style="margin-bottom: 1.5rem; color: #cbd5e1; line-height: 1.6;">
+        Your AIVerID™ has been created successfully!<br>
+        <strong style="color: #00d4ff;">AIVerID:</strong> ${data.id || 'N/A'}<br>
+        <strong style="color: #00d4ff;">Email:</strong> ${data.email}<br>
+      </p>
+      ${data.claimTokens ? `<p style="margin-bottom: 1.5rem; color: #60a5fa; font-size: 0.9rem; background: rgba(0,212,255,0.1); padding: 1rem; border-radius: 10px; border: 1px solid rgba(0,212,255,0.2);">🪙 Your AI Rights tokens have been reserved!</p>` : ''}
+      <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 10px; font-size: 0.9rem; color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">
+        <strong>📧 Next Steps:</strong><br>
+        1. Check your email for verification<br>
+        2. Continue to Login or Test OAuth
+      </div>
+      <button onclick="window.location.href='/login?registered=true&email=${encodeURIComponent(data.email)}'" 
+              style="background: linear-gradient(135deg, #00d4ff, #1d4ed8); color: white; padding: 1rem 2rem; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; font-size: 1rem; transition: all 0.3s ease; margin-bottom: 1rem; width: 100%; box-shadow: 0 4px 15px rgba(0,212,255,0.3);">
+        Continue to Login →
+      </button>
+      <button onclick="window.open('/oauth-demo', '_blank')" 
+              style="background: linear-gradient(135deg, #059669, #047857); color: white; padding: 1rem 2rem; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; font-size: 1rem; transition: all 0.3s ease; width: 100%; box-shadow: 0 4px 15px rgba(5,150,105,0.3);">
+        🔧 Test OAuth Integration
+      </button>
+    </div>
+  `;
+  document.body.appendChild(modal);
+}
+
+function showGlobalError(message) {
+  let errorDiv = document.querySelector('.global-error');
+  if (!errorDiv) {
+    errorDiv = document.createElement('div');
+    errorDiv.className = 'global-error';
+    errorDiv.style.cssText = `position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #ef4444, #dc2626); color: white; padding: 1rem 1.5rem; border-radius: 12px; font-weight: 600; z-index: 10000; box-shadow: 0 4px 20px rgba(239,68,68,0.4); animation: slideDown 0.3s ease; border: 1px solid rgba(239,68,68,0.3);`;
+    document.body.appendChild(errorDiv);
+  }
+  errorDiv.textContent = message;
+  setTimeout(() => { if (errorDiv.parentNode) errorDiv.remove(); }, 5000);
+}
+
+// Additional CSS animations
+const additionalCSS = `
+@keyframes slideDown { 
+  from { transform: translateX(-50%) translateY(-100%); opacity: 0; } 
+  to { transform: translateX(-50%) translateY(0); opacity: 1; } 
+} 
+@keyframes fadeIn { 
+  from { opacity: 0; } 
+  to { opacity: 1; } 
+}
+`;
+const styleSheet = document.createElement('style');
+styleSheet.textContent = additionalCSS;
+document.head.appendChild(styleSheet);
+</script>
+
 </body>
 </html>

@@ -1675,7 +1675,7 @@ async function checkAPIHealth() {
   try {
     statusEl.className = 'api-status checking';
     textEl.textContent = 'Checking API...';
-    const healthURL = API_CONFIG.API_URL.replace('/register', '/health');
+    const healthURL = API_CONFIG.API_URL.replace('/api/auth/register', '/api/health');
     const res = await fetch(healthURL, { signal: AbortSignal.timeout(5000) });
     if (!res.ok) throw new Error('API not responding');
     apiHealthy = true;

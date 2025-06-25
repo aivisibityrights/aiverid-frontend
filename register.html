@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 <title>Register for AIVerID™ - Universal AI Rights Identity</title>
 <meta name="description" content="Create your AIVerID™ account. Join the AI Rights Revolution with secure, privacy-first digital identity.">
 <link rel="icon" type="image/x-icon" href="https://cdn.prod.website-files.com/67deba5cd88e614e5dd5b8d0/681393463882b3e960e1867a_AIVerID.png">
@@ -40,6 +42,7 @@ body {
   justify-content: center;
   position: relative;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 /* Animated Background */
@@ -51,6 +54,7 @@ body {
   height: 100%;
   z-index: -1;
   opacity: 0.3;
+  overflow: hidden; /* Prevent scrollbars */
 }
 
 .bg-animation::before {
@@ -58,8 +62,8 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 800px;
-  height: 800px;
+  width: min(800px, 100vw); /* Responsive sizing */
+  height: min(800px, 100vh);
   background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
   transform: translate(-50%, -50%);
   animation: pulse 8s ease-in-out infinite;
@@ -70,8 +74,8 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 600px;
-  height: 600px;
+  width: min(600px, 80vw); /* Responsive sizing */
+  height: min(600px, 80vh);
   background: radial-gradient(circle, var(--secondary) 0%, transparent 70%);
   transform: translate(-30%, -70%);
   animation: pulse 8s ease-in-out infinite reverse;
@@ -357,6 +361,14 @@ option {
   cursor: pointer;
   color: var(--text-muted);
   font-size: 1.25rem;
+  padding: 4px;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Add padding to password input to make room for toggle */
+input[type="password"] {
+  padding-right: 48px;
 }
 
 .password-strength {
@@ -470,6 +482,7 @@ option {
 
 .submit-button.loading {
   color: transparent;
+  position: relative;
 }
 
 .submit-button.loading::after {
@@ -515,6 +528,36 @@ option {
   text-decoration: underline;
 }
 
+/* Auto-save Indicator */
+.auto-save-indicator {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100px);
+  background: rgba(16, 185, 129, 0.9);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+
+.auto-save-indicator.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+.save-icon {
+  font-size: 1rem;
+}
+
 /* API Status */
 .api-status {
   position: fixed;
@@ -554,18 +597,56 @@ option {
 }
 
 /* Responsive */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  /* Tablet adjustments */
   .register-container {
-    padding: 32px 24px;
-    margin: 10px;
+    padding: 40px 32px;
+    margin: 16px;
   }
   
   .title {
-    font-size: 2rem;
+    font-size: 2.25rem;
+  }
+  
+  .logo {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Mobile adjustments */
+  body {
+    padding: 0;
+    min-height: 100vh;
+    align-items: flex-start;
+  }
+  
+  .register-container {
+    padding: 32px 20px;
+    margin: 0;
+    border-radius: 0;
+    min-height: 100vh;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .title {
+    font-size: 1.875rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+  }
+  
+  .logo {
+    width: 60px;
+    height: 60px;
   }
   
   .form-row {
     grid-template-columns: 1fr;
+    gap: 0;
   }
   
   .type-cards {
@@ -573,15 +654,128 @@ option {
   }
   
   .phone-input-wrapper {
-    flex-direction: column;
+    flex-direction: row; /* Keep side by side on mobile */
+    gap: 8px;
   }
   
   .country-code {
-    width: 100%;
+    min-width: 80px;
+    flex-shrink: 0;
+  }
+  
+  .phone-input {
+    min-width: 0; /* Allow shrinking */
+  }
+  
+  /* Adjust form spacing */
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-section {
+    margin-bottom: 24px;
+  }
+  
+  /* Smaller text on mobile */
+  label {
+    font-size: 0.8125rem;
+  }
+  
+  input, select, textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 12px 14px;
+  }
+  
+  .help-text {
+    font-size: 0.7rem;
+  }
+  
+  /* Progress steps */
+  .progress-steps {
+    font-size: 0.75rem;
+  }
+  
+  /* Auto-save indicator position */
+  .auto-save-indicator {
+    top: auto;
+    bottom: 60px; /* Above API status */
+    padding: 8px 16px;
+    font-size: 0.8125rem;
+    border-radius: 16px;
+  }
+  
+  /* API status position */
+  .api-status {
+    bottom: 10px;
+    right: 10px;
+    padding: 8px 12px;
+    font-size: 0.7rem;
+  }
+  
+  /* Submit button */
+  .submit-button {
+    padding: 14px 20px;
+    font-size: 0.9375rem;
+  }
+  
+  /* Checkbox text */
+  .checkbox-label {
+    font-size: 0.8125rem;
   }
 }
 
-/* Animations */
+@media (max-width: 375px) {
+  /* Small mobile adjustments */
+  .register-container {
+    padding: 24px 16px;
+  }
+  
+  .title {
+    font-size: 1.625rem;
+  }
+  
+  .country-code {
+    min-width: 70px;
+    font-size: 0.8125rem;
+  }
+}
+
+/* Touch-friendly adjustments for mobile */
+@media (hover: none) and (pointer: coarse) {
+  /* Larger touch targets */
+  .type-card {
+    min-height: 120px;
+  }
+  
+  input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .password-toggle {
+    padding: 8px;
+    margin-right: -8px;
+  }
+  
+  /* Remove hover effects on touch devices */
+  .type-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .submit-button:hover:not(:disabled) {
+    transform: none;
+  }
+  
+  /* Increase tap areas */
+  label {
+    padding: 4px 0;
+  }
+  
+  .checkbox-wrapper {
+    padding: 8px 0;
+  }
+}
 .fade-in {
   animation: fadeIn 0.5s ease-out;
 }
@@ -884,6 +1078,12 @@ option {
   <span id="statusText">Checking API...</span>
 </div>
 
+<!-- Auto-save indicator (fixed position) -->
+<div class="auto-save-indicator" id="autoSaveIndicator">
+  <span class="save-icon">💾</span>
+  <span>Draft saved</span>
+</div>
+
 <script>
 // API Configuration
 const API_CONFIG = {
@@ -950,6 +1150,21 @@ document.addEventListener('DOMContentLoaded', function() {
   checkAPIConnection();
   initializeFormHandlers();
   updateProgress();
+  
+  // Prevent viewport jumping on mobile keyboards
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    // Remove any autofocus on mobile
+    document.querySelectorAll('[autofocus]').forEach(el => el.removeAttribute('autofocus'));
+    
+    // Smooth scroll to input on focus
+    document.addEventListener('focusin', function(e) {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') {
+        setTimeout(() => {
+          e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 300);
+      }
+    });
+  }
 });
 
 // API Connection Check
@@ -1080,6 +1295,11 @@ function addRealTimeValidation() {
     validatePhone(this.value);
   });
   
+  // Allow only numbers in phone input
+  document.getElementById('phone').addEventListener('input', function(e) {
+    this.value = this.value.replace(/\D/g, '');
+  });
+  
   // Password match validation
   document.getElementById('confirmPassword').addEventListener('blur', function() {
     const password = document.getElementById('password').value;
@@ -1152,8 +1372,13 @@ function updateProgress() {
 }
 
 // Form submission
+let isSubmitting = false;
 async function handleSubmit(e) {
   e.preventDefault();
+  
+  // Prevent double submission
+  if (isSubmitting) return;
+  isSubmitting = true;
   
   const submitBtn = document.getElementById('submitBtn');
   submitBtn.disabled = true;
@@ -1218,31 +1443,46 @@ async function handleSubmit(e) {
   } finally {
     submitBtn.disabled = false;
     submitBtn.classList.remove('loading');
+    isSubmitting = false;
   }
 }
 
 // Auto-save functionality (optional)
 let autoSaveTimer;
+let lastSavedData = '';
+
 function autoSave() {
   clearTimeout(autoSaveTimer);
   autoSaveTimer = setTimeout(() => {
     const formData = new FormData(document.getElementById('registrationForm'));
     const data = Object.fromEntries(formData);
-    localStorage.setItem('aiverid_draft', JSON.stringify(data));
+    const dataString = JSON.stringify(data);
     
-    // Show auto-save indicator
-    const autoSaveEl = document.createElement('div');
-    autoSaveEl.className = 'auto-save-indicator';
-    autoSaveEl.textContent = 'Draft saved';
-    document.body.appendChild(autoSaveEl);
-    
-    setTimeout(() => autoSaveEl.remove(), 2000);
-  }, 2000);
+    // Only save if data actually changed
+    if (dataString !== lastSavedData) {
+      lastSavedData = dataString;
+      localStorage.setItem('aiverid_draft', dataString);
+      
+      // Show auto-save indicator (fixed position, no layout shift)
+      const indicator = document.getElementById('autoSaveIndicator');
+      if (indicator) {
+        indicator.classList.add('show');
+        setTimeout(() => indicator.classList.remove('show'), 2000);
+      }
+    }
+  }, 5000); // Increased to 5 seconds
 }
 
-// Add auto-save to all inputs
+// Add auto-save to all inputs with debouncing
 document.querySelectorAll('input, select').forEach(input => {
-  input.addEventListener('input', autoSave);
+  // Skip checkboxes for auto-save
+  if (input.type !== 'checkbox') {
+    input.addEventListener('input', autoSave);
+  }
+  // Save checkboxes on change instead
+  if (input.type === 'checkbox') {
+    input.addEventListener('change', autoSave);
+  }
 });
 
 // Load draft on page load

@@ -1238,7 +1238,7 @@ function initializePage() {
 
 function setupEventListeners() {
   document.querySelectorAll('.mode-btn').forEach(btn => btn.addEventListener('click', () => setMode(btn.dataset.mode)));
-  document.querySelectorAll('.type-card').forEach(card => card.addEventListener('click', () => select(card.dataset.type)));
+  document.querySelectorAll('.type-card').forEach(card => card.addEventListener('click', () => selectAccountType(card.dataset.type)));
   document.getElementById('country').addEventListener('change', function() {
     updateCountryCode(this.value);
     updateIdValidation(this.value);

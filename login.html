@@ -1,730 +1,915 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in to AIVerID™ - Universal AI Rights Platform</title>
-    <meta name="description" content="Sign in to your AIVerID™ account. Access your AI Rights tokens and use OAuth to sign in to other platforms.">
-    <meta name="keywords" content="AI Rights, Login, OAuth, AIVerID, Sign in, Digital Identity">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://aivisibilityrights.com/login">
-    <meta property="og:title" content="Sign in to AIVerID™ - Universal AI Rights Platform">
-    <meta property="og:description" content="Access your AIVerID™ account and manage your AI Rights tokens.">
-    <meta property="og:image" content="https://aivisibilityrights.com/assets/images/aiverid-og.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - AIVerID™ Universal AI Rights</title>
+  
+  <style>
+    /* ============================================
+       GLOBAL STYLES & CSS VARIABLES
+    ============================================ */
+    :root {
+      --primary: #00d4ff;
+      --primary-dark: #0099cc;
+      --secondary: #6366f1;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      --dark-bg: #0f172a;
+      --dark-surface: #1e293b;
+      --dark-border: rgba(148,163,184,0.2);
+      --text-primary: #e2e8f0;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --gradient-1: linear-gradient(135deg, #00d4ff 0%, #6366f1 100%);
+      --gradient-2: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      --glow: 0 0 40px rgba(0,212,255,0.3), 0 0 80px rgba(99,102,241,0.2);
+      --shadow-lg: 0 20px 40px rgba(0,0,0,0.3);
+    }
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://aivisibilityrights.com/login">
-    <meta property="twitter:title" content="Sign in to AIVerID™ - Universal AI Rights Platform">
-    <meta property="twitter:description" content="Access your AIVerID™ account and manage your AI Rights tokens.">
-    <meta property="twitter:image" content="https://aivisibilityrights.com/assets/images/aiverid-og.png">
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="canonical" href="https://aivisibilityrights.com/login">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--dark-bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
-            color: #ffffff;
-            min-height: 100vh;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+    /* Animated Background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(0,212,255,0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(99,102,241,0.2) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(0,212,255,0.1) 0%, transparent 70%);
+      animation: bgPulse 20s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-        /* Animated Background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.1;
-        }
+    @keyframes bgPulse {
+      0%, 100% { opacity: 0.8; transform: scale(1) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1.1) rotate(5deg); }
+    }
 
-        .bg-animation::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 80%, #00d4ff 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, #ff6b6b 0%, transparent 50%);
-            animation: backgroundShift 15s ease-in-out infinite;
-        }
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 480px;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+    }
 
-        @keyframes backgroundShift {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(-20px, -20px) rotate(180deg); }
-        }
+    /* Login Card */
+    .login-card {
+      background: var(--gradient-2);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: var(--shadow-lg), var(--glow);
+      border: 1px solid var(--dark-border);
+      position: relative;
+      overflow: hidden;
+    }
 
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-            padding: 1rem 0;
-        }
+    .login-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0,212,255,0.1) 0%, transparent 70%);
+      animation: rotate 30s linear infinite;
+      pointer-events: none;
+    }
 
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #00d4ff, #ff6b6b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-decoration: none;
-        }
+    /* Logo & Header */
+    .logo-section {
+      text-align: center;
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 1;
+    }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
+    .logo {
+      font-size: 2.5rem;
+      font-weight: 900;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+      display: inline-block;
+      animation: logoGlow 3s ease-in-out infinite;
+    }
 
-        .nav-links a {
-            color: #ffffff;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-        }
+    @keyframes logoGlow {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.2); }
+    }
 
-        .nav-links a:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
+    .tagline {
+      font-size: 1rem;
+      color: var(--text-secondary);
+    }
 
-        /* Main Content */
-        main {
-            padding-top: 100px;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    /* Success Message */
+    .success-banner {
+      display: none;
+      background: rgba(16,185,129,0.2);
+      border: 1px solid var(--success);
+      color: var(--success);
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+      animation: slideIn 0.5s ease;
+    }
 
-        .login-container {
-            max-width: 1000px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 2rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        .login-info {
-            animation: slideLeft 0.8s ease-out;
-        }
+    /* OAuth Alert */
+    .oauth-alert {
+      display: none;
+      background: rgba(99,102,241,0.2);
+      border: 1px solid var(--secondary);
+      color: var(--text-primary);
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 0.9rem;
+      animation: slideIn 0.5s ease;
+    }
 
-        .login-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 3rem;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            animation: slideRight 0.8s ease-out;
-        }
+    .oauth-client {
+      font-weight: 700;
+      color: var(--primary);
+    }
 
-        @keyframes slideLeft {
-            from { opacity: 0; transform: translateX(-30px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
+    /* Form */
+    .form-group {
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
 
-        @keyframes slideRight {
-            from { opacity: 0; transform: translateX(30px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
+    label {
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: block;
+    }
 
-        .info-header {
-            margin-bottom: 2rem;
-        }
+    .input-wrapper {
+      position: relative;
+    }
 
-        .info-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #00d4ff, #ff6b6b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+    input {
+      width: 100%;
+      padding: 16px 20px;
+      border: 2px solid var(--dark-border);
+      border-radius: 12px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      background: rgba(255,255,255,0.05);
+      color: var(--text-primary);
+      backdrop-filter: blur(10px);
+    }
 
-        .info-subtitle {
-            color: #b0b3c7;
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-        }
+    input::placeholder {
+      color: var(--text-muted);
+    }
 
-        .feature-list {
-            list-style: none;
-            margin-bottom: 2rem;
-        }
+    input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: rgba(0,212,255,0.1);
+      box-shadow: 
+        0 0 0 4px rgba(0,212,255,0.1),
+        0 4px 20px rgba(0,212,255,0.2);
+    }
 
-        .feature-list li {
-            margin: 1rem 0;
-            padding-left: 2rem;
-            position: relative;
-            color: #e2e8f0;
-        }
+    input.error {
+      border-color: var(--error);
+      background: rgba(239,68,68,0.1);
+    }
 
-        .feature-list li::before {
-            content: '✨';
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
+    /* Password Toggle */
+    .password-toggle {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+      z-index: 2;
+    }
 
-        .oauth-demo-btn {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 1rem;
-        }
+    .password-toggle:hover {
+      color: var(--primary);
+    }
 
-        .oauth-demo-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
-        }
+    /* Remember Me */
+    .remember-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
 
-        .card-header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-        .card-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: #ffffff;
-        }
+    .checkbox-group input[type="checkbox"] {
+      width: auto;
+      cursor: pointer;
+    }
 
-        .card-subtitle {
-            color: #b0b3c7;
-            font-size: 1rem;
-        }
+    .checkbox-group label {
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 0;
+    }
 
-        /* Registration Success Alert */
-        .registration-success {
-            background: rgba(34, 197, 94, 0.1);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            color: #10b981;
-            padding: 1rem;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            animation: fadeIn 0.5s ease-out;
-        }
+    /* Forgot Password Link */
+    .forgot-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: opacity 0.3s ease;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .forgot-link:hover {
+      opacity: 0.8;
+    }
 
-        /* Form Styles */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+    /* Submit Button */
+    .btn-primary {
+      width: 100%;
+      padding: 18px;
+      background: var(--gradient-1);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 20px rgba(0,212,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #ffffff;
-            font-weight: 500;
-        }
+    .btn-primary:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,212,255,0.4);
+    }
 
-        .form-group input {
-            width: 100%;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            color: #ffffff;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
 
-        .form-group input:focus {
-            outline: none;
-            border-color: #00d4ff;
-            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
-            background: rgba(255, 255, 255, 0.08);
-        }
+    /* Loading Spinner */
+    .loading-spinner {
+      display: none;
+      width: 18px;
+      height: 18px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
 
-        .form-group input::placeholder {
-            color: #6b7280;
-        }
+    .loading-spinner.show {
+      display: inline-block;
+    }
 
-        .remember-forgot {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 1rem 0;
-            font-size: 0.9rem;
-        }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
 
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+    /* Divider */
+    .divider {
+      text-align: center;
+      margin: 30px 0;
+      position: relative;
+    }
 
-        .remember-me input[type="checkbox"] {
-            width: auto;
-        }
+    .divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--dark-border);
+    }
 
-        .forgot-password {
-            color: #00d4ff;
-            text-decoration: none;
-        }
+    .divider span {
+      background: var(--dark-surface);
+      padding: 0 20px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      position: relative;
+      z-index: 1;
+    }
 
-        .forgot-password:hover {
-            text-decoration: underline;
-        }
+    /* Social Login */
+    .social-login {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
 
-        .submit-btn {
-            width: 100%;
-            padding: 1.2rem;
-            background: linear-gradient(135deg, #00d4ff, #0099cc);
-            border: none;
-            border-radius: 12px;
-            color: #ffffff;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
-        }
+    .social-btn {
+      width: 100%;
+      padding: 14px;
+      border: 2px solid var(--dark-border);
+      background: rgba(255,255,255,0.05);
+      color: var(--text-primary);
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
 
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
-        }
+    .social-btn:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
 
-        .submit-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
+    /* Messages */
+    .error-message, .success-message {
+      font-size: 0.9rem;
+      margin-top: 8px;
+      display: none;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      animation: slideIn 0.3s ease;
+    }
 
-        /* OAuth Section */
-        .oauth-section {
-            margin: 2rem 0;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
+    .error-message {
+      color: white;
+      background: rgba(239,68,68,0.9);
+      border: 1px solid var(--error);
+    }
 
-        .oauth-title {
-            text-align: center;
-            margin-bottom: 1rem;
-            color: #b0b3c7;
-            font-size: 0.9rem;
-        }
+    .error-message.show {
+      display: block;
+    }
 
-        .oauth-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
+    .success-message {
+      color: white;
+      background: rgba(16,185,129,0.9);
+      border: 1px solid var(--success);
+    }
 
-        .oauth-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            padding: 0.75rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: #ffffff;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
+    .success-message.show {
+      display: block;
+    }
 
-        .oauth-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-1px);
-        }
+    /* Register Link */
+    .register-link {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
 
-        /* Register Link */
-        .register-link {
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
+    .register-link a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.3s ease;
+    }
 
-        .register-link a {
-            color: #00d4ff;
-            text-decoration: none;
-            font-weight: 500;
-        }
+    .register-link a:hover {
+      opacity: 0.8;
+    }
 
-        .register-link a:hover {
-            text-decoration: underline;
-        }
+    /* Back Link */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
 
-        /* Loading State */
-        .loading {
-            opacity: 0.7;
-            pointer-events: none;
-            position: relative;
-        }
+    .back-link:hover {
+      color: var(--primary);
+      transform: translateX(-5px);
+    }
 
-        .loading::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 20px;
-            height: 20px;
-            margin: -10px 0 0 -10px;
-            border: 2px solid transparent;
-            border-top: 2px solid #ffffff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
+    /* API Status */
+    .api-status {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 12px 20px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+    .api-status::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: currentColor;
+      animation: pulse 2s ease-in-out infinite;
+    }
 
-        /* Error Messages */
-        .error-message {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: #ff6b6b;
-            padding: 0.75rem;
-            border-radius: 8px;
-            margin-top: 0.5rem;
-            font-size: 0.9rem;
-        }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
+    }
 
-        .success-message {
-            background: rgba(34, 197, 94, 0.1);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            color: #10b981;
-            padding: 0.75rem;
-            border-radius: 8px;
-            margin-top: 0.5rem;
-            font-size: 0.9rem;
-        }
+    .api-status.checking {
+      background: rgba(251,191,36,0.2);
+      color: var(--warning);
+      border: 1px solid var(--warning);
+    }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
+    .api-status.connected {
+      background: rgba(16,185,129,0.2);
+      color: var(--success);
+      border: 1px solid var(--success);
+    }
 
-            .login-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                padding: 1rem;
-            }
+    .api-status.disconnected {
+      background: rgba(239,68,68,0.2);
+      color: var(--error);
+      border: 1px solid var(--error);
+    }
 
-            .login-info {
-                order: 2;
-            }
+    /* Footer */
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
 
-            .login-card {
-                order: 1;
-                padding: 2rem;
-            }
+    .footer a {
+      color: var(--primary);
+      text-decoration: none;
+      margin: 0 10px;
+      transition: opacity 0.3s ease;
+    }
 
-            .info-title {
-                font-size: 2rem;
-            }
+    .footer a:hover {
+      opacity: 0.8;
+    }
 
-            .card-title {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+
+      .login-card {
+        padding: 30px 20px;
+      }
+
+      .logo {
+        font-size: 2rem;
+      }
+
+      .api-status {
+        bottom: 10px;
+        right: 10px;
+        font-size: 0.8rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="bg-animation"></div>
+  <!-- API Status -->
+  <div class="api-status checking" id="apiStatus">
+    <span id="apiStatusText">Checking API...</span>
+  </div>
 
-    <header>
-        <nav>
-            <a href="/" class="logo">AIVerID™</a>
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/register.html">Register</a></li>
-                <li><a href="/oauth-demo">OAuth Demo</a></li>
-            </ul>
-        </nav>
-    </header>
+  <div class="container">
+    <a href="/" class="back-link">← Back to Home</a>
+    
+    <div class="login-card">
+      <!-- Logo Section -->
+      <div class="logo-section">
+        <h1 class="logo">AIVerID™</h1>
+        <p class="tagline">Your Universal AI Rights & Digital Identity</p>
+      </div>
 
-    <main>
-        <div class="login-container">
-            <!-- Left Side - Information -->
-            <div class="login-info">
-                <div class="info-header">
-                    <h1 class="info-title">Welcome Back</h1>
-                    <p class="info-subtitle">Access your Universal AI Rights Platform and manage your digital identity tokens.</p>
-                </div>
+      <!-- Success Banner -->
+      <div class="success-banner" id="registrationSuccess">
+        🎉 Registration successful! Please login to continue.
+      </div>
 
-                <ul class="feature-list">
-                    <li><strong>Universal SSO</strong> - Sign in to any AI platform with AIVerID</li>
-                    <li><strong>AI Rights Tokens</strong> - Manage your AIVID, AIPLT, and SLIVR tokens</li>
-                    <li><strong>OAuth Integration</strong> - Developers can integrate "Sign in with AIVerID"</li>
-                    <li><strong>Privacy First</strong> - Your data stays secure and encrypted</li>
-                    <li><strong>Global Recognition</strong> - First mover in AI Rights ecosystem</li>
-                </ul>
+      <!-- OAuth Alert -->
+      <div class="oauth-alert" id="oauthAlert">
+        🔐 <span class="oauth-client" id="oauthClientName"></span> wants to access your AIVerID™ account
+      </div>
 
-                <a href="/oauth-demo" class="oauth-demo-btn">
-                    🚀 Try OAuth Demo
-                </a>
-            </div>
+      <!-- Error Message -->
+      <div class="error-message" id="errorMessage"></div>
+      <div class="success-message" id="successMessage"></div>
 
-            <!-- Right Side - Login Form -->
-            <div class="login-card">
-                <div class="card-header">
-                    <h2 class="card-title">Sign In</h2>
-                    <p class="card-subtitle">Enter your credentials to access your account</p>
-                </div>
-
-                <!-- Registration Success Alert -->
-                <div id="registrationSuccess" class="registration-success" style="display: none;">
-                    ✅ Registration successful! You can now sign in with your new account.
-                </div>
-
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required placeholder="your@email.com" autocomplete="email">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" required placeholder="Enter your password" autocomplete="current-password">
-                    </div>
-
-                    <div class="remember-forgot">
-                        <label class="remember-me">
-                            <input type="checkbox" id="rememberMe" name="rememberMe">
-                            Remember me
-                        </label>
-                        <a href="/forgot-password" class="forgot-password">Forgot Password?</a>
-                    </div>
-
-                    <button type="submit" class="submit-btn" id="submitBtn">
-                        Sign In to AIVerID
-                    </button>
-
-                    <div id="errorMessage" class="error-message" style="display: none;"></div>
-                    <div id="successMessage" class="success-message" style="display: none;"></div>
-                </form>
-
-                <!-- OAuth Demo Section -->
-                <div class="oauth-section">
-                    <p class="oauth-title">Or test OAuth integration</p>
-                    <div class="oauth-buttons">
-                        <a href="/oauth-demo" class="oauth-btn">
-                            🔗 Test OAuth 2.0 Flow
-                        </a>
-                        <a href="/oauth-demo?app=vergolf" class="oauth-btn">
-                            ⛳ Sign in to VerGolf (Demo)
-                        </a>
-                    </div>
-                </div>
-
-                <div class="register-link">
-                    <p>Don't have an account? <a href="/register.html">Create your AIVerID</a></p>
-                </div>
-            </div>
+      <!-- Login Form -->
+      <form id="loginForm" novalidate>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <div class="input-wrapper">
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              placeholder="your.name@example.com" 
+              required
+              autocomplete="username"
+            >
+          </div>
         </div>
-    </main>
 
-    <script>
-        // API Configuration
-        const API_BASE_URL = 'https://aiverid-backend-production.up.railway.app';
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-wrapper">
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              placeholder="Enter your password" 
+              required
+              autocomplete="current-password"
+            >
+            <button type="button" class="password-toggle" id="passwordToggle">
+              👁️
+            </button>
+          </div>
+        </div>
 
-        // Form elements
-        const form = document.getElementById('loginForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const errorMessage = document.getElementById('errorMessage');
-        const successMessage = document.getElementById('successMessage');
-        const registrationSuccess = document.getElementById('registrationSuccess');
+        <div class="remember-section">
+          <div class="checkbox-group">
+            <input type="checkbox" id="rememberMe" name="rememberMe">
+            <label for="rememberMe">Remember me</label>
+          </div>
+          <a href="/forgot-password" class="forgot-link">Forgot password?</a>
+        </div>
 
-        // Check for registration success
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('registered') === 'true' || sessionStorage.getItem('registrationSuccess') === 'true') {
-            registrationSuccess.style.display = 'block';
-            
-            // Pre-fill email if available
-            const userEmail = sessionStorage.getItem('userEmail');
-            if (userEmail) {
-                document.getElementById('email').value = userEmail;
-            }
-            
-            // Clear session storage
-            sessionStorage.removeItem('registrationSuccess');
-            sessionStorage.removeItem('userEmail');
+        <button type="submit" class="btn-primary" id="submitBtn">
+          <span class="loading-spinner" id="loadingSpinner"></span>
+          <span>🔐 Login to AIVerID™</span>
+        </button>
+      </form>
+
+      <!-- Divider -->
+      <div class="divider">
+        <span>OR</span>
+      </div>
+
+      <!-- Social Login -->
+      <div class="social-login">
+        <button class="social-btn" onclick="showOAuthDemo('google')">
+          <span>🌐</span> Continue with Google
+        </button>
+        <button class="social-btn" onclick="showOAuthDemo('github')">
+          <span>💻</span> Continue with GitHub
+        </button>
+      </div>
+
+      <!-- Register Link -->
+      <div class="register-link">
+        Don't have an account? <a href="/register">Create your AIVerID™</a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>© 2025 AIVerID™. All Rights Reserved.</p>
+      <p>
+        <a href="/terms">Terms</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/help">Help</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // API Configuration
+    const API_CONFIG = {
+      API_URL: 'https://aiverid-backend-production.up.railway.app/api/auth/login',
+      API_HEALTH: 'https://aiverid-backend-production.up.railway.app/api/health',
+      OAUTH_AUTHORIZE: 'https://aiverid-backend-production.up.railway.app/oauth/authorize',
+      API_TIMEOUT: 10000
+    };
+
+    // DOM Elements
+    const form = document.getElementById('loginForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    const errorMessage = document.getElementById('errorMessage');
+    const successMessage = document.getElementById('successMessage');
+    const registrationSuccess = document.getElementById('registrationSuccess');
+    const passwordToggle = document.getElementById('passwordToggle');
+    const passwordInput = document.getElementById('password');
+    const oauthAlert = document.getElementById('oauthAlert');
+    const oauthClientName = document.getElementById('oauthClientName');
+
+    // OAuth Parameters
+    let oauthParams = null;
+
+    // Page Initialization
+    document.addEventListener('DOMContentLoaded', function() {
+      checkAPIHealth();
+      checkRegistrationSuccess();
+      checkOAuthFlow();
+      setupEventListeners();
+      setInterval(checkAPIHealth, 30000);
+    });
+
+    // Check for registration success
+    function checkRegistrationSuccess() {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('registered') === 'true' || sessionStorage.getItem('registrationSuccess') === 'true') {
+        registrationSuccess.style.display = 'block';
+        
+        // Pre-fill email if available
+        const userEmail = urlParams.get('email') || sessionStorage.getItem('userEmail');
+        if (userEmail) {
+          document.getElementById('email').value = decodeURIComponent(userEmail);
         }
+        
+        // Clear session storage
+        sessionStorage.removeItem('registrationSuccess');
+        sessionStorage.removeItem('userEmail');
+      }
+    }
 
-        // Error/Success message functions
-        function showError(message) {
-            errorMessage.textContent = message;
-            errorMessage.style.display = 'block';
-            successMessage.style.display = 'none';
-        }
+    // Check for OAuth flow
+    function checkOAuthFlow() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const clientId = urlParams.get('client_id');
+      const redirectUri = urlParams.get('redirect_uri');
+      const scope = urlParams.get('scope');
+      const state = urlParams.get('state');
 
-        function showSuccess(message) {
-            successMessage.textContent = message;
-            successMessage.style.display = 'block';
-            errorMessage.style.display = 'none';
-        }
+      if (clientId && redirectUri) {
+        oauthParams = {
+          client_id: clientId,
+          redirect_uri: redirectUri,
+          scope: scope || 'profile',
+          state: state
+        };
 
-        function hideMessages() {
-            errorMessage.style.display = 'none';
-            successMessage.style.display = 'none';
-        }
+        // Show OAuth alert
+        const clientNames = {
+          'aiv_50de5e3f702bfe688230d13d': 'VerGolf',
+          'aiv_aijmt_client_demo': 'AI Job Matching Platform'
+        };
 
-        // Form submission
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            hideMessages();
+        oauthClientName.textContent = clientNames[clientId] || 'Third-party application';
+        oauthAlert.style.display = 'block';
+      }
+    }
 
-            const formData = new FormData(form);
-            const email = formData.get('email');
-            const password = formData.get('password');
-            const rememberMe = document.getElementById('rememberMe').checked;
+    // Setup event listeners
+    function setupEventListeners() {
+      form.addEventListener('submit', handleLogin);
+      
+      // Password toggle
+      passwordToggle.addEventListener('click', function() {
+        const type = passwordInput.type === 'password' ? 'text' : 'password';
+        passwordInput.type = type;
+        this.textContent = type === 'password' ? '👁️' : '🙈';
+      });
 
-            // Basic validation
-            if (!email || !password) {
-                showError('Please fill in all fields');
-                return;
-            }
+      // Clear error on input
+      ['email', 'password'].forEach(id => {
+        document.getElementById(id).addEventListener('input', function() {
+          hideMessages();
+          this.classList.remove('error');
+        });
+      });
+    }
 
-            // Set loading state
-            submitBtn.disabled = true;
-            submitBtn.classList.add('loading');
-            submitBtn.textContent = 'Signing In...';
+    // API Health Check
+    async function checkAPIHealth() {
+      const statusEl = document.getElementById('apiStatus');
+      const textEl = document.getElementById('apiStatusText');
+      
+      try {
+        statusEl.className = 'api-status checking';
+        textEl.textContent = 'Checking API...';
+        
+        const res = await fetch(API_CONFIG.API_HEALTH, { 
+          signal: AbortSignal.timeout(5000) 
+        });
+        
+        if (!res.ok) throw new Error('API not responding');
+        
+        statusEl.className = 'api-status connected';
+        textEl.textContent = '✅ API Connected';
+        setTimeout(() => { statusEl.style.opacity = '0.5'; }, 3000);
+        
+      } catch (e) {
+        statusEl.className = 'api-status disconnected';
+        textEl.textContent = '❌ API Offline';
+        statusEl.style.opacity = '1';
+      }
+    }
 
-            try {
-                // Make API call
-                const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        email: email,
-                        password: password,
-                        rememberMe: rememberMe
-                    })
-                });
+    // Handle login
+    async function handleLogin(e) {
+      e.preventDefault();
+      hideMessages();
 
-                const result = await response.json();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const rememberMe = document.getElementById('rememberMe').checked;
 
-                if (response.ok) {
-                    showSuccess('Login successful! Redirecting to dashboard...');
-                    
-                    // Store auth token
-                    if (rememberMe) {
-                        localStorage.setItem('aiverid_token', result.token);
-                        localStorage.setItem('aiverid_user', JSON.stringify(result.user));
-                    } else {
-                        sessionStorage.setItem('aiverid_token', result.token);
-                        sessionStorage.setItem('aiverid_user', JSON.stringify(result.user));
-                    }
-                    
-                    // Check for OAuth redirect
-                    const redirectUri = urlParams.get('redirect_uri');
-                    const state = urlParams.get('state');
-                    
-                    if (redirectUri && state) {
-                        // OAuth flow - redirect back to requesting application
-                        const authCode = result.authCode || 'temp_auth_code';
-                        const redirectUrl = new URL(redirectUri);
-                        redirectUrl.searchParams.set('code', authCode);
-                        redirectUrl.searchParams.set('state', state);
-                        
-                        setTimeout(() => {
-                            window.location.href = redirectUrl.toString();
-                        }, 1000);
-                    } else {
-                        // Normal login - redirect to dashboard
-                        setTimeout(() => {
-                            window.location.href = '/dashboard';
-                        }, 1000);
-                    }
-                    
-                } else {
-                    showError(result.message || 'Login failed. Please check your credentials.');
-                }
+      // Basic validation
+      if (!email || !password) {
+        showError('Please enter both email and password');
+        return;
+      }
 
-            } catch (error) {
-                console.error('Login error:', error);
-                showError('Network error. Please check your connection and try again.');
-            } finally {
-                // Reset button state
-                submitBtn.disabled = false;
-                submitBtn.classList.remove('loading');
-                submitBtn.textContent = 'Sign In to AIVerID';
-            }
+      if (!validateEmail(email)) {
+        showError('Please enter a valid email address');
+        document.getElementById('email').classList.add('error');
+        return;
+      }
+
+      // Show loading state
+      submitBtn.disabled = true;
+      loadingSpinner.classList.add('show');
+      submitBtn.querySelector('span:last-child').textContent = 'Logging in...';
+
+      try {
+        const response = await fetch(API_CONFIG.API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({ email, password, rememberMe }),
+          signal: AbortSignal.timeout(API_CONFIG.API_TIMEOUT)
         });
 
-        // Auto-fill test credentials for development
-        if (window.location.hostname === 'localhost' || window.location.hostname.includes('vercel')) {
-            document.getElementById('email').value = 'test5@test.com';
-            document.getElementById('password').value = 'testpassword';
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || data.message || 'Login failed');
         }
 
-        // Handle OAuth demo buttons
-        document.querySelectorAll('.oauth-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                // Add slight delay for better UX
-                e.preventDefault();
-                setTimeout(() => {
-                    window.location.href = this.href;
-                }, 100);
-            });
+        // Store token
+        localStorage.setItem('authToken', data.token);
+        if (data.user) {
+          localStorage.setItem('userInfo', JSON.stringify(data.user));
+        }
+
+        showSuccess('Login successful! Redirecting...');
+
+        // Handle OAuth flow or regular login
+        if (oauthParams) {
+          // OAuth flow - authorize the client
+          setTimeout(() => authorizeOAuthClient(data.token), 1000);
+        } else {
+          // Regular login - redirect to dashboard
+          setTimeout(() => {
+            window.location.href = '/dashboard';
+          }, 1000);
+        }
+
+      } catch (error) {
+        console.error('Login error:', error);
+        
+        if (error.message.includes('invalid_credentials')) {
+          showError('Invalid email or password');
+        } else if (error.message.includes('account_locked')) {
+          showError('Account temporarily locked. Please try again later.');
+        } else if (error.name === 'AbortError') {
+          showError('Request timed out. Please check your connection.');
+        } else {
+          showError(error.message || 'Login failed. Please try again.');
+        }
+      } finally {
+        submitBtn.disabled = false;
+        loadingSpinner.classList.remove('show');
+        submitBtn.querySelector('span:last-child').textContent = '🔐 Login to AIVerID™';
+      }
+    }
+
+    // OAuth Authorization
+    async function authorizeOAuthClient(token) {
+      try {
+        const response = await fetch(API_CONFIG.OAUTH_AUTHORIZE, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(oauthParams)
         });
 
-        // Auto-hide registration success message after 10 seconds
-        setTimeout(() => {
-            if (registrationSuccess.style.display === 'block') {
-                registrationSuccess.style.display = 'none';
-            }
-        }, 10000);
-    </script>
+        const data = await response.json();
+
+        if (data.success && data.redirect_url) {
+          window.location.href = data.redirect_url;
+        } else {
+          throw new Error('OAuth authorization failed');
+        }
+
+      } catch (error) {
+        console.error('OAuth authorization error:', error);
+        showError('Authorization failed. Please try again.');
+      }
+    }
+
+    // Utility functions
+    function validateEmail(email) {
+      const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return re.test(email);
+    }
+
+    function showError(message) {
+      errorMessage.textContent = message;
+      errorMessage.classList.add('show');
+      successMessage.classList.remove('show');
+    }
+
+    function showSuccess(message) {
+      successMessage.textContent = message;
+      successMessage.classList.add('show');
+      errorMessage.classList.remove('show');
+    }
+
+    function hideMessages() {
+      errorMessage.classList.remove('show');
+      successMessage.classList.remove('show');
+    }
+
+    // OAuth Demo
+    function showOAuthDemo(provider) {
+      alert(`${provider} OAuth integration coming soon!\n\nFor now, please use your AIVerID™ email and password to login.`);
+    }
+  </script>
 </body>
 </html>

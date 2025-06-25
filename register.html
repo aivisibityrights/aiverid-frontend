@@ -1238,7 +1238,7 @@ function initializePage() {
 
 function setupEventListeners() {
   document.querySelectorAll('.mode-btn').forEach(btn => btn.addEventListener('click', () => setMode(btn.dataset.mode)));
-  document.querySelectorAll('.type-card').forEach(card => card.addEventListener('click', () => selectAccountType(card.dataset.type)));
+  document.querySelectorAll('.type-card').forEach(card => card.addEventListener('click', () => select(card.dataset.type)));
   document.getElementById('country').addEventListener('change', function() {
     updateCountryCode(this.value);
     updateIdValidation(this.value);
@@ -1633,20 +1633,20 @@ async function handleFormSubmit(e) {
   
   try {
     const formData = {
-      accountType: document.getElementById('accountType').value,
-      firstName: document.getElementById('firstName').value.trim(),
-      lastName: document.getElementById('lastName').value.trim(),
-      email: document.getElementById('email').value.trim(),
-      phone: document.getElementById('countryCode').textContent + document.getElementById('phone').value.trim(),
-      country: document.getElementById('country').value,
-      password: document.getElementById('password').value,
-      idcard: document.getElementById('nationalId').value.trim(), // API expects 'idcard'
-      wallet: document.getElementById('wallet').value.trim(),
-      claimTokens: document.getElementById('claimTokens').checked,
-      marketing: document.getElementById('marketing').checked,
-      adminName: document.getElementById('adminName')?.value?.trim() || '',
-      registrationNumber: document.getElementById('registrationNumber')?.value?.trim() || ''
-    };
+  accountType: document.getElementById('accountType').value,
+  firstName: document.getElementById('firstName').value.trim(),
+  lastName: document.getElementById('lastName').value.trim(),
+  email: document.getElementById('email').value.trim(),
+  phoneNumber: document.getElementById('countryCode').textContent + document.getElementById('phone').value.trim(), // เปลี่ยนจาก phone เป็น phoneNumber
+  country: document.getElementById('country').value,
+  password: document.getElementById('password').value,
+  aiverIdNumber: document.getElementById('nationalId').value.trim(), // เปลี่ยนจาก idcard เป็น aiverIdNumber
+  wallet: document.getElementById('wallet').value.trim(),
+  claimTokens: document.getElementById('claimTokens').checked,
+  marketing: document.getElementById('marketing').checked,
+  adminName: document.getElementById('adminName')?.value?.trim() || '',
+  registrationNumber: document.getElementById('registrationNumber')?.value?.trim() || ''
+};
     
     console.log('📤 Submitting:', { ...formData, password: '***' });
     const result = await submitRegistrationWithRetry(formData);
@@ -1692,6 +1692,9 @@ async function checkAPIHealth() {
 
 async function submitRegistrationWithRetry(formData, retries = 0) {
   try {
+    console.log('API URL:', API_CONFIG.API_URL);
+    console.log('Method:', 'POST');
+    console.log('Data:', formData);
     const res = await fetch(API_CONFIG.API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },

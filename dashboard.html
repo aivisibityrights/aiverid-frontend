@@ -694,7 +694,7 @@
             const user = localStorage.getItem('aiverid_user') || sessionStorage.getItem('aiverid_user');
             
             if (!token || !user) {
-                window.location.href = '/login';
+                window.location.href = '/login.html';
                 return null;
             }
             
@@ -849,7 +849,7 @@
                 localStorage.removeItem('aiverid_user');
                 sessionStorage.removeItem('aiverid_token');
                 sessionStorage.removeItem('aiverid_user');
-                window.location.href = '/login';
+                window.location.href = '/login.html';
             }
         }
 

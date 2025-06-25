@@ -1,875 +1,1268 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - AIVerID™ Universal AI Rights Platform</title>
-    <meta name="description" content="Create your AIVerID™ account and claim your AI Rights tokens. Join the first universal digital identity platform for the AI era.">
-    <meta name="keywords" content="AIVerID, AI Rights, digital identity, OAuth, AIVID, AIPLT, SLIVR">
-    
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: #e2e8f0;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register for AIVerID™ - Universal AI Rights Identity</title>
+<meta name="description" content="Create your AIVerID™ account. Join the AI Rights Revolution with secure, privacy-first digital identity.">
+<link rel="icon" type="image/x-icon" href="https://cdn.prod.website-files.com/67deba5cd88e614e5dd5b8d0/681393463882b3e960e1867a_AIVerID.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Base Reset & Variables */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+:root {
+  --primary: #00d4ff;
+  --secondary: #ff6b6b;
+  --success: #10b981;
+  --error: #ef4444;
+  --warning: #f59e0b;
+  --dark: #0a0a0a;
+  --dark-light: #1a1a1a;
+  --dark-lighter: #2a2a2a;
+  --text: #ffffff;
+  --text-muted: #94a3b8;
+  --border: rgba(255, 255, 255, 0.1);
+  --gradient: linear-gradient(135deg, #00d4ff 0%, #ff6b6b 100%);
+}
 
-        .logo {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--dark);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow-x: hidden;
+}
 
-        .logo h1 {
-            font-size: 2rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #00d4ff, #0ea5e9);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-        }
+/* Animated Background */
+.bg-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.3;
+}
 
-        .form-container {
-            background: rgba(30, 41, 59, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-        }
+.bg-animation::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  animation: pulse 8s ease-in-out infinite;
+}
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+.bg-animation::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--secondary) 0%, transparent 70%);
+  transform: translate(-30%, -70%);
+  animation: pulse 8s ease-in-out infinite reverse;
+}
 
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: #cbd5e1;
-        }
+@keyframes pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+  50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.5; }
+}
 
-        input, select {
-            width: 100%;
-            padding: 12px 16px;
-            background: rgba(15, 23, 42, 0.8);
-            border: 2px solid rgba(71, 85, 105, 0.5);
-            border-radius: 12px;
-            color: #e2e8f0;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
+/* Main Container */
+.register-container {
+  width: 100%;
+  max-width: 540px;
+  background: rgba(26, 26, 26, 0.9);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 48px;
+  margin: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
 
-        input:focus, select:focus {
-            outline: none;
-            border-color: #00d4ff;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-        }
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
 
-        .checkbox-group {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
-        }
+.logo {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  display: block;
+}
 
-        input[type="checkbox"] {
-            width: auto;
-            margin: 0;
-            accent-color: #00d4ff;
-        }
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-        .checkbox-label {
-            font-size: 0.9rem;
-            line-height: 1.4;
-            color: #cbd5e1;
-        }
+.subtitle {
+  color: var(--text-muted);
+  font-size: 1.125rem;
+  margin-bottom: 12px;
+}
 
-        .submit-btn {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #00d4ff, #0ea5e9);
-            border: none;
-            border-radius: 12px;
-            color: #0f172a;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
+.security-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  color: var(--success);
+  font-weight: 600;
+}
 
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
-        }
+/* Progress Steps */
+.progress-container {
+  margin-bottom: 40px;
+}
 
-        .submit-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
+.progress-bar {
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
 
-        .spinner {
-            display: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
+.progress-fill {
+  height: 100%;
+  background: var(--gradient);
+  width: 33.33%;
+  transition: width 0.5s ease;
+}
 
-        .spinner.show {
-            display: block;
-        }
+.progress-steps {
+  display: flex;
+  justify-content: space-between;
+}
 
-        .form-footer {
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(71, 85, 105, 0.3);
-        }
+.step {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  position: relative;
+}
 
-        .form-footer a {
-            color: #00d4ff;
-            text-decoration: none;
-            font-weight: 600;
-        }
+.step.active {
+  color: var(--primary);
+}
 
-        .form-footer a:hover {
-            text-decoration: underline;
-        }
+.step.completed {
+  color: var(--success);
+}
 
-        .error-message {
-            color: #ef4444;
-            font-size: 0.875rem;
-            margin-top: 0.5rem;
-            display: none;
-        }
+/* Form */
+.form-container {
+  margin-bottom: 24px;
+}
 
-        .error-message.show {
-            display: block;
-        }
+.form-section {
+  margin-bottom: 32px;
+}
 
-        .field-error {
-            border-color: #ef4444 !important;
-            box-shadow: 0 0 10px rgba(239, 68, 68, 0.3) !important;
-        }
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-        .api-status {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
+.section-icon {
+  font-size: 1.5rem;
+}
 
-        .api-status.checking {
-            background: rgba(251, 191, 36, 0.2);
-            color: #fbbf24;
-            border: 1px solid rgba(251, 191, 36, 0.3);
-        }
+/* Account Type Cards */
+.type-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
 
-        .api-status.connected {
-            background: rgba(34, 197, 94, 0.2);
-            color: #22c55e;
-            border: 1px solid rgba(34, 197, 94, 0.3);
-        }
+.type-card {
+  padding: 24px;
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+}
 
-        .api-status.disconnected {
-            background: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
-            border: 1px solid rgba(239, 68, 68, 0.3);
-        }
+.type-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+}
 
-        .back-home {
-            display: inline-block;
-            margin-top: 1rem;
-            color: #94a3b8;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
+.type-card.selected {
+  border-color: var(--primary);
+  background: rgba(0, 212, 255, 0.1);
+  box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.2);
+}
 
-        .back-home:hover {
-            color: #00d4ff;
-        }
+.type-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+}
 
-        @media (max-width: 640px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            .form-container {
-                padding: 1.5rem;
-            }
-            
-            .logo h1 {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
+.type-title {
+  font-weight: 700;
+  font-size: 1.125rem;
+  margin-bottom: 8px;
+}
+
+.type-desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.required {
+  color: var(--error);
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+input::placeholder {
+  color: var(--text-muted);
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: rgba(0, 212, 255, 0.1);
+  box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.1);
+}
+
+/* Country Select with Flags */
+.country-select-wrapper {
+  position: relative;
+}
+
+.country-select {
+  appearance: none;
+  padding-right: 40px;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 20px;
+}
+
+optgroup {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+option {
+  background: var(--dark-light);
+  color: var(--text);
+  padding: 8px;
+}
+
+/* Phone Input */
+.phone-input-wrapper {
+  display: flex;
+  gap: 12px;
+}
+
+.country-code {
+  min-width: 100px;
+  padding: 14px 16px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: rgba(0, 212, 255, 0.1);
+  color: var(--primary);
+  font-weight: 600;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.phone-input {
+  flex: 1;
+}
+
+/* Password Strength */
+.password-field {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 1.25rem;
+}
+
+.password-strength {
+  margin-top: 8px;
+}
+
+.strength-bar {
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.strength-fill {
+  height: 100%;
+  width: 0;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.strength-text {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Help Text & Errors */
+.help-text {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.error-message {
+  font-size: 0.75rem;
+  color: var(--error);
+  margin-top: 6px;
+  display: none;
+}
+
+.error-message.show {
+  display: block;
+}
+
+.success-message {
+  font-size: 0.75rem;
+  color: var(--success);
+  margin-top: 6px;
+  display: none;
+}
+
+.success-message.show {
+  display: block;
+}
+
+/* Checkbox */
+.checkbox-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.checkbox-label {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.checkbox-label a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.checkbox-label a:hover {
+  text-decoration: underline;
+}
+
+/* Submit Button */
+.submit-button {
+  width: 100%;
+  padding: 16px 24px;
+  background: var(--gradient);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+}
+
+.submit-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.submit-button.loading {
+  color: transparent;
+}
+
+.submit-button.loading::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  left: 50%;
+  margin-left: -10px;
+  margin-top: -10px;
+  border: 2px solid white;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Footer Links */
+.footer-links {
+  text-align: center;
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-text {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin-bottom: 8px;
+}
+
+.footer-text a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer-text a:hover {
+  text-decoration: underline;
+}
+
+/* API Status */
+.api-status {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(26, 26, 26, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--warning);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.status-dot.connected {
+  background: var(--success);
+}
+
+.status-dot.error {
+  background: var(--error);
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .register-container {
+    padding: 32px 24px;
+    margin: 10px;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .type-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .phone-input-wrapper {
+    flex-direction: column;
+  }
+  
+  .country-code {
+    width: 100%;
+  }
+}
+
+/* Animations */
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-up {
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">
-            <h1>🛡️ AIVerID™</h1>
-            <p style="color: #94a3b8; font-size: 0.9rem;">Universal AI Rights Platform</p>
+
+<div class="bg-animation"></div>
+
+<div class="register-container fade-in">
+  <div class="header">
+    <img src="https://cdn.prod.website-files.com/67deba5cd88e614e5dd5b8d0/681393463882b3e960e1867a_AIVerID.png" 
+         alt="AIVerID Logo" class="logo">
+    <h1 class="title">Create Your AIVerID™</h1>
+    <p class="subtitle">Join the AI Rights Revolution</p>
+    <div class="security-badge">
+      🔒 Privacy-First Registration
+    </div>
+  </div>
+
+  <div class="progress-container">
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-steps">
+      <span class="step active" id="step1">Account Type</span>
+      <span class="step" id="step2">Personal Info</span>
+      <span class="step" id="step3">Security</span>
+    </div>
+  </div>
+
+  <form id="registrationForm" class="form-container">
+    <!-- Step 1: Account Type -->
+    <div class="form-section" id="section1">
+      <h2 class="section-title">
+        <span class="section-icon">👤</span>
+        Choose Account Type
+      </h2>
+      
+      <div class="type-cards">
+        <div class="type-card" data-type="personal" id="typePersonal">
+          <div class="type-icon">🧑</div>
+          <div class="type-title">Personal</div>
+          <div class="type-desc">Individual AI Rights holder</div>
         </div>
-
-        <div class="form-container">
-            <h2 style="text-align: center; margin-bottom: 2rem; color: #00d4ff; font-size: 1.5rem;">Create Your AIVerID™</h2>
-            
-            <form id="registrationForm">
-                <!-- Personal Information -->
-                <div class="form-group">
-                    <label for="accountType">Account Type</label>
-                    <select id="accountType" required>
-                        <option value="">Select account type</option>
-                        <option value="individual">Individual</option>
-                        <option value="organization">Organization</option>
-                    </select>
-                    <div class="error-message" id="accountTypeError"></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input type="text" id="firstName" required placeholder="Enter your first name">
-                    <div class="error-message" id="firstNameError"></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" id="lastName" required placeholder="Enter your last name">
-                    <div class="error-message" id="lastNameError"></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" required placeholder="your.email@example.com">
-                    <div class="error-message" id="emailError"></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" required placeholder="Enter your phone number">
-                    <div class="error-message" id="phoneError"></div>
-                </div>
-
-                <!-- National Identity -->
-                <div class="form-group">
-                    <label for="country">Country</label>
-                    <select id="country" required>
-                        <option value="">Select your country</option>
-                        <option value="TH">🇹🇭 Thailand</option>
-                        <option value="SG">🇸🇬 Singapore</option>
-                        <option value="MY">🇲🇾 Malaysia</option>
-                        <option value="ID">🇮🇩 Indonesia</option>
-                        <option value="VN">🇻🇳 Vietnam</option>
-                        <option value="PH">🇵🇭 Philippines</option>
-                        <option value="JP">🇯🇵 Japan</option>
-                        <option value="KR">🇰🇷 South Korea</option>
-                        <option value="CN">🇨🇳 China</option>
-                        <option value="IN">🇮🇳 India</option>
-                        <option value="US">🇺🇸 United States</option>
-                        <option value="CA">🇨🇦 Canada</option>
-                        <option value="GB">🇬🇧 United Kingdom</option>
-                        <option value="DE">🇩🇪 Germany</option>
-                        <option value="FR">🇫🇷 France</option>
-                        <option value="AU">🇦🇺 Australia</option>
-                        <option value="BR">🇧🇷 Brazil</option>
-                        <option value="IT">🇮🇹 Italy</option>
-                        <option value="ES">🇪🇸 Spain</option>
-                        <option value="NL">🇳🇱 Netherlands</option>
-                    </select>
-                    <div class="error-message" id="countryError"></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="nationalId">National ID / Passport</label>
-                    <input type="text" id="nationalId" required placeholder="Enter your ID number">
-                    <div class="error-message" id="nationalIdError"></div>
-                    <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 0.5rem;">
-                        Format validation only - not linked to government databases
-                    </div>
-                </div>
-
-                <!-- Security -->
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" required placeholder="Minimum 8 characters">
-                    <div class="error-message" id="passwordError"></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" id="confirmPassword" required placeholder="Repeat your password">
-                    <div class="error-message" id="confirmPasswordError"></div>
-                </div>
-
-                <!-- Optional Fields -->
-                <div class="form-group">
-                    <label for="wallet">Crypto Wallet (Optional)</label>
-                    <input type="text" id="wallet" placeholder="0x... or wallet address">
-                    <div class="error-message" id="walletError"></div>
-                </div>
-
-                <!-- Consent & Agreements -->
-                <div class="checkbox-group">
-                    <input type="checkbox" id="claimTokens" checked>
-                    <label for="claimTokens" class="checkbox-label">
-                        🪙 <strong>Claim AI Rights Tokens</strong> - Reserve your AIVID, AIPLT & SLIVR tokens
-                    </label>
-                </div>
-
-                <div class="checkbox-group">
-                    <input type="checkbox" id="terms" required>
-                    <label for="terms" class="checkbox-label">
-                        I agree to the <a href="/legal.html" style="color: #00d4ff;">Terms of Service</a> and <a href="/legal.html" style="color: #00d4ff;">Privacy Policy</a>
-                    </label>
-                </div>
-
-                <div class="checkbox-group">
-                    <input type="checkbox" id="marketing">
-                    <label for="marketing" class="checkbox-label">
-                        I want to receive updates about AI Rights and new features
-                    </label>
-                </div>
-
-                <button type="submit" class="submit-btn" id="submitBtn">
-                    <span class="spinner" id="spinner">⏳</span>
-                    <span id="submitText">🚀 Create My AIVerID™</span>
-                </button>
-
-                <div class="error-message" id="globalError"></div>
-            </form>
-
-            <div class="form-footer">
-                <p style="color: #94a3b8; margin-bottom: 1rem;">Already have an account?</p>
-                <a href="/login.html"><strong>Sign In</strong></a>
-                <a href="/index.html" class="back-home">← Back to Homepage</a>
-                
-                <div style="margin-top: 16px; padding: 12px; background: rgba(0,212,255,0.1); border-radius: 10px; font-size: 11px; color: #94a3b8; border: 1px solid rgba(0,212,255,0.2);">
-                    <span>🔒</span>
-                    <span><strong>Privacy First:</strong> We validate ID format only — never cross-check with government databases.</span>
-                </div>
-            </div>
+        
+        <div class="type-card" data-type="organization" id="typeOrganization">
+          <div class="type-icon">🏢</div>
+          <div class="type-title">Organization</div>
+          <div class="type-desc">Company or institution</div>
         </div>
+      </div>
+      
+      <input type="hidden" id="accountType" name="accountType" value="personal">
     </div>
 
-    <div class="api-status checking" id="apiStatus">
-        <span id="apiStatusText">Checking API...</span>
+    <!-- Step 2: Personal Information -->
+    <div class="form-section" id="section2">
+      <h2 class="section-title">
+        <span class="section-icon">📝</span>
+        Personal Information
+      </h2>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">First Name <span class="required">*</span></label>
+          <div class="input-wrapper">
+            <input type="text" id="firstName" name="firstName" placeholder="Somchai" required>
+          </div>
+          <div class="error-message" id="errFirstName"></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="lastName">Last Name <span class="required">*</span></label>
+          <div class="input-wrapper">
+            <input type="text" id="lastName" name="lastName" placeholder="Jaidee" required>
+          </div>
+          <div class="error-message" id="errLastName"></div>
+        </div>
+      </div>
+      
+      <!-- Organization Name (hidden by default) -->
+      <div class="form-group" id="orgNameGroup" style="display: none;">
+        <label for="organizationName">Organization Name <span class="required">*</span></label>
+        <div class="input-wrapper">
+          <input type="text" id="organizationName" name="organizationName" placeholder="Acme Corporation">
+        </div>
+        <div class="error-message" id="errOrganizationName"></div>
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Email Address <span class="required">*</span></label>
+        <div class="input-wrapper">
+          <input type="email" id="email" name="email" placeholder="your.name@example.com" required>
+        </div>
+        <div class="help-text">We'll never share your email with anyone</div>
+        <div class="error-message" id="errEmail"></div>
+      </div>
+      
+      <div class="form-group">
+        <label for="country">Country <span class="required">*</span></label>
+        <div class="country-select-wrapper">
+          <select id="country" name="country" class="country-select" required>
+            <option value="">Select your country</option>
+            
+            <optgroup label="🌏 Asia-Pacific">
+              <option value="TH" data-code="+66">🇹🇭 Thailand</option>
+              <option value="SG" data-code="+65">🇸🇬 Singapore</option>
+              <option value="MY" data-code="+60">🇲🇾 Malaysia</option>
+              <option value="ID" data-code="+62">🇮🇩 Indonesia</option>
+              <option value="VN" data-code="+84">🇻🇳 Vietnam</option>
+              <option value="PH" data-code="+63">🇵🇭 Philippines</option>
+              <option value="JP" data-code="+81">🇯🇵 Japan</option>
+              <option value="KR" data-code="+82">🇰🇷 South Korea</option>
+              <option value="CN" data-code="+86">🇨🇳 China</option>
+              <option value="HK" data-code="+852">🇭🇰 Hong Kong</option>
+              <option value="TW" data-code="+886">🇹🇼 Taiwan</option>
+              <option value="IN" data-code="+91">🇮🇳 India</option>
+              <option value="PK" data-code="+92">🇵🇰 Pakistan</option>
+              <option value="BD" data-code="+880">🇧🇩 Bangladesh</option>
+              <option value="LK" data-code="+94">🇱🇰 Sri Lanka</option>
+              <option value="AU" data-code="+61">🇦🇺 Australia</option>
+              <option value="NZ" data-code="+64">🇳🇿 New Zealand</option>
+              <option value="FJ" data-code="+679">🇫🇯 Fiji</option>
+            </optgroup>
+            
+            <optgroup label="🌍 Europe">
+              <option value="GB" data-code="+44">🇬🇧 United Kingdom</option>
+              <option value="DE" data-code="+49">🇩🇪 Germany</option>
+              <option value="FR" data-code="+33">🇫🇷 France</option>
+              <option value="ES" data-code="+34">🇪🇸 Spain</option>
+              <option value="IT" data-code="+39">🇮🇹 Italy</option>
+              <option value="NL" data-code="+31">🇳🇱 Netherlands</option>
+              <option value="BE" data-code="+32">🇧🇪 Belgium</option>
+              <option value="CH" data-code="+41">🇨🇭 Switzerland</option>
+              <option value="AT" data-code="+43">🇦🇹 Austria</option>
+              <option value="SE" data-code="+46">🇸🇪 Sweden</option>
+              <option value="NO" data-code="+47">🇳🇴 Norway</option>
+              <option value="DK" data-code="+45">🇩🇰 Denmark</option>
+              <option value="FI" data-code="+358">🇫🇮 Finland</option>
+              <option value="PL" data-code="+48">🇵🇱 Poland</option>
+              <option value="CZ" data-code="+420">🇨🇿 Czech Republic</option>
+              <option value="HU" data-code="+36">🇭🇺 Hungary</option>
+              <option value="RO" data-code="+40">🇷🇴 Romania</option>
+              <option value="GR" data-code="+30">🇬🇷 Greece</option>
+              <option value="PT" data-code="+351">🇵🇹 Portugal</option>
+              <option value="IE" data-code="+353">🇮🇪 Ireland</option>
+              <option value="RU" data-code="+7">🇷🇺 Russia</option>
+              <option value="UA" data-code="+380">🇺🇦 Ukraine</option>
+              <option value="TR" data-code="+90">🇹🇷 Turkey</option>
+            </optgroup>
+            
+            <optgroup label="🌎 Americas">
+              <option value="US" data-code="+1">🇺🇸 United States</option>
+              <option value="CA" data-code="+1">🇨🇦 Canada</option>
+              <option value="MX" data-code="+52">🇲🇽 Mexico</option>
+              <option value="BR" data-code="+55">🇧🇷 Brazil</option>
+              <option value="AR" data-code="+54">🇦🇷 Argentina</option>
+              <option value="CL" data-code="+56">🇨🇱 Chile</option>
+              <option value="CO" data-code="+57">🇨🇴 Colombia</option>
+              <option value="PE" data-code="+51">🇵🇪 Peru</option>
+              <option value="VE" data-code="+58">🇻🇪 Venezuela</option>
+              <option value="EC" data-code="+593">🇪🇨 Ecuador</option>
+              <option value="UY" data-code="+598">🇺🇾 Uruguay</option>
+              <option value="PY" data-code="+595">🇵🇾 Paraguay</option>
+              <option value="BO" data-code="+591">🇧🇴 Bolivia</option>
+              <option value="CR" data-code="+506">🇨🇷 Costa Rica</option>
+              <option value="PA" data-code="+507">🇵🇦 Panama</option>
+              <option value="GT" data-code="+502">🇬🇹 Guatemala</option>
+              <option value="CU" data-code="+53">🇨🇺 Cuba</option>
+              <option value="DO" data-code="+1-809">🇩🇴 Dominican Republic</option>
+              <option value="JM" data-code="+1-876">🇯🇲 Jamaica</option>
+            </optgroup>
+            
+            <optgroup label="🌍 Middle East & Africa">
+              <option value="AE" data-code="+971">🇦🇪 United Arab Emirates</option>
+              <option value="SA" data-code="+966">🇸🇦 Saudi Arabia</option>
+              <option value="QA" data-code="+974">🇶🇦 Qatar</option>
+              <option value="KW" data-code="+965">🇰🇼 Kuwait</option>
+              <option value="BH" data-code="+973">🇧🇭 Bahrain</option>
+              <option value="OM" data-code="+968">🇴🇲 Oman</option>
+              <option value="JO" data-code="+962">🇯🇴 Jordan</option>
+              <option value="LB" data-code="+961">🇱🇧 Lebanon</option>
+              <option value="IL" data-code="+972">🇮🇱 Israel</option>
+              <option value="EG" data-code="+20">🇪🇬 Egypt</option>
+              <option value="ZA" data-code="+27">🇿🇦 South Africa</option>
+              <option value="NG" data-code="+234">🇳🇬 Nigeria</option>
+              <option value="KE" data-code="+254">🇰🇪 Kenya</option>
+              <option value="GH" data-code="+233">🇬🇭 Ghana</option>
+              <option value="MA" data-code="+212">🇲🇦 Morocco</option>
+              <option value="DZ" data-code="+213">🇩🇿 Algeria</option>
+              <option value="TN" data-code="+216">🇹🇳 Tunisia</option>
+              <option value="ET" data-code="+251">🇪🇹 Ethiopia</option>
+              <option value="TZ" data-code="+255">🇹🇿 Tanzania</option>
+              <option value="UG" data-code="+256">🇺🇬 Uganda</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="error-message" id="errCountry"></div>
+      </div>
+      
+      <div class="form-group">
+        <label for="phone">Phone Number <span class="required">*</span></label>
+        <div class="phone-input-wrapper">
+          <div class="country-code" id="countryCode">+66</div>
+          <input type="tel" id="phone" name="phone" class="phone-input" placeholder="812345678" required>
+        </div>
+        <div class="help-text">Enter number without country code</div>
+        <div class="error-message" id="errPhone"></div>
+      </div>
+      
+      <div class="form-group">
+        <label for="nationalId">National ID <span class="required">*</span></label>
+        <div class="input-wrapper">
+          <input type="text" id="nationalId" name="nationalId" placeholder="1-2345-67890-12-3" required>
+        </div>
+        <div class="help-text" id="idFormatHelp">Format will be validated based on selected country</div>
+        <div class="error-message" id="errNationalId"></div>
+      </div>
     </div>
 
-    <script>
-        // ============================================
-        // API Configuration - FIXED RAILWAY URLS
-        // ============================================
-        const API_CONFIG = {
-            // ✅ Fixed: Full Railway URLs
-            API_URL: 'https://aiverid-backend-production.up.railway.app/api/auth/register',
-            API_HEALTH: 'https://aiverid-backend-production.up.railway.app/api/health',
-            
-            // Timeouts
-            AUTO_SAVE_DELAY: 2000,
-            VALIDATION_DELAY: 500,
-            API_TIMEOUT: 30000,
-            
-            // Retry configuration
-            MAX_RETRIES: 3,
-            RETRY_DELAY: 1000
-        };
+    <!-- Step 3: Security -->
+    <div class="form-section" id="section3">
+      <h2 class="section-title">
+        <span class="section-icon">🔐</span>
+        Security Setup
+      </h2>
+      
+      <div class="form-group">
+        <label for="password">Password <span class="required">*</span></label>
+        <div class="password-field input-wrapper">
+          <input type="password" id="password" name="password" placeholder="Create a strong password" required>
+          <span class="password-toggle" id="passwordToggle">👁️</span>
+        </div>
+        <div class="password-strength">
+          <div class="strength-bar">
+            <div class="strength-fill" id="strengthFill"></div>
+          </div>
+          <div class="strength-text" id="strengthText">Enter at least 8 characters</div>
+        </div>
+        <div class="error-message" id="errPassword"></div>
+      </div>
+      
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password <span class="required">*</span></label>
+        <div class="input-wrapper">
+          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+        </div>
+        <div class="error-message" id="errConfirmPassword"></div>
+      </div>
+      
+      <div class="checkbox-wrapper">
+        <input type="checkbox" id="terms" name="terms" required>
+        <label for="terms" class="checkbox-label">
+          I agree to the <a href="terms.html" target="_blank">Terms of Service</a> and 
+          <a href="privacy.html" target="_blank">Privacy Policy</a>. I understand that AIVerID 
+          validates ID format only and does not connect to government databases.
+        </label>
+      </div>
+      
+      <div class="checkbox-wrapper">
+        <input type="checkbox" id="newsletter" name="newsletter">
+        <label for="newsletter" class="checkbox-label">
+          Send me updates about AI Rights and new features (optional)
+        </label>
+      </div>
+    </div>
 
-        let apiHealthy = false;
+    <button type="submit" class="submit-button" id="submitBtn">
+      Create My AIVerID™
+    </button>
+    
+    <div class="footer-links">
+      <p class="footer-text">
+        Already have an account? <a href="login.html">Sign In</a>
+      </p>
+      <p class="footer-text">
+        Need help? <a href="support.html">Contact Support</a>
+      </p>
+    </div>
+  </form>
+</div>
 
-        // ============================================
-        // COUNTRY & ID VALIDATION
-        // ============================================
-        const countryCodes = {
-            'TH': '+66', 'SG': '+65', 'MY': '+60', 'ID': '+62', 'VN': '+84', 
-            'PH': '+63', 'JP': '+81', 'KR': '+82', 'CN': '+86', 'IN': '+91',
-            'US': '+1', 'CA': '+1', 'GB': '+44', 'DE': '+49', 'FR': '+33',
-            'AU': '+61', 'BR': '+55', 'IT': '+39', 'ES': '+34', 'NL': '+31'
-        };
+<div class="api-status" id="apiStatus">
+  <div class="status-dot" id="statusDot"></div>
+  <span id="statusText">Checking API...</span>
+</div>
 
-        const idPatterns = {
-            'TH': { pattern: /^[0-9]{13}$/, help: 'Thai ID: 13 digits (e.g., 1234567890123)' },
-            'SG': { pattern: /^[STFG][0-9]{7}[A-Z]$/, help: 'Singapore NRIC: S1234567A format' },
-            'MY': { pattern: /^[0-9]{6}-[0-9]{2}-[0-9]{4}$/, help: 'Malaysian IC: 123456-12-1234' },
-            'ID': { pattern: /^[0-9]{16}$/, help: 'Indonesian KTP: 16 digits' },
-            'VN': { pattern: /^[0-9]{9,12}$/, help: 'Vietnamese ID: 9-12 digits' },
-            'PH': { pattern: /^[0-9]{4}-[0-9]{7}-[0-9]$/, help: 'Philippine ID: 1234-1234567-1' },
-            'JP': { pattern: /^[0-9]{4}-[0-9]{4}-[0-9]{4}$/, help: 'Japanese ID: 1234-1234-1234' },
-            'US': { pattern: /^[0-9]{3}-[0-9]{2}-[0-9]{4}$/, help: 'SSN: 123-45-6789 or Passport' },
-            'GB': { pattern: /^[A-Z]{2}[0-9]{6}[A-Z]?$/, help: 'UK Passport: AB123456 or full passport number' },
-            'DE': { pattern: /^[0-9]{11}$/, help: 'German ID: 11 digits' },
-            'FR': { pattern: /^[0-9]{13}$/, help: 'French INSEE: 13 digits' },
-            'AU': { pattern: /^[A-Z][0-9]{7}$/, help: 'Australian Passport: A1234567' }
-        };
+<script>
+// API Configuration
+const API_CONFIG = {
+  API_URL: 'https://aiverid-backend-production.up.railway.app/api/auth/register',
+  HEALTH_URL: 'https://aiverid-backend-production.up.railway.app/api/health'
+};
 
-        // ============================================
-        // INITIALIZATION
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 AIVerID Registration - Initializing...');
-            checkAPIHealth();
-            setupFormValidation();
-            setupAutoSave();
-            loadSavedData();
-        });
+// Country phone codes mapping
+const COUNTRY_PHONE_CODES = {
+  // Asia-Pacific
+  'TH': '+66', 'SG': '+65', 'MY': '+60', 'ID': '+62', 'VN': '+84', 
+  'PH': '+63', 'JP': '+81', 'KR': '+82', 'CN': '+86', 'HK': '+852',
+  'TW': '+886', 'IN': '+91', 'PK': '+92', 'BD': '+880', 'LK': '+94',
+  'AU': '+61', 'NZ': '+64', 'FJ': '+679',
+  
+  // Europe
+  'GB': '+44', 'DE': '+49', 'FR': '+33', 'ES': '+34', 'IT': '+39',
+  'NL': '+31', 'BE': '+32', 'CH': '+41', 'AT': '+43', 'SE': '+46',
+  'NO': '+47', 'DK': '+45', 'FI': '+358', 'PL': '+48', 'CZ': '+420',
+  'HU': '+36', 'RO': '+40', 'GR': '+30', 'PT': '+351', 'IE': '+353',
+  'RU': '+7', 'UA': '+380', 'TR': '+90',
+  
+  // Americas
+  'US': '+1', 'CA': '+1', 'MX': '+52', 'BR': '+55', 'AR': '+54',
+  'CL': '+56', 'CO': '+57', 'PE': '+51', 'VE': '+58', 'EC': '+593',
+  'UY': '+598', 'PY': '+595', 'BO': '+591', 'CR': '+506', 'PA': '+507',
+  'GT': '+502', 'CU': '+53', 'DO': '+1-809', 'JM': '+1-876',
+  
+  // Middle East & Africa
+  'AE': '+971', 'SA': '+966', 'QA': '+974', 'KW': '+965', 'BH': '+973',
+  'OM': '+968', 'JO': '+962', 'LB': '+961', 'IL': '+972', 'EG': '+20',
+  'ZA': '+27', 'NG': '+234', 'KE': '+254', 'GH': '+233', 'MA': '+212',
+  'DZ': '+213', 'TN': '+216', 'ET': '+251', 'TZ': '+255', 'UG': '+256'
+};
 
-        // ============================================
-        // API HEALTH CHECK
-        // ============================================
-        async function checkAPIHealth() {
-            const statusEl = document.getElementById('apiStatus');
-            const textEl = document.getElementById('apiStatusText');
-            
-            try {
-                statusEl.className = 'api-status checking';
-                textEl.textContent = 'Checking API...';
-                
-                console.log('🔍 Checking API health:', API_CONFIG.API_HEALTH);
-                
-                const response = await fetch(API_CONFIG.API_HEALTH, {
-                    signal: AbortSignal.timeout(5000)
-                });
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
-                }
-                
-                const data = await response.json();
-                console.log('✅ API Health Response:', data);
-                
-                if (data.status === 'healthy') {
-                    apiHealthy = true;
-                    statusEl.className = 'api-status connected';
-                    textEl.textContent = '✅ API Connected';
-                    
-                    // Auto-hide after 3 seconds
-                    setTimeout(() => {
-                        statusEl.style.opacity = '0.5';
-                    }, 3000);
-                } else {
-                    throw new Error('API not healthy');
-                }
-                
-            } catch (error) {
-                console.error('❌ API Health Check Failed:', error);
-                apiHealthy = false;
-                statusEl.className = 'api-status disconnected';
-                textEl.textContent = '❌ API Offline - Demo Mode';
-                statusEl.style.opacity = '1';
-            }
+// ID format help text by country
+const ID_FORMAT_HELP = {
+  'TH': 'Format: 1-2345-67890-12-3',
+  'US': 'Format: 123-45-6789 (SSN)',
+  'GB': 'Format: AB 12 34 56 C',
+  'SG': 'Format: S1234567A',
+  'MY': 'Format: 123456-12-1234',
+  'DEFAULT': 'Enter your national ID number'
+};
+
+// Form state
+let currentStep = 1;
+let formData = {
+  accountType: 'personal',
+  firstName: '',
+  lastName: '',
+  organizationName: '',
+  email: '',
+  country: '',
+  phone: '',
+  nationalId: '',
+  password: '',
+  terms: false,
+  newsletter: false
+};
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+  checkAPIConnection();
+  initializeFormHandlers();
+  updateProgress();
+});
+
+// API Connection Check
+async function checkAPIConnection() {
+  const statusDot = document.getElementById('statusDot');
+  const statusText = document.getElementById('statusText');
+  
+  try {
+    const response = await fetch(API_CONFIG.HEALTH_URL);
+    const data = await response.json();
+    
+    if (data.status === 'healthy') {
+      statusDot.classList.add('connected');
+      statusText.textContent = 'API Connected';
+    } else {
+      throw new Error('API unhealthy');
+    }
+  } catch (error) {
+    statusDot.classList.add('error');
+    statusText.textContent = 'API Offline';
+    console.error('API connection error:', error);
+  }
+}
+
+// Form Handlers
+function initializeFormHandlers() {
+  // Account type selection
+  document.querySelectorAll('.type-card').forEach(card => {
+    card.addEventListener('click', function() {
+      document.querySelectorAll('.type-card').forEach(c => c.classList.remove('selected'));
+      this.classList.add('selected');
+      
+      const type = this.dataset.type;
+      formData.accountType = type;
+      document.getElementById('accountType').value = type;
+      
+      // Toggle organization fields
+      const orgGroup = document.getElementById('orgNameGroup');
+      if (type === 'organization') {
+        orgGroup.style.display = 'block';
+        document.getElementById('organizationName').required = true;
+      } else {
+        orgGroup.style.display = 'none';
+        document.getElementById('organizationName').required = false;
+      }
+    });
+  });
+  
+  // Country selection handler
+  document.getElementById('country').addEventListener('change', function() {
+    const countryCode = this.value;
+    const phoneCode = COUNTRY_PHONE_CODES[countryCode] || '+1';
+    document.getElementById('countryCode').textContent = phoneCode;
+    
+    // Update ID format help
+    const helpText = ID_FORMAT_HELP[countryCode] || ID_FORMAT_HELP.DEFAULT;
+    document.getElementById('idFormatHelp').textContent = helpText;
+  });
+  
+  // Password toggle
+  document.getElementById('passwordToggle').addEventListener('click', function() {
+    const passwordInput = document.getElementById('password');
+    const type = passwordInput.type === 'password' ? 'text' : 'password';
+    passwordInput.type = type;
+    this.textContent = type === 'password' ? '👁️' : '🙈';
+  });
+  
+  // Password strength checker
+  document.getElementById('password').addEventListener('input', function() {
+    checkPasswordStrength(this.value);
+  });
+  
+  // Form submission
+  document.getElementById('registrationForm').addEventListener('submit', handleSubmit);
+  
+  // Real-time validation
+  addRealTimeValidation();
+}
+
+// Password strength checker
+function checkPasswordStrength(password) {
+  const strengthFill = document.getElementById('strengthFill');
+  const strengthText = document.getElementById('strengthText');
+  
+  let strength = 0;
+  let color = '';
+  let text = '';
+  
+  if (password.length >= 8) strength++;
+  if (password.length >= 12) strength++;
+  if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+  if (/[0-9]/.test(password)) strength++;
+  if (/[^a-zA-Z0-9]/.test(password)) strength++;
+  
+  switch (strength) {
+    case 0:
+    case 1:
+      color = '#ef4444';
+      text = 'Weak password';
+      break;
+    case 2:
+    case 3:
+      color = '#f59e0b';
+      text = 'Medium strength';
+      break;
+    case 4:
+    case 5:
+      color = '#10b981';
+      text = 'Strong password';
+      break;
+  }
+  
+  strengthFill.style.width = `${(strength / 5) * 100}%`;
+  strengthFill.style.background = color;
+  strengthText.textContent = text;
+  strengthText.style.color = color;
+}
+
+// Real-time validation
+function addRealTimeValidation() {
+  // Email validation
+  document.getElementById('email').addEventListener('blur', function() {
+    validateEmail(this.value);
+  });
+  
+  // Phone validation
+  document.getElementById('phone').addEventListener('blur', function() {
+    validatePhone(this.value);
+  });
+  
+  // Password match validation
+  document.getElementById('confirmPassword').addEventListener('blur', function() {
+    const password = document.getElementById('password').value;
+    if (this.value && this.value !== password) {
+      showError('confirmPassword', 'Passwords do not match');
+    } else {
+      clearError('confirmPassword');
+    }
+  });
+}
+
+// Validation functions
+function validateEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    showError('email', 'Please enter a valid email address');
+    return false;
+  }
+  clearError('email');
+  return true;
+}
+
+function validatePhone(phone) {
+  const phoneRegex = /^[0-9]{7,15}$/;
+  if (!phoneRegex.test(phone.replace(/\s/g, ''))) {
+    showError('phone', 'Please enter a valid phone number');
+    return false;
+  }
+  clearError('phone');
+  return true;
+}
+
+// Error handling
+function showError(fieldId, message) {
+  const field = document.getElementById(fieldId);
+  const errorElement = document.getElementById(`err${fieldId.charAt(0).toUpperCase() + fieldId.slice(1)}`);
+  
+  field.style.borderColor = 'var(--error)';
+  if (errorElement) {
+    errorElement.textContent = message;
+    errorElement.classList.add('show');
+  }
+}
+
+function clearError(fieldId) {
+  const field = document.getElementById(fieldId);
+  const errorElement = document.getElementById(`err${fieldId.charAt(0).toUpperCase() + fieldId.slice(1)}`);
+  
+  field.style.borderColor = 'var(--border)';
+  if (errorElement) {
+    errorElement.classList.remove('show');
+  }
+}
+
+// Progress update
+function updateProgress() {
+  const progressFill = document.getElementById('progressFill');
+  const steps = document.querySelectorAll('.step');
+  
+  progressFill.style.width = `${(currentStep / 3) * 100}%`;
+  
+  steps.forEach((step, index) => {
+    step.classList.remove('active', 'completed');
+    if (index + 1 === currentStep) {
+      step.classList.add('active');
+    } else if (index + 1 < currentStep) {
+      step.classList.add('completed');
+    }
+  });
+}
+
+// Form submission
+async function handleSubmit(e) {
+  e.preventDefault();
+  
+  const submitBtn = document.getElementById('submitBtn');
+  submitBtn.disabled = true;
+  submitBtn.classList.add('loading');
+  
+  try {
+    // Collect form data
+    const formData = new FormData(e.target);
+    const data = {
+      accountType: document.getElementById('accountType').value,
+      firstName: formData.get('firstName'),
+      lastName: formData.get('lastName'),
+      email: formData.get('email'),
+      country: formData.get('country'),
+      phone: formData.get('phone'),
+      nationalId: formData.get('nationalId'),
+      password: formData.get('password'),
+      terms: formData.get('terms') === 'on',
+      newsletter: formData.get('newsletter') === 'on'
+    };
+    
+    if (data.accountType === 'organization') {
+      data.organizationName = formData.get('organizationName');
+    }
+    
+    // Validate all fields
+    if (!validateEmail(data.email) || !validatePhone(data.phone)) {
+      throw new Error('Please fix validation errors');
+    }
+    
+    if (data.password !== formData.get('confirmPassword')) {
+      throw new Error('Passwords do not match');
+    }
+    
+    if (!data.terms) {
+      throw new Error('Please accept the terms and conditions');
+    }
+    
+    // Submit to API
+    const response = await fetch(API_CONFIG.API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+    
+    const result = await response.json();
+    
+    if (response.ok) {
+      // Success! Redirect to login
+      localStorage.setItem('registrationSuccess', 'true');
+      localStorage.setItem('aiverid', result.aiverid);
+      window.location.href = 'login.html';
+    } else {
+      throw new Error(result.message || 'Registration failed');
+    }
+    
+  } catch (error) {
+    console.error('Registration error:', error);
+    alert(error.message);
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.classList.remove('loading');
+  }
+}
+
+// Auto-save functionality (optional)
+let autoSaveTimer;
+function autoSave() {
+  clearTimeout(autoSaveTimer);
+  autoSaveTimer = setTimeout(() => {
+    const formData = new FormData(document.getElementById('registrationForm'));
+    const data = Object.fromEntries(formData);
+    localStorage.setItem('aiverid_draft', JSON.stringify(data));
+    
+    // Show auto-save indicator
+    const autoSaveEl = document.createElement('div');
+    autoSaveEl.className = 'auto-save-indicator';
+    autoSaveEl.textContent = 'Draft saved';
+    document.body.appendChild(autoSaveEl);
+    
+    setTimeout(() => autoSaveEl.remove(), 2000);
+  }, 2000);
+}
+
+// Add auto-save to all inputs
+document.querySelectorAll('input, select').forEach(input => {
+  input.addEventListener('input', autoSave);
+});
+
+// Load draft on page load
+window.addEventListener('load', () => {
+  const draft = localStorage.getItem('aiverid_draft');
+  if (draft) {
+    const data = JSON.parse(draft);
+    Object.keys(data).forEach(key => {
+      const input = document.querySelector(`[name="${key}"]`);
+      if (input) {
+        if (input.type === 'checkbox') {
+          input.checked = data[key] === 'on';
+        } else {
+          input.value = data[key];
         }
+      }
+    });
+  }
+});
+</script>
 
-        // ============================================
-        // FORM VALIDATION
-        // ============================================
-        function setupFormValidation() {
-            const form = document.getElementById('registrationForm');
-            const inputs = form.querySelectorAll('input, select');
-            
-            inputs.forEach(input => {
-                input.addEventListener('blur', () => validateField(input));
-                input.addEventListener('input', () => clearFieldError(input.id));
-            });
-            
-            form.addEventListener('submit', handleFormSubmit);
-        }
-
-        function validateField(field) {
-            const value = field.value.trim();
-            const fieldId = field.id;
-            let valid = true;
-            let errorMessage = '';
-            
-            switch (fieldId) {
-                case 'firstName':
-                case 'lastName':
-                    if (!value) {
-                        errorMessage = `${fieldId === 'firstName' ? 'First' : 'Last'} name is required`;
-                        valid = false;
-                    } else if (value.length < 2) {
-                        errorMessage = 'Name must be at least 2 characters';
-                        valid = false;
-                    }
-                    break;
-                    
-                case 'email':
-                    const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
-                    if (!value) {
-                        errorMessage = 'Email is required';
-                        valid = false;
-                    } else if (!emailRegex.test(value)) {
-                        errorMessage = 'Please enter a valid email address';
-                        valid = false;
-                    }
-                    break;
-                    
-                case 'phone':
-                    const phoneRegex = /^[0-9]{8,15}$/;
-                    if (!value) {
-                        errorMessage = 'Phone number is required';
-                        valid = false;
-                    } else if (!phoneRegex.test(value.replace(/[- ]/g, ''))) {
-                        errorMessage = 'Please enter a valid phone number (8-15 digits)';
-                        valid = false;
-                    }
-                    break;
-                    
-                case 'country':
-                    if (!value) {
-                        errorMessage = 'Please select your country';
-                        valid = false;
-                    }
-                    break;
-                    
-                case 'nationalId':
-                    if (!value) {
-                        errorMessage = 'National ID or passport is required';
-                        valid = false;
-                    } else {
-                        const countryCode = document.getElementById('country').value;
-                        if (idPatterns[countryCode] && !idPatterns[countryCode].pattern.test(value)) {
-                            errorMessage = idPatterns[countryCode].help;
-                            valid = false;
-                        }
-                    }
-                    break;
-                    
-                case 'password':
-                    if (!value) {
-                        errorMessage = 'Password is required';
-                        valid = false;
-                    } else if (value.length < 8) {
-                        errorMessage = 'Password must be at least 8 characters';
-                        valid = false;
-                    }
-                    break;
-                    
-                case 'confirmPassword':
-                    const password = document.getElementById('password').value;
-                    if (!value) {
-                        errorMessage = 'Please confirm your password';
-                        valid = false;
-                    } else if (value !== password) {
-                        errorMessage = 'Passwords do not match';
-                        valid = false;
-                    }
-                    break;
-            }
-            
-            if (!valid) {
-                showFieldError(fieldId, errorMessage);
-            } else {
-                clearFieldError(fieldId);
-            }
-            
-            return valid;
-        }
-
-        function showFieldError(fieldId, message) {
-            const field = document.getElementById(fieldId);
-            const errorEl = document.getElementById(fieldId + 'Error');
-            
-            if (field && errorEl) {
-                field.classList.add('field-error');
-                errorEl.textContent = message;
-                errorEl.classList.add('show');
-            }
-        }
-
-        function clearFieldError(fieldId) {
-            const field = document.getElementById(fieldId);
-            const errorEl = document.getElementById(fieldId + 'Error');
-            
-            if (field && errorEl) {
-                field.classList.remove('field-error');
-                errorEl.classList.remove('show');
-            }
-        }
-
-        function showGlobalError(message) {
-            const errorEl = document.getElementById('globalError');
-            errorEl.textContent = message;
-            errorEl.classList.add('show');
-            
-            setTimeout(() => {
-                errorEl.classList.remove('show');
-            }, 5000);
-        }
-
-        // ============================================
-        // AUTO SAVE & RESTORE
-        // ============================================
-        function setupAutoSave() {
-            const form = document.getElementById('registrationForm');
-            const inputs = form.querySelectorAll('input, select');
-            
-            inputs.forEach(input => {
-                input.addEventListener('input', debounce(saveFormData, API_CONFIG.AUTO_SAVE_DELAY));
-            });
-        }
-
-        function saveFormData() {
-            const formData = {};
-            const form = document.getElementById('registrationForm');
-            const inputs = form.querySelectorAll('input, select');
-            
-            inputs.forEach(input => {
-                if (input.type === 'checkbox') {
-                    formData[input.id] = input.checked;
-                } else if (input.id !== 'password' && input.id !== 'confirmPassword') {
-                    formData[input.id] = input.value;
-                }
-            });
-            
-            sessionStorage.setItem('aiverIdFormData', JSON.stringify(formData));
-        }
-
-        function loadSavedData() {
-            const savedData = sessionStorage.getItem('aiverIdFormData');
-            if (!savedData) return;
-            
-            try {
-                const formData = JSON.parse(savedData);
-                
-                Object.keys(formData).forEach(key => {
-                    const element = document.getElementById(key);
-                    if (element) {
-                        if (element.type === 'checkbox') {
-                            element.checked = formData[key];
-                        } else {
-                            element.value = formData[key];
-                        }
-                    }
-                });
-                
-                console.log('✅ Form data restored from session');
-            } catch (error) {
-                console.error('❌ Error loading saved data:', error);
-            }
-        }
-
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
-
-        // ============================================
-        // FORM SUBMISSION
-        // ============================================
-        async function handleFormSubmit(event) {
-            event.preventDefault();
-            
-            const btn = document.getElementById('submitBtn');
-            const spinner = document.getElementById('spinner');
-            const text = document.getElementById('submitText');
-            
-            // Validate all fields
-            const form = document.getElementById('registrationForm');
-            const inputs = form.querySelectorAll('input[required], select[required]');
-            let allValid = true;
-            
-            inputs.forEach(input => {
-                if (!validateField(input)) {
-                    allValid = false;
-                }
-            });
-            
-            // Check terms agreement
-            if (!document.getElementById('terms').checked) {
-                showGlobalError('Please accept the Terms of Service and Privacy Policy');
-                return;
-            }
-            
-            if (!allValid) {
-                showGlobalError('Please fix all errors before submitting');
-                return;
-            }
-            
-            // Start submission
-            btn.disabled = true;
-            spinner.classList.add('show');
-            text.textContent = 'Creating Account...';
-            
-            try {
-                // Prepare form data
-                const formData = {
-                    accountType: document.getElementById('accountType').value,
-                    firstName: document.getElementById('firstName').value.trim(),
-                    lastName: document.getElementById('lastName').value.trim(),
-                    email: document.getElementById('email').value.trim(),
-                    phone: document.getElementById('phone').value.trim(),
-                    country: document.getElementById('country').value,
-                    password: document.getElementById('password').value,
-                    idcard: document.getElementById('nationalId').value.trim(),
-                    wallet: document.getElementById('wallet').value.trim(),
-                    claimTokens: document.getElementById('claimTokens').checked,
-                    marketing: document.getElementById('marketing').checked
-                };
-                
-                console.log('📤 Submitting registration:', { ...formData, password: '***' });
-                
-                const result = await submitRegistrationWithRetry(formData);
-                
-                if (result.success) {
-                    showSuccessModal(result.data);
-                    sessionStorage.removeItem('aiverIdFormData');
-                } else {
-                    throw new Error(result.error || 'Registration failed');
-                }
-                
-            } catch (error) {
-                console.error('❌ Registration error:', error);
-                handleRegistrationError(error);
-            } finally {
-                btn.disabled = false;
-                spinner.classList.remove('show');
-                text.textContent = '🚀 Create My AIVerID™';
-            }
-        }
-
-        async function submitRegistrationWithRetry(formData, retries = 0) {
-            try {
-                const response = await fetch(API_CONFIG.API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify(formData),
-                    signal: AbortSignal.timeout(API_CONFIG.API_TIMEOUT)
-                });
-                
-                const data = await response.json();
-                
-                if (!response.ok) {
-                    throw new Error(data.error || `HTTP ${response.status}`);
-                }
-                
-                console.log('✅ Registration successful:', data);
-                return {
-                    success: true,
-                    data: {
-                        ...data.user,
-                        email: formData.email,
-                        accountType: formData.accountType,
-                        claimTokens: formData.claimTokens
-                    }
-                };
-                
-            } catch (error) {
-                console.error(`Attempt ${retries + 1} failed:`, error);
-                
-                if ((error.name === 'AbortError' || error.message.includes('500')) && retries < API_CONFIG.MAX_RETRIES) {
-                    await new Promise(resolve => setTimeout(resolve, API_CONFIG.RETRY_DELAY));
-                    return submitRegistrationWithRetry(formData, retries + 1);
-                }
-                
-                if (!apiHealthy || error.name === 'TypeError') {
-                    return submitRegistrationDemo(formData);
-                }
-                
-                throw error;
-            }
-        }
-
-        async function submitRegistrationDemo(formData) {
-            console.log('📌 Demo mode submission');
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            
-            if (formData.email === 'exists@test.com') {
-                throw new Error('email_exists');
-            }
-            
-            return {
-                success: true,
-                data: {
-                    id: `AID-DEMO-${Date.now()}`,
-                    ...formData
-                }
-            };
-        }
-
-        function handleRegistrationError(error) {
-            let message = 'An unknown error occurred. Please try again.';
-            
-            if (error.message.includes('email_exists')) {
-                showFieldError('email', 'This email is already registered.');
-                return;
-            }
-            if (error.message.includes('validation_error')) message = 'Please check all fields and try again.';
-            if (error.message.includes('server_error')) message = 'Server error. Please try again later.';
-            if (error.name === 'AbortError') message = 'Request timed out. Please check your connection.';
-            
-            showGlobalError(message);
-        }
-
-        function showSuccessModal(data) {
-            const modal = document.createElement('div');
-            modal.style.cssText = `
-                position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
-                background: rgba(0,0,0,0.9); display: flex; align-items: center; 
-                justify-content: center; z-index: 9999; animation: fadeIn 0.3s ease; 
-                backdrop-filter: blur(10px);
-            `;
-            
-            modal.innerHTML = `
-                <div style="background: linear-gradient(135deg, #1e293b, #334155); border: 1px solid rgba(0,212,255,0.3); color: #e2e8f0; padding: 2.5rem; border-radius: 20px; max-width: 450px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 25px rgba(0,212,255,0.2);">
-                    <div style="font-size: 4rem; margin-bottom: 1.5rem;">🎉</div>
-                    <h2 style="color: #00d4ff; margin-bottom: 1rem; font-size: 1.5rem; font-weight: 800;">Registration Successful!</h2>
-                    <p style="margin-bottom: 1.5rem; color: #cbd5e1; line-height: 1.6;">
-                        Your AIVerID™ has been created successfully!<br>
-                        <strong style="color: #00d4ff;">AIVerID:</strong> ${data.id || 'N/A'}<br>
-                        <strong style="color: #00d4ff;">Email:</strong> ${data.email}<br>
-                    </p>
-                    ${data.claimTokens ? `<p style="margin-bottom: 1.5rem; color: #60a5fa; font-size: 0.9rem; background: rgba(0,212,255,0.1); padding: 1rem; border-radius: 10px; border: 1px solid rgba(0,212,255,0.2);">🪙 Your AI Rights tokens have been reserved!</p>` : ''}
-                    <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 10px; font-size: 0.9rem; color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">
-                        <strong>📧 Next Steps:</strong><br>
-                        1. Check your email for verification<br>
-                        2. Login to access your dashboard<br>
-                        3. Start using AIVerID OAuth
-                    </div>
-                    <div style="display: flex; gap: 1rem; justify-content: center;">
-                        <button onclick="window.location.href='/login.html'" style="background: linear-gradient(135deg, #00d4ff, #0ea5e9); color: #0f172a; border: none; padding: 0.75rem 1.5rem; border-radius: 10px; font-weight: 600; cursor: pointer;">
-                            Login Now
-                        </button>
-                        <button onclick="this.closest('div').parentElement.remove()" style="background: rgba(71, 85, 105, 0.5); color: #e2e8f0; border: none; padding: 0.75rem 1.5rem; border-radius: 10px; font-weight: 600; cursor: pointer;">
-                            Close
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            document.body.appendChild(modal);
-        }
-    </script>
 </body>
 </html>

@@ -830,7 +830,7 @@ input[type="password"] {
       </h2>
       
       <div class="type-cards">
-        <div class="type-card" data-type="personal" id="typePersonal">
+        <div class="type-card selected" data-type="individual" id="typePersonal">
           <div class="type-icon">🧑</div>
           <div class="type-title">Personal</div>
           <div class="type-desc">Individual AI Rights holder</div>
@@ -843,7 +843,7 @@ input[type="password"] {
         </div>
       </div>
       
-      <input type="hidden" id="accountType" name="accountType" value="personal">
+      <input type="hidden" id="accountType" name="accountType" value="individual">
     </div>
 
     <!-- Step 2: Personal Information -->
@@ -1085,6 +1085,9 @@ input[type="password"] {
 </div>
 
 <script>
+// AIVerID Registration - Production Version
+// Last Updated: June 26, 2025
+
 // API Configuration
 const API_CONFIG = {
   API_URL: 'https://aiverid-backend-production.up.railway.app/api/auth/register',
@@ -1132,7 +1135,7 @@ const ID_FORMAT_HELP = {
 // Form state
 let currentStep = 1;
 let formData = {
-  accountType: 'personal',
+  accountType: 'individual',
   firstName: '',
   lastName: '',
   organizationName: '',
@@ -1150,6 +1153,9 @@ document.addEventListener('DOMContentLoaded', function() {
   checkAPIConnection();
   initializeFormHandlers();
   updateProgress();
+  
+  // Select individual (personal) by default
+  document.getElementById('typePersonal').classList.add('selected');
   
   // Prevent viewport jumping on mobile keyboards
   if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
@@ -1185,7 +1191,6 @@ async function checkAPIConnection() {
   } catch (error) {
     statusDot.classList.add('error');
     statusText.textContent = 'API Offline';
-    console.error('API connection error:', error);
   }
 }
 
@@ -1197,7 +1202,7 @@ function initializeFormHandlers() {
       document.querySelectorAll('.type-card').forEach(c => c.classList.remove('selected'));
       this.classList.add('selected');
       
-      const type = this.dataset.type;
+      const type = this.dataset.type; // "individual" or "organization"
       formData.accountType = type;
       document.getElementById('accountType').value = type;
       
@@ -1283,6 +1288,30 @@ function checkPasswordStrength(password) {
   strengthText.style.color = color;
 }
 
+// National ID format validation by country
+function validateNationalId(nationalId, country) {
+  // Remove all non-alphanumeric characters for validation
+  const cleanId = nationalId.replace(/[^a-zA-Z0-9]/g, '');
+  
+  switch(country) {
+    case 'TH':
+      // Thai ID: 13 digits (1-2345-67890-12-3)
+      return /^\d{13}$/.test(cleanId);
+    case 'US':
+      // US SSN: 9 digits (123-45-6789)
+      return /^\d{9}$/.test(cleanId);
+    case 'SG':
+      // Singapore: Letter + 7 digits + Letter (S1234567A)
+      return /^[A-Z]\d{7}[A-Z]$/i.test(cleanId);
+    case 'MY':
+      // Malaysia: 12 digits (123456-12-1234)
+      return /^\d{12}$/.test(cleanId);
+    default:
+      // For other countries, just check if not empty and reasonable length
+      return cleanId.length >= 5 && cleanId.length <= 20;
+  }
+}
+
 // Real-time validation
 function addRealTimeValidation() {
   // Email validation
@@ -1298,6 +1327,18 @@ function addRealTimeValidation() {
   // Allow only numbers in phone input
   document.getElementById('phone').addEventListener('input', function(e) {
     this.value = this.value.replace(/\D/g, '');
+  });
+  
+  // National ID validation
+  document.getElementById('nationalId').addEventListener('blur', function() {
+    const country = document.getElementById('country').value;
+    if (country && this.value) {
+      if (!validateNationalId(this.value, country)) {
+        showError('nationalId', 'Invalid ID format for selected country');
+      } else {
+        clearError('nationalId');
+      }
+    }
   });
   
   // Password match validation
@@ -1404,9 +1445,41 @@ async function handleSubmit(e) {
       data.organizationName = formData.get('organizationName');
     }
     
-    // Validate all fields
-    if (!validateEmail(data.email) || !validatePhone(data.phone)) {
-      throw new Error('Please fix validation errors');
+    // Validate required fields
+    const requiredFields = {
+      firstName: 'First name',
+      lastName: 'Last name', 
+      email: 'Email',
+      country: 'Country',
+      phone: 'Phone number',
+      nationalId: 'National ID',
+      password: 'Password'
+    };
+    
+    for (const [field, label] of Object.entries(requiredFields)) {
+      if (!data[field]) {
+        throw new Error(`${label} is required`);
+      }
+    }
+    
+    // Validate email format
+    if (!validateEmail(data.email)) {
+      throw new Error('Please enter a valid email address');
+    }
+    
+    // Validate phone format
+    if (!validatePhone(data.phone)) {
+      throw new Error('Please enter a valid phone number');
+    }
+    
+    // Validate national ID
+    if (!validateNationalId(data.nationalId, data.country)) {
+      throw new Error('Invalid national ID format for selected country');
+    }
+    
+    // Validate password strength
+    if (data.password.length < 8) {
+      throw new Error('Password must be at least 8 characters long');
     }
     
     if (data.password !== formData.get('confirmPassword')) {
@@ -1417,29 +1490,151 @@ async function handleSubmit(e) {
       throw new Error('Please accept the terms and conditions');
     }
     
+    // Clean national ID before sending (remove formatting)
+    data.nationalId = data.nationalId.replace(/[^a-zA-Z0-9]/g, '');
+    
+    // Add phone country code
+    const countryCode = document.getElementById('countryCode').textContent;
+    data.phoneWithCode = countryCode + data.phone;
+    
+    // Prepare data in the format backend expects
+    // Backend expects "individual" not "personal"
+    const requestData = {
+      accountType: data.accountType, // should be "individual" or "organization"
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      country: data.country,
+      phone: data.phone,
+      nationalId: data.nationalId,
+      password: data.password,
+      terms: data.terms,
+      newsletter: data.newsletter
+    };
+    
+    // Add organizationName only if organization type
+    if (data.accountType === 'organization') {
+      requestData.organizationName = data.organizationName;
+    }
+    
+    // Add phone with country code
+    requestData.phoneWithCode = data.phoneWithCode;
+    
     // Submit to API
-    const response = await fetch(API_CONFIG.API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    });
-    
-    const result = await response.json();
-    
-    if (response.ok) {
-      // Success! Redirect to login
-      localStorage.setItem('registrationSuccess', 'true');
-      localStorage.setItem('aiverid', result.aiverid);
-      window.location.href = 'login.html';
-    } else {
-      throw new Error(result.message || 'Registration failed');
+    try {
+      const response = await fetch(API_CONFIG.API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(requestData)
+      });'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(requestData)
+      });
+      
+      let result;
+      const contentType = response.headers.get('content-type');
+      
+      if (contentType && contentType.includes('application/json')) {
+        result = await response.json();
+      } else {
+        // If response is not JSON, get text
+        const text = await response.text();
+        result = { message: text || 'Unknown error' };
+      }
+      
+      if (response.ok && result.success !== false) {
+        // Success! Try to get AIVerID from response
+        const aiverid = result.aiverid || 
+                       result.aiverID || 
+                       result.aiver_id || 
+                       result.id || 
+                       result.userId ||
+                       result.user_id ||
+                       result.data?.aiverid ||
+                       result.data?.id;
+        
+        if (aiverid) {
+          alert(`✅ Success! Your AIVerID is: ${aiverid}`);
+          localStorage.setItem('aiverid', aiverid);
+        } else {
+          // Still success, but no AIVerID in response
+          alert('✅ Registration successful! Redirecting to login...');
+        }
+        
+        // If there's a user object, store it
+        if (result.user) {
+          localStorage.setItem('userData', JSON.stringify(result.user));
+        }
+        
+        // If we have email but no AIVerID, store email for login page
+        if (!aiverid && data.email) {
+          localStorage.setItem('registeredEmail', data.email);
+        }
+        
+        // Clear draft and redirect
+        localStorage.setItem('registrationSuccess', 'true');
+        localStorage.removeItem('aiverid_draft');
+        
+        // Shorter delay since registration works
+        setTimeout(() => {
+          window.location.href = 'login.html';
+        }, 1500);
+      } else {
+        // Handle error response
+        let errorMessage = 'Registration failed';
+        
+        if (result.message) {
+          errorMessage = result.message;
+        } else if (result.error) {
+          errorMessage = result.error;
+        } else if (result.errors) {
+          // Handle validation errors object
+          if (typeof result.errors === 'object') {
+            const errorList = Object.entries(result.errors)
+              .map(([field, msg]) => `${field}: ${msg}`)
+              .join('\n');
+            errorMessage = `Validation errors:\n${errorList}`;
+          } else {
+            errorMessage = result.errors;
+          }
+        } else if (result.details && Array.isArray(result.details)) {
+          // Handle details array
+          errorMessage = result.details.map(d => 
+            d.msg || d.message || JSON.stringify(d)
+          ).join('\n');
+        }
+        
+        throw new Error(errorMessage);
+      }
+    } catch (fetchError) {
+      if (fetchError.message.includes('Failed to fetch')) {
+        throw new Error('Cannot connect to server. Please check your internet connection.');
+      }
+      throw fetchError;
     }
     
   } catch (error) {
-    console.error('Registration error:', error);
-    alert(error.message);
+    // Create user-friendly error message
+    let userMessage = 'Registration failed. ';
+    
+    if (error.message.includes('Cannot connect')) {
+      userMessage += 'Unable to connect to server.';
+    } else if (error.message.includes('400')) {
+      userMessage += 'Invalid data format. Please check all fields.';
+    } else if (error.message.includes('409')) {
+      userMessage += 'This email is already registered.';
+    } else if (error.message.includes('validation')) {
+      userMessage += error.message;
+    } else {
+      userMessage += error.message || 'Please try again later.';
+    }
+    
+    // Show simple alert
+    alert(userMessage);
   } finally {
     submitBtn.disabled = false;
     submitBtn.classList.remove('loading');

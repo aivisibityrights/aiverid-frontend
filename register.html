@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head>d
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -1522,14 +1522,84 @@ async function handleSubmit(e) {
     
     // Submit to API
     try {
-  const response = await fetch(API_CONFIG.API_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    },
-    body: JSON.stringify(requestData)
-  });
+      async function handleSubmit(e) {
+  e.preventDefault();
+  
+  if (isSubmitting) return;
+  isSubmitting = true;
+  
+  const submitBtn = document.getElementById('submitBtn');
+  submitBtn.disabled = true;
+  submitBtn.classList.add('loading');
+  
+  try {
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+    data.accountType = document.getElementById('accountType').value;
+    data.terms = formData.get('terms') === 'on';
+    data.newsletter = formData.get('newsletter') === 'on';
+
+    // Client-side validation logic... (omitted for brevity, assume it passes)
+    
+    // Prepare data in the format backend expects
+    const requestData = {
+      accountType: data.accountType,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      country: data.country,
+      phoneNumber: document.getElementById('countryCode').textContent + data.phone, // Send combined phone number
+      aiverIdNumber: data.nationalId.replace(/[^a-zA-Z0-9]/g, ''), // Send cleaned ID
+      password: data.password,
+      wallet: data.wallet, // Assuming there's a wallet field
+      claimTokens: true, // Assuming this is desired
+      marketing: data.newsletter,
+    };
+
+    if (data.accountType === 'organization') {
+      requestData.companyName = data.organizationName;
+    }
+    
+    // Submit to API
+    const response = await fetch(API_CONFIG.API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(requestData)
+    });
+
+    const result = await response.json();
+    
+    if (!response.ok) {
+        let errorMessage = result.message || result.error || 'Registration failed';
+        if (result.details && Array.isArray(result.details)) {
+          errorMessage = result.details.map(d => d.msg).join(', ');
+        }
+        throw new Error(errorMessage);
+    }
+
+    // Success
+    const aiverid = result.user?.id || result.user?.aiverid;
+    alert(`✅ Success! Your AIVerID is: ${aiverid}`);
+    localStorage.removeItem('aiverid_draft');
+    window.location.href = 'login.html';
+    
+  } catch (error) {
+    let userMessage = 'Registration failed. ';
+    if (error.message.includes('Failed to fetch')) {
+        userMessage += 'Cannot connect to the server.';
+    } else {
+        userMessage += error.message;
+    }
+    alert(userMessage);
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.classList.remove('loading');
+    isSubmitting = false;
+  }
+}
       
       let result;
       const contentType = response.headers.get('content-type');

@@ -40,6 +40,25 @@
             margin-bottom: 10px;
         }
 
+        .auth-section {
+            background: rgba(0, 255, 136, 0.1);
+            border: 2px solid #00ff88;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .auth-section input {
+            padding: 10px 20px;
+            background: #0a0a0a;
+            border: 2px solid #333;
+            border-radius: 5px;
+            color: #fff;
+            margin-right: 10px;
+            width: 300px;
+        }
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -203,12 +222,17 @@
             margin: 20px 0;
         }
 
-        .chart-container {
-            height: 300px;
-            margin-top: 20px;
-            background: #0a0a0a;
-            border-radius: 10px;
+        .success {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid #00ff88;
             padding: 20px;
+            border-radius: 10px;
+            color: #00ff88;
+            margin: 20px 0;
+        }
+
+        .hidden {
+            display: none;
         }
     </style>
 </head>
@@ -219,54 +243,64 @@
             <p>Real-time monitoring and user management</p>
         </div>
 
-        <!-- Statistics -->
-        <div class="stats-grid" id="statsGrid">
-            <div class="stat-card">
-                <h3>Total Users</h3>
-                <div class="value">-</div>
-                <div class="change">Loading...</div>
-            </div>
-            <div class="stat-card">
-                <h3>New Today</h3>
-                <div class="value">-</div>
-                <div class="change">Last 24 hours</div>
-            </div>
-            <div class="stat-card">
-                <h3>This Week</h3>
-                <div class="value">-</div>
-                <div class="change">Last 7 days</div>
-            </div>
-            <div class="stat-card">
-                <h3>Active Tokens</h3>
-                <div class="value">-</div>
-                <div class="change">AIVID, AIPLT, SLIVR</div>
-            </div>
+        <!-- Auth Section -->
+        <div class="auth-section" id="authSection">
+            <h3>Admin Authentication Required</h3>
+            <input type="password" id="adminTokenInput" placeholder="Enter Admin Token" onkeypress="if(event.key==='Enter') authenticate()">
+            <button class="btn" onclick="authenticate()">Authenticate</button>
         </div>
 
-        <!-- Search Section -->
-        <div class="section">
-            <h2>Search Users</h2>
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Search by email, AIVerID, or phone...">
-                <button class="btn" onclick="searchUsers()">Search</button>
-                <button class="btn btn-secondary" onclick="exportUsers()">Export CSV</button>
+        <!-- Main Dashboard (hidden until auth) -->
+        <div id="dashboard" class="hidden">
+            <!-- Statistics -->
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-card">
+                    <h3>Total Users</h3>
+                    <div class="value" id="totalUsers">-</div>
+                    <div class="change" id="userTypes">Loading...</div>
+                </div>
+                <div class="stat-card">
+                    <h3>New Today</h3>
+                    <div class="value" id="newToday">-</div>
+                    <div class="change">Last 24 hours</div>
+                </div>
+                <div class="stat-card">
+                    <h3>This Week</h3>
+                    <div class="value" id="newWeek">-</div>
+                    <div class="change">Last 7 days</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Active Tokens</h3>
+                    <div class="value" id="activeTokens">-</div>
+                    <div class="change">AIVID, AIPLT, SLIVR</div>
+                </div>
             </div>
-            <div id="searchResults"></div>
-        </div>
 
-        <!-- Recent Registrations -->
-        <div class="section">
-            <h2>Recent Registrations</h2>
-            <div id="recentUsers">
-                <div class="loading">Loading recent users...</div>
+            <!-- Search Section -->
+            <div class="section">
+                <h2>Search Users</h2>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search by email, AIVerID, or phone...">
+                    <button class="btn" onclick="searchUsers()">Search</button>
+                    <button class="btn btn-secondary" onclick="exportUsers()">Export CSV</button>
+                </div>
+                <div id="searchResults"></div>
             </div>
-        </div>
 
-        <!-- User List -->
-        <div class="section">
-            <h2>All Users</h2>
-            <div id="userList">
-                <div class="loading">Loading users...</div>
+            <!-- Recent Registrations -->
+            <div class="section">
+                <h2>Recent Registrations</h2>
+                <div id="recentUsers">
+                    <div class="loading">Loading recent users...</div>
+                </div>
+            </div>
+
+            <!-- User List -->
+            <div class="section">
+                <h2>All Users</h2>
+                <div id="userList">
+                    <div class="loading">Loading users...</div>
+                </div>
             </div>
         </div>
     </div>
@@ -276,30 +310,66 @@
         const API_BASE = 'https://aiverid-backend-production.up.railway.app';
         let ADMIN_TOKEN = '';
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', async () => {
-            // Prompt for admin token
-            ADMIN_TOKEN = prompt('Enter Admin Token:');
-            if (!ADMIN_TOKEN) {
-                document.body.innerHTML = '<div class="error">Admin token required</div>';
+        // Authentication
+        function authenticate() {
+            const token = document.getElementById('adminTokenInput').value;
+            if (!token) {
+                alert('Please enter admin token');
                 return;
             }
 
-            // Load all data
+            ADMIN_TOKEN = token;
+            
+            // Test authentication
+            testAuth().then(valid => {
+                if (valid) {
+                    document.getElementById('authSection').style.display = 'none';
+                    document.getElementById('dashboard').classList.remove('hidden');
+                    loadDashboard();
+                } else {
+                    alert('Invalid admin token');
+                    ADMIN_TOKEN = '';
+                }
+            });
+        }
+
+        // Test authentication
+        async function testAuth() {
+            try {
+                const response = await fetch(`${API_BASE}/api/admin/stats`, {
+                    method: 'GET',
+                    headers: {
+                        'X-Admin-Token': ADMIN_TOKEN,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                return response.ok;
+            } catch (error) {
+                console.error('Auth test failed:', error);
+                return false;
+            }
+        }
+
+        // Load Dashboard
+        async function loadDashboard() {
             await Promise.all([
                 loadStats(),
                 loadRecentUsers(),
                 loadAllUsers()
             ]);
-        });
+        }
 
         // API Call Helper
-        async function apiCall(endpoint) {
+        async function apiCall(endpoint, options = {}) {
             try {
                 const response = await fetch(`${API_BASE}${endpoint}`, {
+                    method: options.method || 'GET',
                     headers: {
-                        'X-Admin-Token': ADMIN_TOKEN
-                    }
+                        'X-Admin-Token': ADMIN_TOKEN,
+                        'Content-Type': 'application/json',
+                        ...options.headers
+                    },
+                    ...options
                 });
 
                 if (!response.ok) {
@@ -319,17 +389,17 @@
                 const data = await apiCall('/api/admin/stats');
                 if (data.success) {
                     const stats = data.data.overview;
-                    const cards = document.querySelectorAll('.stat-card');
                     
-                    cards[0].querySelector('.value').textContent = stats.total_users;
-                    cards[0].querySelector('.change').textContent = `${stats.individual_accounts} individuals, ${stats.organization_accounts} organizations`;
-                    
-                    cards[1].querySelector('.value').textContent = stats.new_users_24h;
-                    cards[2].querySelector('.value').textContent = stats.new_users_7d;
-                    cards[3].querySelector('.value').textContent = stats.active_tokens;
+                    document.getElementById('totalUsers').textContent = stats.total_users || '0';
+                    document.getElementById('userTypes').textContent = 
+                        `${stats.individual_accounts || 0} individuals, ${stats.organization_accounts || 0} organizations`;
+                    document.getElementById('newToday').textContent = stats.new_users_24h || '0';
+                    document.getElementById('newWeek').textContent = stats.new_users_7d || '0';
+                    document.getElementById('activeTokens').textContent = stats.active_tokens || '0';
                 }
             } catch (error) {
                 console.error('Failed to load stats:', error);
+                document.getElementById('totalUsers').textContent = 'Error';
             }
         }
 
@@ -427,6 +497,7 @@
                 const data = await apiCall(`/api/admin/search/${encodeURIComponent(query)}`);
                 if (data.success && data.data.results.length > 0) {
                     const html = `
+                        <h3>Search Results for "${query}"</h3>
                         <table>
                             <thead>
                                 <tr>
@@ -464,17 +535,52 @@
         // Export Users
         async function exportUsers() {
             try {
-                window.location.href = `${API_BASE}/api/admin/export?token=${ADMIN_TOKEN}`;
+                // Create a temporary form to submit with token as POST
+                const form = document.createElement('form');
+                form.method = 'GET';
+                form.action = `${API_BASE}/api/admin/export`;
+                
+                // Create hidden input for token
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'token';
+                input.value = ADMIN_TOKEN;
+                
+                form.appendChild(input);
+                document.body.appendChild(form);
+                
+                // Submit and remove
+                form.submit();
+                document.body.removeChild(form);
+                
             } catch (error) {
-                alert('Export failed');
+                alert('Export failed: ' + error.message);
             }
         }
 
         // Auto-refresh every 5 minutes
-        setInterval(() => {
-            loadStats();
-            loadRecentUsers();
-        }, 300000);
+        let refreshInterval;
+        function startAutoRefresh() {
+            refreshInterval = setInterval(() => {
+                if (ADMIN_TOKEN) {
+                    loadStats();
+                    loadRecentUsers();
+                }
+            }, 300000);
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('adminTokenInput').focus();
+            startAutoRefresh();
+        });
+
+        // Clean up on unload
+        window.addEventListener('beforeunload', () => {
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+            }
+        });
     </script>
 </body>
 </html>

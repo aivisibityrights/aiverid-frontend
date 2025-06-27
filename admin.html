@@ -674,47 +674,52 @@
         }
 
         // Search Users
-        async function searchUsers() {
-            const query = document.getElementById('searchInput').value;
-            if (!query) return;
+async function searchUsers() {
+    const searchInput = document.getElementById('searchInput');
+    if (!searchInput) {
+        console.error('Search input not found');
+        return;
+    }
+    const query = searchInput.value;
+    if (!query) return;
 
-            try {
-                const data = await apiCall(`/api/admin/search/${encodeURIComponent(query)}`);
-                if (data.success && data.data.results.length > 0) {
-                    const html = `
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>AIVerID</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Type</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${data.data.results.map(user => `
-                                    <tr>
-                                        <td>${user.aiverid}</td>
-                                        <td>${user.first_name || ''} ${user.last_name || ''}</td>
-                                        <td>${user.email}</td>
-                                        <td>${user.phone || '-'}</td>
-                                        <td><span class="badge badge-${user.account_type}">${user.account_type}</span></td>
-                                        <td><span class="badge badge-${user.status}">${user.status}</span></td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    `;
-                    document.getElementById('searchResults').innerHTML = html;
-                } else {
-                    document.getElementById('searchResults').innerHTML = '<p>No results found</p>';
-                }
-            } catch (error) {
-                document.getElementById('searchResults').innerHTML = '<div class="error">Search failed</div>';
-            }
+    try {
+        const data = await apiCall(`/api/admin/search/${encodeURIComponent(query)}`);
+        if (data.success && data.data.results.length > 0) {
+            const html = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>AIVerID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${data.data.results.map(user => `
+                            <tr>
+                                <td>${user.aiverid}</td>
+                                <td>${user.first_name || ''} ${user.last_name || ''}</td>
+                                <td>${user.email}</td>
+                                <td>${user.phone || '-'}</td>
+                                <td><span class="badge badge-${user.account_type}">${user.account_type}</span></td>
+                                <td><span class="badge badge-${user.status}">${user.status}</span></td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+            document.getElementById('searchResults').innerHTML = html;
+        } else {
+            document.getElementById('searchResults').innerHTML = '<p>No results found</p>';
         }
+    } catch (error) {
+        document.getElementById('searchResults').innerHTML = '<div class="error">Search failed</div>';
+    }
+}
 
         // Export Users
         async function exportUsers() {

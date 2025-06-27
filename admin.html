@@ -477,7 +477,7 @@
                 const response = await fetch(`${API_BASE}${endpoint}`, {
                     method: 'GET',
                     headers: {
-                        'X-Admin-Token': ADMIN_TOKEN,
+                        'x-admin-token': ADMIN_TOKEN,
                         'Content-Type': 'application/json'
                     },
                     credentials: 'include'
@@ -707,7 +707,7 @@
                 const response = await fetch(`${API_BASE}/api/admin/users/${aiverId}`, {
                     method: 'PUT',
                     headers: {
-                        'X-Admin-Token': ADMIN_TOKEN,
+                        'x-admin-token': ADMIN_TOKEN,
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(data)
@@ -740,7 +740,7 @@
                 const response = await fetch(`${API_BASE}/api/admin/users/${aiverId}`, {
                     method: 'DELETE',
                     headers: {
-                        'X-Admin-Token': ADMIN_TOKEN
+                        'x-admin-token': ADMIN_TOKEN
                     }
                 });
                 

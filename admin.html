@@ -140,6 +140,7 @@
 
         .btn-secondary:hover {
             background: #444;
+            transform: scale(1.02);
         }
 
         table {
@@ -321,6 +322,27 @@
             justify-content: flex-end;
             margin-top: 20px;
         }
+        
+        /* Dropdown styles */
+        select {
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 5px;
+            color: #fff;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        select:hover {
+            border-color: #00ff88;
+        }
+        
+        select:focus {
+            outline: none;
+            border-color: #00ff88;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -376,6 +398,19 @@
         <!-- User List -->
         <div class="section">
             <h2>All Users</h2>
+            <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <label style="color: #888; margin-right: 10px;">Show:</label>
+                    <select id="pageLimit" onchange="changePageLimit()">
+                        <option value="25">25 per page</option>
+                        <option value="50">50 per page</option>
+                        <option value="100" selected>100 per page</option>
+                        <option value="200">200 per page</option>
+                        <option value="500">500 per page</option>
+                    </select>
+                </div>
+                <div id="userCount" style="color: #888;"></div>
+            </div>
             <div id="userList">
                 <div class="loading">Loading users...</div>
             </div>
@@ -436,6 +471,8 @@
         // Configuration
         const API_BASE = 'https://aiverid-backend-production.up.railway.app';
         let ADMIN_TOKEN = '';
+        let currentPageLimit = 100; // Default page limit
+        let currentPage = 1; // Current page
 
         // Initialize
         document.addEventListener('DOMContentLoaded', async () => {
@@ -464,7 +501,7 @@
                 await Promise.all([
                     loadStats(),
                     loadRecentUsers(),
-                    loadAllUsers()
+                    loadAllUsers(currentPage, currentPageLimit)
                 ]);
             } catch (error) {
                 console.error('Failed to load dashboard data:', error);
@@ -565,9 +602,12 @@
         }
 
         // Load All Users
-        async function loadAllUsers(page = 1) {
+        async function loadAllUsers(page = 1, limit = 100) {
             try {
-                const data = await apiCall(`/api/admin/users?page=${page}&limit=50`);
+                currentPage = page; // Update current page
+                currentPageLimit = limit; // Update current limit
+                
+                const data = await apiCall(`/api/admin/users?page=${page}&limit=${limit}`);
                 if (data.success) {
                     const html = `
                         <table>
@@ -603,13 +643,30 @@
                                 `).join('')}
                             </tbody>
                         </table>
-                        <div style="margin-top: 20px; text-align: center;">
-                            ${data.data.pagination.page > 1 ? `<button class="btn btn-secondary" onclick="loadAllUsers(${data.data.pagination.page - 1})">Previous</button>` : ''}
-                            <span style="margin: 0 20px;">Page ${data.data.pagination.page} of ${data.data.pagination.pages}</span>
-                            ${data.data.pagination.page < data.data.pagination.pages ? `<button class="btn btn-secondary" onclick="loadAllUsers(${data.data.pagination.page + 1})">Next</button>` : ''}
+                        <div style="margin-top: 20px; text-align: center; display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap;">
+                            ${data.data.pagination.page > 2 ? `<button class="btn btn-secondary" onclick="loadAllUsers(1, ${limit})" title="First page">« First</button>` : ''}
+                            ${data.data.pagination.page > 1 ? `<button class="btn btn-secondary" onclick="loadAllUsers(${data.data.pagination.page - 1}, ${limit})">‹ Previous</button>` : ''}
+                            <span style="display: flex; align-items: center; gap: 5px;">
+                                Page <input type="number" 
+                                    value="${data.data.pagination.page}" 
+                                    min="1" 
+                                    max="${data.data.pagination.pages}" 
+                                    style="width: 60px; padding: 4px; text-align: center;"
+                                    onchange="if(this.value >= 1 && this.value <= ${data.data.pagination.pages}) loadAllUsers(parseInt(this.value), ${limit})"
+                                    onkeypress="if(event.key === 'Enter' && this.value >= 1 && this.value <= ${data.data.pagination.pages}) loadAllUsers(parseInt(this.value), ${limit})"
+                                > of ${data.data.pagination.pages} 
+                                <span style="color: #666;">(${data.data.pagination.total} total users)</span>
+                            </span>
+                            ${data.data.pagination.page < data.data.pagination.pages ? `<button class="btn btn-secondary" onclick="loadAllUsers(${data.data.pagination.page + 1}, ${limit})">Next ›</button>` : ''}
+                            ${data.data.pagination.page < data.data.pagination.pages - 1 ? `<button class="btn btn-secondary" onclick="loadAllUsers(${data.data.pagination.pages}, ${limit})" title="Last page">Last »</button>` : ''}
                         </div>
                     `;
                     document.getElementById('userList').innerHTML = html;
+                    
+                    // Update user count display
+                    const startUser = ((data.data.pagination.page - 1) * limit) + 1;
+                    const endUser = Math.min(data.data.pagination.page * limit, data.data.pagination.total);
+                    document.getElementById('userCount').textContent = `Showing ${startUser}-${endUser} of ${data.data.pagination.total} users`;
                 }
             } catch (error) {
                 document.getElementById('userList').innerHTML = '<div class="error">Failed to load users</div>';
@@ -719,7 +776,7 @@
                     alert('User updated successfully!');
                     closeEditModal();
                     // Reload data
-                    loadAllUsers();
+                    loadAllUsers(currentPage, currentPageLimit);
                     loadRecentUsers();
                     loadStats();
                 } else {
@@ -749,7 +806,7 @@
                 if (result.success) {
                     alert('User deleted successfully!');
                     // Reload data
-                    loadAllUsers();
+                    loadAllUsers(currentPage, currentPageLimit);
                     loadRecentUsers();
                     loadStats();
                 } else {
@@ -758,6 +815,13 @@
             } catch (error) {
                 alert('Failed to delete user: ' + error.message);
             }
+        }
+
+        // Change page limit
+        function changePageLimit() {
+            currentPageLimit = parseInt(document.getElementById('pageLimit').value);
+            currentPage = 1; // Reset to first page
+            loadAllUsers(currentPage, currentPageLimit);
         }
 
         // Auto-refresh every 5 minutes

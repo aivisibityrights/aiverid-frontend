@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>d
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -42,7 +42,7 @@ body {
   justify-content: center;
   position: relative;
   overflow-x: hidden;
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Animated Background */
@@ -54,7 +54,7 @@ body {
   height: 100%;
   z-index: -1;
   opacity: 0.3;
-  overflow: hidden; /* Prevent scrollbars */
+  overflow: hidden;
 }
 
 .bg-animation::before {
@@ -62,7 +62,7 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: min(800px, 100vw); /* Responsive sizing */
+  width: min(800px, 100vw);
   height: min(800px, 100vh);
   background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
   transform: translate(-50%, -50%);
@@ -74,7 +74,7 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: min(600px, 80vw); /* Responsive sizing */
+  width: min(600px, 80vw);
   height: min(600px, 80vh);
   background: radial-gradient(circle, var(--secondary) 0%, transparent 70%);
   transform: translate(-30%, -70%);
@@ -301,7 +301,7 @@ input:focus, select:focus, textarea:focus {
   box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.1);
 }
 
-/* Country Select with Flags */
+/* Country Select */
 .country-select-wrapper {
   position: relative;
 }
@@ -348,7 +348,7 @@ option {
   flex: 1;
 }
 
-/* Password Strength */
+/* Password Field */
 .password-field {
   position: relative;
 }
@@ -366,7 +366,6 @@ option {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Add padding to password input to make room for toggle */
 input[type="password"] {
   padding-right: 48px;
 }
@@ -528,36 +527,6 @@ input[type="password"] {
   text-decoration: underline;
 }
 
-/* Auto-save Indicator */
-.auto-save-indicator {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%) translateY(-100px);
-  background: rgba(16, 185, 129, 0.9);
-  color: white;
-  padding: 10px 20px;
-  border-radius: 20px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
-  transition: transform 0.3s ease;
-  pointer-events: none;
-}
-
-.auto-save-indicator.show {
-  transform: translateX(-50%) translateY(0);
-}
-
-.save-icon {
-  font-size: 1rem;
-}
-
 /* API Status */
 .api-status {
   position: fixed;
@@ -598,7 +567,6 @@ input[type="password"] {
 
 /* Responsive */
 @media (max-width: 768px) {
-  /* Tablet adjustments */
   .register-container {
     padding: 40px 32px;
     margin: 16px;
@@ -607,15 +575,9 @@ input[type="password"] {
   .title {
     font-size: 2.25rem;
   }
-  
-  .logo {
-    width: 70px;
-    height: 70px;
-  }
 }
 
 @media (max-width: 640px) {
-  /* Mobile adjustments */
   body {
     padding: 0;
     min-height: 100vh;
@@ -635,15 +597,6 @@ input[type="password"] {
     font-size: 1.875rem;
   }
   
-  .subtitle {
-    font-size: 1rem;
-  }
-  
-  .logo {
-    width: 60px;
-    height: 60px;
-  }
-  
   .form-row {
     grid-template-columns: 1fr;
     gap: 0;
@@ -654,7 +607,7 @@ input[type="password"] {
   }
   
   .phone-input-wrapper {
-    flex-direction: row; /* Keep side by side on mobile */
+    flex-direction: row;
     gap: 8px;
   }
   
@@ -663,134 +616,24 @@ input[type="password"] {
     flex-shrink: 0;
   }
   
-  .phone-input {
-    min-width: 0; /* Allow shrinking */
-  }
-  
-  /* Adjust form spacing */
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  .form-section {
-    margin-bottom: 24px;
-  }
-  
-  /* Smaller text on mobile */
-  label {
-    font-size: 0.8125rem;
-  }
-  
   input, select, textarea {
-    font-size: 16px; /* Prevents zoom on iOS */
-    padding: 12px 14px;
+    font-size: 16px;
   }
   
-  .help-text {
-    font-size: 0.7rem;
-  }
-  
-  /* Progress steps */
-  .progress-steps {
-    font-size: 0.75rem;
-  }
-  
-  /* Auto-save indicator position */
-  .auto-save-indicator {
-    top: auto;
-    bottom: 60px; /* Above API status */
-    padding: 8px 16px;
-    font-size: 0.8125rem;
-    border-radius: 16px;
-  }
-  
-  /* API status position */
   .api-status {
     bottom: 10px;
     right: 10px;
     padding: 8px 12px;
     font-size: 0.7rem;
   }
-  
-  /* Submit button */
-  .submit-button {
-    padding: 14px 20px;
-    font-size: 0.9375rem;
-  }
-  
-  /* Checkbox text */
-  .checkbox-label {
-    font-size: 0.8125rem;
-  }
 }
 
-@media (max-width: 375px) {
-  /* Small mobile adjustments */
-  .register-container {
-    padding: 24px 16px;
-  }
-  
-  .title {
-    font-size: 1.625rem;
-  }
-  
-  .country-code {
-    min-width: 70px;
-    font-size: 0.8125rem;
-  }
-}
-
-/* Touch-friendly adjustments for mobile */
-@media (hover: none) and (pointer: coarse) {
-  /* Larger touch targets */
-  .type-card {
-    min-height: 120px;
-  }
-  
-  input[type="checkbox"] {
-    width: 24px;
-    height: 24px;
-  }
-  
-  .password-toggle {
-    padding: 8px;
-    margin-right: -8px;
-  }
-  
-  /* Remove hover effects on touch devices */
-  .type-card:hover {
-    transform: none;
-    box-shadow: none;
-  }
-  
-  .submit-button:hover:not(:disabled) {
-    transform: none;
-  }
-  
-  /* Increase tap areas */
-  label {
-    padding: 4px 0;
-  }
-  
-  .checkbox-wrapper {
-    padding: 8px 0;
-  }
-}
 .fade-in {
   animation: fadeIn 0.5s ease-out;
 }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.slide-up {
-  animation: slideUp 0.5s ease-out;
-}
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
 </style>
@@ -905,15 +748,9 @@ input[type="password"] {
               <option value="JP" data-code="+81">🇯🇵 Japan</option>
               <option value="KR" data-code="+82">🇰🇷 South Korea</option>
               <option value="CN" data-code="+86">🇨🇳 China</option>
-              <option value="HK" data-code="+852">🇭🇰 Hong Kong</option>
-              <option value="TW" data-code="+886">🇹🇼 Taiwan</option>
               <option value="IN" data-code="+91">🇮🇳 India</option>
-              <option value="PK" data-code="+92">🇵🇰 Pakistan</option>
-              <option value="BD" data-code="+880">🇧🇩 Bangladesh</option>
-              <option value="LK" data-code="+94">🇱🇰 Sri Lanka</option>
               <option value="AU" data-code="+61">🇦🇺 Australia</option>
               <option value="NZ" data-code="+64">🇳🇿 New Zealand</option>
-              <option value="FJ" data-code="+679">🇫🇯 Fiji</option>
             </optgroup>
             
             <optgroup label="🌍 Europe">
@@ -925,21 +762,8 @@ input[type="password"] {
               <option value="NL" data-code="+31">🇳🇱 Netherlands</option>
               <option value="BE" data-code="+32">🇧🇪 Belgium</option>
               <option value="CH" data-code="+41">🇨🇭 Switzerland</option>
-              <option value="AT" data-code="+43">🇦🇹 Austria</option>
               <option value="SE" data-code="+46">🇸🇪 Sweden</option>
               <option value="NO" data-code="+47">🇳🇴 Norway</option>
-              <option value="DK" data-code="+45">🇩🇰 Denmark</option>
-              <option value="FI" data-code="+358">🇫🇮 Finland</option>
-              <option value="PL" data-code="+48">🇵🇱 Poland</option>
-              <option value="CZ" data-code="+420">🇨🇿 Czech Republic</option>
-              <option value="HU" data-code="+36">🇭🇺 Hungary</option>
-              <option value="RO" data-code="+40">🇷🇴 Romania</option>
-              <option value="GR" data-code="+30">🇬🇷 Greece</option>
-              <option value="PT" data-code="+351">🇵🇹 Portugal</option>
-              <option value="IE" data-code="+353">🇮🇪 Ireland</option>
-              <option value="RU" data-code="+7">🇷🇺 Russia</option>
-              <option value="UA" data-code="+380">🇺🇦 Ukraine</option>
-              <option value="TR" data-code="+90">🇹🇷 Turkey</option>
             </optgroup>
             
             <optgroup label="🌎 Americas">
@@ -948,43 +772,14 @@ input[type="password"] {
               <option value="MX" data-code="+52">🇲🇽 Mexico</option>
               <option value="BR" data-code="+55">🇧🇷 Brazil</option>
               <option value="AR" data-code="+54">🇦🇷 Argentina</option>
-              <option value="CL" data-code="+56">🇨🇱 Chile</option>
-              <option value="CO" data-code="+57">🇨🇴 Colombia</option>
-              <option value="PE" data-code="+51">🇵🇪 Peru</option>
-              <option value="VE" data-code="+58">🇻🇪 Venezuela</option>
-              <option value="EC" data-code="+593">🇪🇨 Ecuador</option>
-              <option value="UY" data-code="+598">🇺🇾 Uruguay</option>
-              <option value="PY" data-code="+595">🇵🇾 Paraguay</option>
-              <option value="BO" data-code="+591">🇧🇴 Bolivia</option>
-              <option value="CR" data-code="+506">🇨🇷 Costa Rica</option>
-              <option value="PA" data-code="+507">🇵🇦 Panama</option>
-              <option value="GT" data-code="+502">🇬🇹 Guatemala</option>
-              <option value="CU" data-code="+53">🇨🇺 Cuba</option>
-              <option value="DO" data-code="+1-809">🇩🇴 Dominican Republic</option>
-              <option value="JM" data-code="+1-876">🇯🇲 Jamaica</option>
             </optgroup>
             
             <optgroup label="🌍 Middle East & Africa">
               <option value="AE" data-code="+971">🇦🇪 United Arab Emirates</option>
               <option value="SA" data-code="+966">🇸🇦 Saudi Arabia</option>
-              <option value="QA" data-code="+974">🇶🇦 Qatar</option>
-              <option value="KW" data-code="+965">🇰🇼 Kuwait</option>
-              <option value="BH" data-code="+973">🇧🇭 Bahrain</option>
-              <option value="OM" data-code="+968">🇴🇲 Oman</option>
-              <option value="JO" data-code="+962">🇯🇴 Jordan</option>
-              <option value="LB" data-code="+961">🇱🇧 Lebanon</option>
-              <option value="IL" data-code="+972">🇮🇱 Israel</option>
-              <option value="EG" data-code="+20">🇪🇬 Egypt</option>
               <option value="ZA" data-code="+27">🇿🇦 South Africa</option>
               <option value="NG" data-code="+234">🇳🇬 Nigeria</option>
-              <option value="KE" data-code="+254">🇰🇪 Kenya</option>
-              <option value="GH" data-code="+233">🇬🇭 Ghana</option>
-              <option value="MA" data-code="+212">🇲🇦 Morocco</option>
-              <option value="DZ" data-code="+213">🇩🇿 Algeria</option>
-              <option value="TN" data-code="+216">🇹🇳 Tunisia</option>
-              <option value="ET" data-code="+251">🇪🇹 Ethiopia</option>
-              <option value="TZ" data-code="+255">🇹🇿 Tanzania</option>
-              <option value="UG" data-code="+256">🇺🇬 Uganda</option>
+              <option value="EG" data-code="+20">🇪🇬 Egypt</option>
             </optgroup>
           </select>
         </div>
@@ -1078,16 +873,7 @@ input[type="password"] {
   <span id="statusText">Checking API...</span>
 </div>
 
-<!-- Auto-save indicator (fixed position) -->
-<div class="auto-save-indicator" id="autoSaveIndicator">
-  <span class="save-icon">💾</span>
-  <span>Draft saved</span>
-</div>
-
 <script>
-// AIVerID Registration - Production Version
-// Last Updated: June 26, 2025
-
 // API Configuration
 const API_CONFIG = {
   API_URL: 'https://aiverid-backend-production.up.railway.app/api/auth/register',
@@ -1096,35 +882,18 @@ const API_CONFIG = {
 
 // Country phone codes mapping
 const COUNTRY_PHONE_CODES = {
-  // Asia-Pacific
   'TH': '+66', 'SG': '+65', 'MY': '+60', 'ID': '+62', 'VN': '+84', 
-  'PH': '+63', 'JP': '+81', 'KR': '+82', 'CN': '+86', 'HK': '+852',
-  'TW': '+886', 'IN': '+91', 'PK': '+92', 'BD': '+880', 'LK': '+94',
-  'AU': '+61', 'NZ': '+64', 'FJ': '+679',
-  
-  // Europe
-  'GB': '+44', 'DE': '+49', 'FR': '+33', 'ES': '+34', 'IT': '+39',
-  'NL': '+31', 'BE': '+32', 'CH': '+41', 'AT': '+43', 'SE': '+46',
-  'NO': '+47', 'DK': '+45', 'FI': '+358', 'PL': '+48', 'CZ': '+420',
-  'HU': '+36', 'RO': '+40', 'GR': '+30', 'PT': '+351', 'IE': '+353',
-  'RU': '+7', 'UA': '+380', 'TR': '+90',
-  
-  // Americas
-  'US': '+1', 'CA': '+1', 'MX': '+52', 'BR': '+55', 'AR': '+54',
-  'CL': '+56', 'CO': '+57', 'PE': '+51', 'VE': '+58', 'EC': '+593',
-  'UY': '+598', 'PY': '+595', 'BO': '+591', 'CR': '+506', 'PA': '+507',
-  'GT': '+502', 'CU': '+53', 'DO': '+1-809', 'JM': '+1-876',
-  
-  // Middle East & Africa
-  'AE': '+971', 'SA': '+966', 'QA': '+974', 'KW': '+965', 'BH': '+973',
-  'OM': '+968', 'JO': '+962', 'LB': '+961', 'IL': '+972', 'EG': '+20',
-  'ZA': '+27', 'NG': '+234', 'KE': '+254', 'GH': '+233', 'MA': '+212',
-  'DZ': '+213', 'TN': '+216', 'ET': '+251', 'TZ': '+255', 'UG': '+256'
+  'PH': '+63', 'JP': '+81', 'KR': '+82', 'CN': '+86', 'IN': '+91',
+  'AU': '+61', 'NZ': '+64', 'GB': '+44', 'DE': '+49', 'FR': '+33',
+  'ES': '+34', 'IT': '+39', 'NL': '+31', 'BE': '+32', 'CH': '+41',
+  'SE': '+46', 'NO': '+47', 'US': '+1', 'CA': '+1', 'MX': '+52',
+  'BR': '+55', 'AR': '+54', 'AE': '+971', 'SA': '+966', 'ZA': '+27',
+  'NG': '+234', 'EG': '+20'
 };
 
-// ID format help text by country
+// ID format help text
 const ID_FORMAT_HELP = {
-  'TH': 'Format: 1-2345-67890-12-3',
+  'TH': 'Format: 1-2345-67890-12-3 (13 digits)',
   'US': 'Format: 123-45-6789 (SSN)',
   'GB': 'Format: AB 12 34 56 C',
   'SG': 'Format: S1234567A',
@@ -1132,44 +901,14 @@ const ID_FORMAT_HELP = {
   'DEFAULT': 'Enter your national ID number'
 };
 
-// Form state
-let currentStep = 1;
-let formData = {
-  accountType: 'individual',
-  firstName: '',
-  lastName: '',
-  organizationName: '',
-  email: '',
-  country: '',
-  phone: '',
-  nationalId: '',
-  password: '',
-  terms: false,
-  newsletter: false
-};
-
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
   checkAPIConnection();
   initializeFormHandlers();
-  updateProgress();
   
-  // Select individual (personal) by default
-  document.getElementById('typePersonal').classList.add('selected');
-  
-  // Prevent viewport jumping on mobile keyboards
+  // Prevent mobile keyboard viewport issues
   if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-    // Remove any autofocus on mobile
     document.querySelectorAll('[autofocus]').forEach(el => el.removeAttribute('autofocus'));
-    
-    // Smooth scroll to input on focus
-    document.addEventListener('focusin', function(e) {
-      if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') {
-        setTimeout(() => {
-          e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 300);
-      }
-    });
   }
 });
 
@@ -1191,6 +930,7 @@ async function checkAPIConnection() {
   } catch (error) {
     statusDot.classList.add('error');
     statusText.textContent = 'API Offline';
+    console.error('API connection error:', error);
   }
 }
 
@@ -1202,8 +942,7 @@ function initializeFormHandlers() {
       document.querySelectorAll('.type-card').forEach(c => c.classList.remove('selected'));
       this.classList.add('selected');
       
-      const type = this.dataset.type; // "individual" or "organization"
-      formData.accountType = type;
+      const type = this.dataset.type;
       document.getElementById('accountType').value = type;
       
       // Toggle organization fields
@@ -1218,7 +957,7 @@ function initializeFormHandlers() {
     });
   });
   
-  // Country selection handler
+  // Country selection
   document.getElementById('country').addEventListener('change', function() {
     const countryCode = this.value;
     const phoneCode = COUNTRY_PHONE_CODES[countryCode] || '+1';
@@ -1240,6 +979,11 @@ function initializeFormHandlers() {
   // Password strength checker
   document.getElementById('password').addEventListener('input', function() {
     checkPasswordStrength(this.value);
+  });
+  
+  // Phone number formatting
+  document.getElementById('phone').addEventListener('input', function(e) {
+    this.value = this.value.replace(/\D/g, '');
   });
   
   // Form submission
@@ -1288,26 +1032,30 @@ function checkPasswordStrength(password) {
   strengthText.style.color = color;
 }
 
-// National ID format validation by country
+// Validation functions
+function validateEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+function validatePhone(phone) {
+  const phoneRegex = /^[0-9]{7,15}$/;
+  return phoneRegex.test(phone.replace(/\s/g, ''));
+}
+
 function validateNationalId(nationalId, country) {
-  // Remove all non-alphanumeric characters for validation
   const cleanId = nationalId.replace(/[^a-zA-Z0-9]/g, '');
   
   switch(country) {
     case 'TH':
-      // Thai ID: 13 digits (1-2345-67890-12-3)
       return /^\d{13}$/.test(cleanId);
     case 'US':
-      // US SSN: 9 digits (123-45-6789)
       return /^\d{9}$/.test(cleanId);
     case 'SG':
-      // Singapore: Letter + 7 digits + Letter (S1234567A)
       return /^[A-Z]\d{7}[A-Z]$/i.test(cleanId);
     case 'MY':
-      // Malaysia: 12 digits (123456-12-1234)
       return /^\d{12}$/.test(cleanId);
     default:
-      // For other countries, just check if not empty and reasonable length
       return cleanId.length >= 5 && cleanId.length <= 20;
   }
 }
@@ -1316,17 +1064,20 @@ function validateNationalId(nationalId, country) {
 function addRealTimeValidation() {
   // Email validation
   document.getElementById('email').addEventListener('blur', function() {
-    validateEmail(this.value);
+    if (this.value && !validateEmail(this.value)) {
+      showError('email', 'Please enter a valid email address');
+    } else {
+      clearError('email');
+    }
   });
   
   // Phone validation
   document.getElementById('phone').addEventListener('blur', function() {
-    validatePhone(this.value);
-  });
-  
-  // Allow only numbers in phone input
-  document.getElementById('phone').addEventListener('input', function(e) {
-    this.value = this.value.replace(/\D/g, '');
+    if (this.value && !validatePhone(this.value)) {
+      showError('phone', 'Please enter a valid phone number');
+    } else {
+      clearError('phone');
+    }
   });
   
   // National ID validation
@@ -1352,27 +1103,6 @@ function addRealTimeValidation() {
   });
 }
 
-// Validation functions
-function validateEmail(email) {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    showError('email', 'Please enter a valid email address');
-    return false;
-  }
-  clearError('email');
-  return true;
-}
-
-function validatePhone(phone) {
-  const phoneRegex = /^[0-9]{7,15}$/;
-  if (!phoneRegex.test(phone.replace(/\s/g, ''))) {
-    showError('phone', 'Please enter a valid phone number');
-    return false;
-  }
-  clearError('phone');
-  return true;
-}
-
 // Error handling
 function showError(fieldId, message) {
   const field = document.getElementById(fieldId);
@@ -1395,29 +1125,11 @@ function clearError(fieldId) {
   }
 }
 
-// Progress update
-function updateProgress() {
-  const progressFill = document.getElementById('progressFill');
-  const steps = document.querySelectorAll('.step');
-  
-  progressFill.style.width = `${(currentStep / 3) * 100}%`;
-  
-  steps.forEach((step, index) => {
-    step.classList.remove('active', 'completed');
-    if (index + 1 === currentStep) {
-      step.classList.add('active');
-    } else if (index + 1 < currentStep) {
-      step.classList.add('completed');
-    }
-  });
-}
-
 // Form submission
 let isSubmitting = false;
 async function handleSubmit(e) {
   e.preventDefault();
   
-  // Prevent double submission
   if (isSubmitting) return;
   isSubmitting = true;
   
@@ -1438,46 +1150,33 @@ async function handleSubmit(e) {
       nationalId: formData.get('nationalId'),
       password: formData.get('password'),
       terms: formData.get('terms') === 'on',
-      newsletter: formData.get('newsletter') === 'on'
+      newsletter: formData.get('newsletter') === 'on',
+      claimTokens: true // Default to claiming AI Rights tokens
     };
     
+    // Add organizationName if organization type
     if (data.accountType === 'organization') {
       data.organizationName = formData.get('organizationName');
     }
     
-    // Validate required fields
-    const requiredFields = {
-      firstName: 'First name',
-      lastName: 'Last name', 
-      email: 'Email',
-      country: 'Country',
-      phone: 'Phone number',
-      nationalId: 'National ID',
-      password: 'Password'
-    };
-    
-    for (const [field, label] of Object.entries(requiredFields)) {
-      if (!data[field]) {
-        throw new Error(`${label} is required`);
-      }
+    // Validate all fields
+    if (!data.firstName || !data.lastName || !data.email || !data.country || 
+        !data.phone || !data.nationalId || !data.password) {
+      throw new Error('Please fill in all required fields');
     }
     
-    // Validate email format
     if (!validateEmail(data.email)) {
       throw new Error('Please enter a valid email address');
     }
     
-    // Validate phone format
     if (!validatePhone(data.phone)) {
       throw new Error('Please enter a valid phone number');
     }
     
-    // Validate national ID
     if (!validateNationalId(data.nationalId, data.country)) {
       throw new Error('Invalid national ID format for selected country');
     }
     
-    // Validate password strength
     if (data.password.length < 8) {
       throw new Error('Password must be at least 8 characters long');
     }
@@ -1490,76 +1189,6 @@ async function handleSubmit(e) {
       throw new Error('Please accept the terms and conditions');
     }
     
-    // Clean national ID before sending (remove formatting)
-    data.nationalId = data.nationalId.replace(/[^a-zA-Z0-9]/g, '');
-    
-    // Add phone country code
-    const countryCode = document.getElementById('countryCode').textContent;
-    data.phoneWithCode = countryCode + data.phone;
-    
-    // Prepare data in the format backend expects
-    // Backend expects "individual" not "personal"
-    const requestData = {
-      accountType: data.accountType, // should be "individual" or "organization"
-      firstName: data.firstName,
-      lastName: data.lastName,
-      email: data.email,
-      country: data.country,
-      phone: data.phone,
-      nationalId: data.nationalId,
-      password: data.password,
-      terms: data.terms,
-      newsletter: data.newsletter
-    };
-    
-    // Add organizationName only if organization type
-    if (data.accountType === 'organization') {
-      requestData.organizationName = data.organizationName;
-    }
-    
-    // Add phone with country code
-    requestData.phoneWithCode = data.phoneWithCode;
-    
-    // Submit to API
-    try {
-      async function handleSubmit(e) {
-  e.preventDefault();
-  
-  if (isSubmitting) return;
-  isSubmitting = true;
-  
-  const submitBtn = document.getElementById('submitBtn');
-  submitBtn.disabled = true;
-  submitBtn.classList.add('loading');
-  
-  try {
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
-    data.accountType = document.getElementById('accountType').value;
-    data.terms = formData.get('terms') === 'on';
-    data.newsletter = formData.get('newsletter') === 'on';
-
-    // Client-side validation logic... (omitted for brevity, assume it passes)
-    
-    // Prepare data in the format backend expects
-    const requestData = {
-      accountType: data.accountType,
-      firstName: data.firstName,
-      lastName: data.lastName,
-      email: data.email,
-      country: data.country,
-      phoneNumber: document.getElementById('countryCode').textContent + data.phone, // Send combined phone number
-      aiverIdNumber: data.nationalId.replace(/[^a-zA-Z0-9]/g, ''), // Send cleaned ID
-      password: data.password,
-      wallet: data.wallet, // Assuming there's a wallet field
-      claimTokens: true, // Assuming this is desired
-      marketing: data.newsletter,
-    };
-
-    if (data.accountType === 'organization') {
-      requestData.companyName = data.organizationName;
-    }
-    
     // Submit to API
     const response = await fetch(API_CONFIG.API_URL, {
       method: 'POST',
@@ -1567,202 +1196,69 @@ async function handleSubmit(e) {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify(requestData)
+      body: JSON.stringify(data)
     });
-
+    
     const result = await response.json();
     
-    if (!response.ok) {
-        let errorMessage = result.message || result.error || 'Registration failed';
-        if (result.details && Array.isArray(result.details)) {
-          errorMessage = result.details.map(d => d.msg).join(', ');
+    if (response.ok && result.success) {
+      // Success!
+      const aiverid = result.aiverid || result.user?.id || result.user?.aiverid;
+      
+      if (aiverid) {
+        // Show success message with AIVerID
+        alert(`✅ Success! Your AIVerID is: ${aiverid}\n\nPlease save this ID for future reference.`);
+        
+        // Store for next page
+        if (typeof(Storage) !== "undefined") {
+          sessionStorage.setItem('registrationSuccess', 'true');
+          sessionStorage.setItem('aiverid', aiverid);
+          sessionStorage.setItem('userEmail', data.email);
         }
-        throw new Error(errorMessage);
+      } else {
+        alert('✅ Registration successful! Redirecting to login...');
+      }
+      
+      // Redirect to login page
+      setTimeout(() => {
+        window.location.href = 'login.html';
+      }, 2000);
+      
+    } else {
+      // Handle error
+      let errorMessage = 'Registration failed';
+      
+      if (result.message) {
+        errorMessage = result.message;
+      } else if (result.error) {
+        errorMessage = result.error;
+      } else if (result.details && Array.isArray(result.details)) {
+        errorMessage = result.details.map(d => d.msg || d.message).join('\n');
+      }
+      
+      throw new Error(errorMessage);
     }
-
-    // Success
-    const aiverid = result.user?.id || result.user?.aiverid;
-    alert(`✅ Success! Your AIVerID is: ${aiverid}`);
-    localStorage.removeItem('aiverid_draft');
-    window.location.href = 'login.html';
     
   } catch (error) {
-    let userMessage = 'Registration failed. ';
+    console.error('Registration error:', error);
+    
+    // Show user-friendly error message
+    let userMessage = error.message;
+    
     if (error.message.includes('Failed to fetch')) {
-        userMessage += 'Cannot connect to the server.';
-    } else {
-        userMessage += error.message;
+      userMessage = 'Cannot connect to server. Please check your internet connection.';
+    } else if (error.message.includes('email_exists') || error.message.includes('already registered')) {
+      userMessage = 'This email is already registered. Please login or use a different email.';
     }
-    alert(userMessage);
+    
+    alert('❌ ' + userMessage);
+    
   } finally {
     submitBtn.disabled = false;
     submitBtn.classList.remove('loading');
     isSubmitting = false;
   }
 }
-      
-      let result;
-      const contentType = response.headers.get('content-type');
-      
-      if (contentType && contentType.includes('application/json')) {
-        result = await response.json();
-      } else {
-        // If response is not JSON, get text
-        const text = await response.text();
-        result = { message: text || 'Unknown error' };
-      }
-      
-      if (response.ok && result.success !== false) {
-        // Success! Try to get AIVerID from response
-        const aiverid = result.aiverid || 
-                       result.aiverID || 
-                       result.aiver_id || 
-                       result.id || 
-                       result.userId ||
-                       result.user_id ||
-                       result.data?.aiverid ||
-                       result.data?.id;
-        
-        if (aiverid) {
-          alert(`✅ Success! Your AIVerID is: ${aiverid}`);
-          localStorage.setItem('aiverid', aiverid);
-        } else {
-          // Still success, but no AIVerID in response
-          alert('✅ Registration successful! Redirecting to login...');
-        }
-        
-        // If there's a user object, store it
-        if (result.user) {
-          localStorage.setItem('userData', JSON.stringify(result.user));
-        }
-        
-        // If we have email but no AIVerID, store email for login page
-        if (!aiverid && data.email) {
-          localStorage.setItem('registeredEmail', data.email);
-        }
-        
-        // Clear draft and redirect
-        localStorage.setItem('registrationSuccess', 'true');
-        localStorage.removeItem('aiverid_draft');
-        
-        // Shorter delay since registration works
-        setTimeout(() => {
-          window.location.href = 'login.html';
-        }, 1500);
-      } else {
-        // Handle error response
-        let errorMessage = 'Registration failed';
-        
-        if (result.message) {
-          errorMessage = result.message;
-        } else if (result.error) {
-          errorMessage = result.error;
-        } else if (result.errors) {
-          // Handle validation errors object
-          if (typeof result.errors === 'object') {
-            const errorList = Object.entries(result.errors)
-              .map(([field, msg]) => `${field}: ${msg}`)
-              .join('\n');
-            errorMessage = `Validation errors:\n${errorList}`;
-          } else {
-            errorMessage = result.errors;
-          }
-        } else if (result.details && Array.isArray(result.details)) {
-          // Handle details array
-          errorMessage = result.details.map(d => 
-            d.msg || d.message || JSON.stringify(d)
-          ).join('\n');
-        }
-        
-        throw new Error(errorMessage);
-      }
-    } catch (fetchError) {
-      if (fetchError.message.includes('Failed to fetch')) {
-        throw new Error('Cannot connect to server. Please check your internet connection.');
-      }
-      throw fetchError;
-    }
-    
-  } catch (error) {
-    // Create user-friendly error message
-    let userMessage = 'Registration failed. ';
-    
-    if (error.message.includes('Cannot connect')) {
-      userMessage += 'Unable to connect to server.';
-    } else if (error.message.includes('400')) {
-      userMessage += 'Invalid data format. Please check all fields.';
-    } else if (error.message.includes('409')) {
-      userMessage += 'This email is already registered.';
-    } else if (error.message.includes('validation')) {
-      userMessage += error.message;
-    } else {
-      userMessage += error.message || 'Please try again later.';
-    }
-    
-    // Show simple alert
-    alert(userMessage);
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.classList.remove('loading');
-    isSubmitting = false;
-  }
-}
-
-// Auto-save functionality (optional)
-let autoSaveTimer;
-let lastSavedData = '';
-
-function autoSave() {
-  clearTimeout(autoSaveTimer);
-  autoSaveTimer = setTimeout(() => {
-    const formData = new FormData(document.getElementById('registrationForm'));
-    const data = Object.fromEntries(formData);
-    const dataString = JSON.stringify(data);
-    
-    // Only save if data actually changed
-    if (dataString !== lastSavedData) {
-      lastSavedData = dataString;
-      localStorage.setItem('aiverid_draft', dataString);
-      
-      // Show auto-save indicator (fixed position, no layout shift)
-      const indicator = document.getElementById('autoSaveIndicator');
-      if (indicator) {
-        indicator.classList.add('show');
-        setTimeout(() => indicator.classList.remove('show'), 2000);
-      }
-    }
-  }, 5000); // Increased to 5 seconds
-}
-
-// Add auto-save to all inputs with debouncing
-document.querySelectorAll('input, select').forEach(input => {
-  // Skip checkboxes for auto-save
-  if (input.type !== 'checkbox') {
-    input.addEventListener('input', autoSave);
-  }
-  // Save checkboxes on change instead
-  if (input.type === 'checkbox') {
-    input.addEventListener('change', autoSave);
-  }
-});
-
-// Load draft on page load
-window.addEventListener('load', () => {
-  const draft = localStorage.getItem('aiverid_draft');
-  if (draft) {
-    const data = JSON.parse(draft);
-    Object.keys(data).forEach(key => {
-      const input = document.querySelector(`[name="${key}"]`);
-      if (input) {
-        if (input.type === 'checkbox') {
-          input.checked = data[key] === 'on';
-        } else {
-          input.value = data[key];
-        }
-      }
-    });
-  }
-});
 </script>
 
 </body>

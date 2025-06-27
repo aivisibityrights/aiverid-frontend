@@ -210,6 +210,117 @@
             border-radius: 10px;
             padding: 20px;
         }
+
+        /* Action buttons styles */
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-small {
+            padding: 5px 15px;
+            font-size: 0.85em;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-edit {
+            background: #00aaff;
+            color: white;
+        }
+        
+        .btn-edit:hover {
+            background: #0088cc;
+        }
+        
+        .btn-delete {
+            background: #ff4444;
+            color: white;
+        }
+        
+        .btn-delete:hover {
+            background: #cc0000;
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+        }
+        
+        .modal-content {
+            background-color: #1a1a2e;
+            margin: 10% auto;
+            padding: 30px;
+            border: 1px solid #00ff88;
+            border-radius: 15px;
+            width: 500px;
+            max-width: 90%;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-header h2 {
+            color: #00ff88;
+            margin: 0;
+        }
+        
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #fff;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #00ff88;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 5px;
+            color: #fff;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #00ff88;
+        }
+        
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -271,6 +382,56 @@
         </div>
     </div>
 
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit User</h2>
+                <span class="close" onclick="closeEditModal()">&times;</span>
+            </div>
+            <form id="editForm">
+                <input type="hidden" id="editAiverId">
+                
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="editEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" id="editFirstName">
+                </div>
+                
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" id="editLastName">
+                </div>
+                
+                <div class="form-group">
+                    <label>Account Type</label>
+                    <select id="editAccountType">
+                        <option value="individual">Individual</option>
+                        <option value="organization">Organization</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="editStatus">
+                        <option value="active">Active</option>
+                        <option value="suspended">Suspended</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
+                    <button type="submit" class="btn">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
         // Configuration
         const API_BASE = 'https://aiverid-backend-production.up.railway.app';
@@ -285,25 +446,46 @@
                 return;
             }
 
+            // Test connection first
+            try {
+                const testResponse = await fetch(`${API_BASE}/api/health`);
+                if (!testResponse.ok) {
+                    throw new Error('API connection failed');
+                }
+                console.log('API connected successfully');
+            } catch (error) {
+                console.error('API connection error:', error);
+                document.body.innerHTML = '<div class="error">Cannot connect to API server. Please check if the backend is running.</div>';
+                return;
+            }
+
             // Load all data
-            await Promise.all([
-                loadStats(),
-                loadRecentUsers(),
-                loadAllUsers()
-            ]);
+            try {
+                await Promise.all([
+                    loadStats(),
+                    loadRecentUsers(),
+                    loadAllUsers()
+                ]);
+            } catch (error) {
+                console.error('Failed to load dashboard data:', error);
+            }
         });
 
         // API Call Helper
         async function apiCall(endpoint) {
             try {
                 const response = await fetch(`${API_BASE}${endpoint}`, {
+                    method: 'GET',
                     headers: {
-                        'X-Admin-Token': ADMIN_TOKEN
-                    }
+                        'X-Admin-Token': ADMIN_TOKEN,
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include'
                 });
 
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
                 }
 
                 return await response.json();
@@ -316,20 +498,29 @@
         // Load Statistics
         async function loadStats() {
             try {
+                console.log('Loading stats...');
                 const data = await apiCall('/api/admin/stats');
-                if (data.success) {
+                console.log('Stats data:', data);
+                
+                if (data.success && data.data) {
                     const stats = data.data.overview;
                     const cards = document.querySelectorAll('.stat-card');
                     
-                    cards[0].querySelector('.value').textContent = stats.total_users;
-                    cards[0].querySelector('.change').textContent = `${stats.individual_accounts} individuals, ${stats.organization_accounts} organizations`;
+                    cards[0].querySelector('.value').textContent = stats.total_users || '0';
+                    cards[0].querySelector('.change').textContent = `${stats.individual_accounts || 0} individuals, ${stats.organization_accounts || 0} organizations`;
                     
-                    cards[1].querySelector('.value').textContent = stats.new_users_24h;
-                    cards[2].querySelector('.value').textContent = stats.new_users_7d;
-                    cards[3].querySelector('.value').textContent = stats.active_tokens;
+                    cards[1].querySelector('.value').textContent = stats.new_users_24h || '0';
+                    cards[2].querySelector('.value').textContent = stats.new_users_7d || '0';
+                    cards[3].querySelector('.value').textContent = stats.active_tokens || '0';
+                } else {
+                    throw new Error('Invalid stats data');
                 }
             } catch (error) {
                 console.error('Failed to load stats:', error);
+                document.querySelectorAll('.stat-card .value').forEach(el => {
+                    el.textContent = 'Error';
+                    el.style.color = '#ff6666';
+                });
             }
         }
 
@@ -389,6 +580,7 @@
                                     <th>Status</th>
                                     <th>Registered</th>
                                     <th>Last Login</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -401,6 +593,12 @@
                                         <td><span class="badge badge-${user.status}">${user.status}</span></td>
                                         <td>${new Date(user.created_at).toLocaleDateString()}</td>
                                         <td>${user.last_login_at ? new Date(user.last_login_at).toLocaleDateString() : 'Never'}</td>
+                                        <td>
+                                            <div class="action-buttons">
+                                                <button class="btn-small btn-edit" onclick="editUser('${user.aiverid}', '${user.email}', '${user.first_name || ''}', '${user.last_name || ''}', '${user.account_type}', '${user.status}')">Edit</button>
+                                                <button class="btn-small btn-delete" onclick="deleteUser('${user.aiverid}', '${user.email}')">Delete</button>
+                                            </div>
+                                        </td>
                                     </tr>
                                 `).join('')}
                             </tbody>
@@ -464,9 +662,101 @@
         // Export Users
         async function exportUsers() {
             try {
-                window.location.href = `${API_BASE}/api/admin/export?token=${ADMIN_TOKEN}`;
+                // Direct download with token in URL
+                const downloadUrl = `${API_BASE}/api/admin/export?token=${encodeURIComponent(ADMIN_TOKEN)}`;
+                
+                // Open in new window to trigger download
+                window.open(downloadUrl, '_blank');
+                
             } catch (error) {
-                alert('Export failed');
+                alert('Export failed: ' + error.message);
+            }
+        }
+
+        // Edit user function
+        function editUser(aiverId, email, firstName, lastName, accountType, status) {
+            document.getElementById('editAiverId').value = aiverId;
+            document.getElementById('editEmail').value = email;
+            document.getElementById('editFirstName').value = firstName || '';
+            document.getElementById('editLastName').value = lastName || '';
+            document.getElementById('editAccountType').value = accountType;
+            document.getElementById('editStatus').value = status;
+            
+            document.getElementById('editModal').style.display = 'block';
+        }
+        
+        // Close edit modal
+        function closeEditModal() {
+            document.getElementById('editModal').style.display = 'none';
+        }
+        
+        // Handle edit form submission
+        document.getElementById('editForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const aiverId = document.getElementById('editAiverId').value;
+            const data = {
+                email: document.getElementById('editEmail').value,
+                firstName: document.getElementById('editFirstName').value,
+                lastName: document.getElementById('editLastName').value,
+                accountType: document.getElementById('editAccountType').value,
+                status: document.getElementById('editStatus').value
+            };
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/admin/users/${aiverId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'X-Admin-Token': ADMIN_TOKEN,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('User updated successfully!');
+                    closeEditModal();
+                    // Reload data
+                    loadAllUsers();
+                    loadRecentUsers();
+                    loadStats();
+                } else {
+                    alert('Error: ' + result.error);
+                }
+            } catch (error) {
+                alert('Failed to update user: ' + error.message);
+            }
+        });
+        
+        // Delete user function
+        async function deleteUser(aiverId, email) {
+            if (!confirm(`Are you sure you want to delete user ${email}?\nAIVerID: ${aiverId}\n\nThis will soft delete the user (can be restored).`)) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/admin/users/${aiverId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-Admin-Token': ADMIN_TOKEN
+                    }
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('User deleted successfully!');
+                    // Reload data
+                    loadAllUsers();
+                    loadRecentUsers();
+                    loadStats();
+                } else {
+                    alert('Error: ' + result.error);
+                }
+            } catch (error) {
+                alert('Failed to delete user: ' + error.message);
             }
         }
 
@@ -475,6 +765,14 @@
             loadStats();
             loadRecentUsers();
         }, 300000);
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('editModal');
+            if (event.target == modal) {
+                closeEditModal();
+            }
+        }
     </script>
 </body>
 </html>

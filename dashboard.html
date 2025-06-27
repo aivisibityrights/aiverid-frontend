@@ -823,7 +823,7 @@
       // Check authentication
       authToken = localStorage.getItem('authToken');
       if (!authToken) {
-        window.location.href = '/login';
+        window.location.href = '/login.html';
         return;
       }
 
@@ -1133,7 +1133,7 @@
       if (confirm('Are you sure you want to logout?')) {
         localStorage.removeItem('authToken');
         localStorage.removeItem('userInfo');
-        window.location.href = '/login';
+        window.location.href = '/login.html';
       }
     }
   </script>
